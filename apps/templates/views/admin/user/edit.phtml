@@ -1,0 +1,9 @@
+<h1><span class="user_login"><?php echo $view->user->login;?></span> - <?php echo _('Account informations')?></h1>
+<form class="edit-form" method="post" enctype="multipart/form-data">
+	<?php echo $view->getBlock('admin/forms/user');?>
+	<?php if (empty($view->noWriting)){?>
+	<button type="submit" class="validate upd"><?php echo _('Update')?></button>
+	<?php }else{?>
+	<span class="user_end_error"><?php echo _('You are not allowed to modify this user.')?></span>
+	<?php }?>
+</form>

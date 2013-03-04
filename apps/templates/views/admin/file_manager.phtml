@@ -1,0 +1,136 @@
+<?php if (!empty($view->files['whole_db_list'])){?>
+<form method="post">
+	<h1><?php echo _('Uploaded files stored into the database')?></h1>
+	<?php echo $view->getBlock('admin/elements/datagrid_searches')?>
+	<table class="datagrid">
+		<thead>
+			<tr>
+				<?php foreach (array('fid'=>'ID', 'filename'=>_('Name'), 'mime_type'=>_('Mime type')) as $field=>$title){?>
+				<th><a href="#" id="field_<?php echo $field?>" class="<?php if (!empty($_GET['order']) && $_GET['order']==$field) echo 'current';?>"><?php echo $title?></a></th>
+				<?php }?>
+				<th><?php echo _('Preview')?></th>
+				<th><?php echo _('Delete')?></th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php foreach ($view->files['whole_db_list'] as $file){?>
+			<tr class="<?php if (empty($trclass)) $trclass = 'iter'; else $trclass = ''; echo $trclass;?>">
+				<td><?php echo $file['fid']?></td>
+				<td><?php echo $file['filename']?></td>
+				<td><?php echo $file['mime_type']?></td>
+				<td>
+					<div class="pic_toggle">
+						<div class="toggle_open"><?php echo _('Visualize')?></div>
+						<div class="toggle_preview">
+							<div><em><?php echo $file['filename']?></em></div>
+							<?php if (stripos($file['mime_type'], 'image')===false){?>
+							<object class="preview" type="<?php echo $file['mime_type']?>" data="<?php echo WEB_ROOT.'/'.$file['path'];?>"></object>
+							<?php }else{?>
+							<img class="preview" src="<?php echo WEB_ROOT.'/'.$file['path'];?>" />
+							<?php }?>
+						</div>
+					</div>
+				</td>
+				<td class="center">
+					<input type="checkbox" name="delete[<?php echo $file['fid']?>]" />
+				</td>
+			</tr>
+			<?php }?>
+		</tbody>
+	</table>
+	<div class="buttons">
+		<button type="submit" class="validate" onclick="return confirm('<?php echo _('Confirm this action');?>');"><?php echo _('Delete')?></button>
+	</div>
+</form>
+<?php }?>
+
+<!-- Upload de fichier -->
+<form method="post" enctype="multipart/form-data">
+	<h1><?php echo _('Upload and list new files')?></h1>
+	<div id="files">
+		<input type="file" class="text file" name="file[0]" />
+	</div>
+	<div style="margin-top: 10px;">
+		<a class="validate add_file_input">+</a>
+	</div>
+	<div class="buttons">
+		<button type="submit" class="add_new" name="upload" onclick="return confirm('<?php echo _('Confirm this action');?>');"><?php echo _('Upload')?></button>
+	</div>
+</form>
+
+
+<?php if (!empty($view->files['not_in_db'])){?>
+<form method="post">
+	<h1><?php echo _('Physical files that are not registered into the database')?></h1>
+	<table class="datagrid">
+		<thead>
+			<tr>
+				<th><?php echo _('File name')?></th>
+				<th><?php echo _('Type|Path')?></th>
+				<th><?php echo _('Preview')?></th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php foreach ($view->files['not_in_db'] as $path=>$filename){
+				$exp	= explode(' ', $path);
+				$type	= $exp['0'];
+				$path	= $exp[1];
+				$exp	= explode('/', $type);
+				$isImg	= $exp[0]=='image';?>
+			<tr>
+				<td><?php echo $filename?></td>
+				<td><?php echo $path?></td>
+				<td>
+					<div class="pic_toggle">
+						<div class="toggle_open"><?php echo _('Visualize')?></div>
+						<div class="toggle_preview">
+							<div><em><?php echo $filename?></em></div>
+							<?php if ($isImg){?>
+							<img class="preview" src="<?php echo WEB_ROOT.'/'.$path;?>" />
+							<?php }else{?>
+							<object class="preview" type="<?php echo $type?>" data="<?php echo WEB_ROOT.'/'.$path;?>"></object>
+							<?php }?>
+						</div>
+					</div>
+				</td>
+			</tr>
+			<?php }?>
+		</tbody>
+	</table>
+	<div class="buttons">
+		<a class="validate" href="<?php echo ADMIN_WEB_ROOT?>/file_manager/diffs"><?php echo _('Manage')?></a>
+	</div>
+</form>
+<?php }?>
+
+<?php if (!empty($view->files['not_in_dir'])){?>
+<form method="post">
+	<h1><?php echo _('Files in database that are not physically presents')?></h1>
+	<table class="datagrid">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th><?php echo _('File name')?></th>
+				<th><?php echo _('Mime type')?></th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php foreach ($view->files['not_in_dir'] as $file){?>
+			<tr>
+				<td><?php echo $file['fid']?></td>
+				<td><?php echo $file['filename']?></td>
+				<td><?php echo $file['mime_type']?></td>
+			</tr>
+			<?php }?>
+		</tbody>
+	</table>
+	<div class="buttons">
+		<a class="validate" href="<?php echo ADMIN_WEB_ROOT?>/file_manager/diffs"><?php echo _('Manage')?></a>
+	</div>
+</form>
+<?php }?>
+<?php if (empty($view->files['not_in_dir']) && empty($view->files['not_in_db'])){?>
+<a class="validate" href="<?php echo ADMIN_WEB_ROOT?>/file_manager/diffs">>><?php echo _('Check for unregistered files')?></a>
+<br /><br />
+<span class="user_end_warning"><?php echo _('Be aware that this process can take a while if your database is huge.')?></span>
+<?php }?>

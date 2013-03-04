@@ -1,0 +1,10 @@
+A tutorial will be available soon on Github.
+
+1- Configure the "settings/application/*.ini" (default) application files.
+2- Configure the "settings/databases/*.ini" database configuration files.
+3- Import by Linux command the "mysql/cms_structure.sql" file (or by phpMyAdmin or by MySQL Workbenh or any MySQL client)
+4- chmod (and/or chown) the "logs" and "public/uploads" directories to enable the Apache writing access
+
+The "locale" directory is dedicated to the PO files (for translation).
+
+Done !

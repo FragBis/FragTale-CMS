@@ -1,0 +1,14 @@
+<?php $article = $view->getArticle()?>
+<h1 class="article-title"><?php echo $article->title?></h1>
+<article class="article-content">
+	<?php echo $article->body?>
+	<div class="greetings">
+		<?php echo $article->greeting_text?><br />
+		<b><?php echo $article->signature?></b>
+	</div>
+</article>
+<?php
+if (!empty($article->getCategory()->aid) && !empty($article->aid) && $article->getCategory()->aid==$article->aid)
+	echo $view->getBlock('blocks/list_of_articles');
+else
+	echo $view->getBlock('forms/article_comments');?>

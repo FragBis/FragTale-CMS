@@ -1,0 +1,33 @@
+<?php if (!empty($view->users)){?>
+<div class="grid_container">
+	<h1><?php echo _('Registered users:')?></h1>
+	<?php echo $view->getBlock('admin/elements/datagrid_searches')?>
+	<table id="users_grid" class="datagrid">
+		<thead>
+			<tr>
+				<?php foreach (array('uid'=>'UID', 'login'=>_('Pseudo'), 'email'=>_('E-mail'),
+						'lastname'=>_('Last name'), 'firstname'=>_('First name')) as $field=>$title){?>
+				<th><a href="#" id="field_<?php echo $field?>" class="<?php if (!empty($_GET['order']) && $_GET['order']==$field) echo 'current';?>"><?php echo $title?></a></th>
+				<?php }?>
+				<th><?php echo _('Is active')?></th>
+			</tr>
+		</thead>
+		<tbody>
+		<?php foreach ($view->users as $user){?>
+			<tr id="uid_<?php echo $user['uid']?>" object="user" class="trigger <?php if (empty($trclass)) $trclass = 'iter'; else $trclass = ''; echo $trclass;?>">
+				<td><?php echo $user['uid']?></td>
+				<td><?php echo $user['login']?></td>
+				<td><?php echo $user['email']?></td>
+				<td><?php echo $user['lastname']?></td>
+				<td><?php echo $user['firstname']?></td>
+				<td><?php echo $user['active'] ? _('Yes') : _('No')?></td>
+			</tr>
+		<?php }?>
+		</tbody>
+	</table>
+</div>
+<?php }else{?>
+<h1><?php echo _('No users found')?></h1>
+<?php }?>
+
+<a class="add_new" href="<?php echo ADMIN_WEB_ROOT?>/user/create"><?php echo _('Add')?></a>

@@ -1,0 +1,8 @@
+<h1 class="article-title"><?php echo $view->getArticle()->title?></h1>
+<article class="article-content">
+	<?php echo $view->getArticle()->body?>
+	<div class="greetings">
+		<?php echo $view->getArticle()->greeting_text?><br />
+		<b class="signature"><?php echo $view->getArticle()->signature?></b>
+	</div>
+</article>

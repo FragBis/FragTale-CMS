@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title><?php echo $view->getTitle()?></title>
+		<?php echo $view->getCssTags()?>
+		<script type="text/javascript">
+			var WEB_ROOT = '<?php echo WEB_ROOT?>';
+			var ADMIN_WEB_ROOT = '<?php echo ADMIN_WEB_ROOT?>';
+		</script>
+	</head>
+	
+	<body class="<?php echo str_replace(array('/', ' '), '-', $view->getViewName());?>">
+	<div class="page">
+	
+		<?php if ($view->userIsAdmin()) echo $view->getBlock('admin/header');?>
+		
+		<section class="content <?php if (!$view->userIsAdmin()) echo 'centerblock'?>">
+			<?php echo $view->getUserEndMsgs()?>
+			<?php echo $view;?>
+		</section>
+		
+		<?php if (!empty($_SESSION['REG_USER']['uid'])){?>
+		<section class="footer">
+			<?php echo $view->getBlock('admin/footer')?>
+		</section>
+		<?php }?>
+		
+	</div>
+	<?php echo $view->getJsTags()?>
+	</body>
+</html>

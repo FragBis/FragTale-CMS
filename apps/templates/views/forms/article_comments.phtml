@@ -1,0 +1,22 @@
+<div class="posts">
+	<h1><?php echo _('Comments')?></h1>
+	<?php if (!empty($view->article_comments)) foreach ($view->article_comments as $comments){?>
+		<div class="comment">
+			<?php echo $comments['message'];?>
+			<div class="comment_author">
+				<span class="comment_user"><?php echo $comments['user_login']?></span> - <span class="comment_date"><?php echo date('d/m/Y H:i:s', strtotime($comments['edit_date']))?></span>
+			</div>
+		</div>
+	<?php }elseif ($view->userIsLogged()){?>
+	<div class="be_first">
+		<?php echo _('Be the first to post a comment.')?>
+	</div>
+	<?php }if ($view->userIsLogged()){?>
+	<div class="add_comments">
+		<form method="post" class="post_comments">
+			<textarea id="article_comment" name="article_comments"></textarea>
+			<button type="submit" name="post_comment" class="validate"><?php echo _('Post comment')?></button>
+		</form>
+	</div>
+	<?php }else echo _('You must be logged in to post a comment.');?>
+</div>

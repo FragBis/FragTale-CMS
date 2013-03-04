@@ -1,0 +1,16 @@
+<section class="header_title">
+	<span><?php echo _('Admin panel')?></span>
+	<a class="userlogged current" href="<?php echo ADMIN_WEB_ROOT?>/user/edit"><?php echo $_SESSION['REG_USER']['login']?></a>
+</section>
+<section class="admin_menu">
+	<ul>
+		<?php foreach ($view->menu as $page=>$title){?>
+		<li class="mainmenu">
+			<a href="<?php echo WEB_ROOT?>/admin/<?php echo $page?>" class="mainmenu_link <?php
+				echo ($page==$view->current || $page==$view->current.'s') ? 'current' : $page?>">
+				<?php echo $title?>
+			</a>
+		</li>
+		<?php }?>
+	</ul>
+</section>

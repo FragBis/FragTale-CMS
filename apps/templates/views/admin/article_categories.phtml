@@ -1,0 +1,29 @@
+<?php if (!empty($view->article_categories)){?>
+<div class="grid_container">
+	<h1><?php echo _('Registered article categories:')?></h1>
+	<?php echo $view->getBlock('admin/elements/datagrid_searches');?>
+	<table id="article_categories_grid" class="datagrid">
+		<thead>
+			<tr>
+				<?php foreach (array('catid'=>'CATID', 'name'=>_('Name'), 'label'=>_('Label'), 'parent_catid'=>_('Parent category')) as $field=>$title){?>
+				<th><a href="#" id="field_<?php echo $field?>" class="<?php if (!empty($_GET['order']) && $_GET['order']==$field) echo 'current';?>"><?php echo $title?></a></th>
+				<?php }?>
+			</tr>
+		</thead>
+		<tbody>
+		<?php foreach ($view->article_categories as $category){?>
+			<tr id="catid_<?php echo $category['catid']?>" object="article_category" class="trigger <?php if (empty($trclass)) $trclass = 'iter'; else $trclass = ''; echo $trclass;?>">
+				<td><?php echo $category['catid']?></td>
+				<td><?php echo $category['name']?></td>
+				<td><?php echo $category['label']?></td>
+				<td><?php echo $category['parent_category']?></td>
+			</tr>
+		<?php }?>
+		</tbody>
+	</table>
+</div>
+<?php }else{?>
+<h1><?php echo _('No categories found')?></h1>
+<?php }?>
+
+<a class="add_new" href="<?php echo ADMIN_WEB_ROOT?>/article_category/create"><?php echo _('Add')?></a>

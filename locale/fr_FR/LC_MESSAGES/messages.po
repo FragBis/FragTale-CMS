@@ -1,0 +1,901 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-02-19 00:36+0100\n"
+"PO-Revision-Date: 2013-02-19 00:38+0100\n"
+"Last-Translator: FragBis <fabricedant@gmail.com>\n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
+"X-Poedit-Basepath: /var/www/html/bon/apps/\n"
+"X-Poedit-Language: French\n"
+"X-Poedit-Country: FRANCE\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SearchPath-0: controllers\n"
+"X-Poedit-SearchPath-1: templates\n"
+
+#: controllers/files.php:17
+msgid "Empty"
+msgstr "Vide"
+
+#: controllers/admin.php:18
+#: controllers/admin/header.php:12
+msgid "Dashboard"
+msgstr "Tableau de bord"
+
+#: controllers/admin.php:43
+msgid "You are not allowed to access the entire administration space."
+msgstr "Vous n'êtes pas autorisé à accéder à cet espace."
+
+#: controllers/admin/article_categories.php:14
+msgid "List of categories"
+msgstr "Liste des catégories"
+
+#: controllers/admin/file_manager.php:12
+#: controllers/admin/header.php:16
+msgid "File manager"
+msgstr "Gestionnaire de fichiers"
+
+#: controllers/admin/file_manager.php:47
+#, php-format
+msgid "File identified by ID #%s successfully removed."
+msgstr "Le fichier avec l'ID %s a été enlevé."
+
+#: controllers/admin/login.php:13
+msgid "Accessing the admin panel"
+msgstr "Espace d'administration"
+
+#: controllers/admin/header.php:13
+msgid "Article categories"
+msgstr "Catégories d'articles"
+
+#: controllers/admin/header.php:14
+msgid "Articles"
+msgstr "Articles"
+
+#: controllers/admin/header.php:15
+msgid "Users"
+msgstr "Utilisateurs"
+
+#: controllers/admin/header.php:18
+msgid "System"
+msgstr "Système"
+
+#: controllers/admin/header.php:19
+#: controllers/admin/logout.php:12
+msgid "Logout"
+msgstr "Déconnexion"
+
+#: controllers/admin/users.php:13
+msgid "User accounts"
+msgstr "Comptes utilisateurs"
+
+#: controllers/admin/articles.php:13
+msgid "List of articles"
+msgstr "Liste d'articles"
+
+#: controllers/admin/user/edit.php:9
+msgid "User account edition"
+msgstr "Modification du compte utilisateur"
+
+#: controllers/admin/user/edit.php:23
+msgid "Unexpected error: User ID cannot be empty."
+msgstr "Erreur inattendue : l'ID utilisateur ne doit pas être vide."
+
+#: controllers/admin/user/edit.php:63
+msgid "has been successfully updated."
+msgstr "a été mis(e) à jour avec succès."
+
+#: controllers/admin/user/edit.php:79
+#, php-format
+msgid "Login \"%s\" already used."
+msgstr "Pseudo \"%s\" déjà utilisé."
+
+#: controllers/admin/user/edit.php:86
+#, php-format
+msgid "E-mail \"%s\" already registered."
+msgstr "E-mail \"%s\" déjà enregistré."
+
+#: controllers/admin/user/create.php:9
+msgid "Add a new user account"
+msgstr "Ajouter un nouveau compte"
+
+#: controllers/admin/user/create.php:21
+msgid "Invalid e-mail address."
+msgstr "E-mail invalide."
+
+#: controllers/admin/user/create.php:42
+msgid "Registration failed."
+msgstr "L'enregistrement a échoué."
+
+#: controllers/admin/user/create.php:51
+msgid "has been successfully added."
+msgstr "a été ajouté avec succès."
+
+#: controllers/admin/user/create.php:64
+msgid ": login already used."
+msgstr " : pseudo déjà utilisé."
+
+#: controllers/admin/user/create.php:69
+msgid ": E-mail already registered."
+msgstr " : e-mail déjà enregistré."
+
+#: controllers/admin/article/edit.php:18
+msgid "Article edition"
+msgstr "Edition"
+
+#: controllers/admin/article/edit.php:25
+msgid "Unexpected error: unable to load article properly."
+msgstr "Erreur inattendue : impossible de charger l'article."
+
+#: controllers/admin/article/edit.php:55
+msgid "This article has been successfully updated."
+msgstr "Article mis à jour."
+
+#: controllers/admin/article/edit.php:62
+msgid "This article has been historicize."
+msgstr "Article historicisé."
+
+#: controllers/admin/article/edit.php:64
+msgid "Historization failed."
+msgstr "Archivage échoué."
+
+#: controllers/admin/article/edit.php:81
+msgid "There is already a web page having the following Url alias: "
+msgstr "Il y a déjà une page Web possédant l'alias d'URL : "
+
+#: controllers/admin/article/create.php:15
+msgid "Add a new article"
+msgstr "Ajouter un nouvel article"
+
+#: controllers/admin/article/create.php:38
+msgid "This article has been successfully registered."
+msgstr "Article enregistré."
+
+#: controllers/admin/article/create.php:44
+#: controllers/admin/article/create.php:47
+msgid "Article not registered."
+msgstr "Article non enregistré."
+
+#: controllers/admin/article/create.php:60
+#: controllers/admin/article_category/edit.php:105
+#: controllers/admin/article_category/create.php:93
+msgid "There is already a web page with this Url alias: "
+msgstr "Il y a déjà une page Web avec l'alias d'URL :"
+
+#: controllers/admin/forms/login.php:16
+msgid "Please, enter your login and password."
+msgstr "Veuillez saisir votre pseudo et votre mot de passe."
+
+#: controllers/admin/forms/login.php:24
+msgid "Your account has been deactivated."
+msgstr "Votre compte a été désactivé."
+
+#: controllers/admin/forms/login.php:35
+msgid "Authentication failed."
+msgstr "L'identification a échoué."
+
+#: controllers/admin/forms/article_category.php:37
+#: controllers/admin/forms/article.php:36
+msgid "It should not exist subdirectory in "
+msgstr "Il ne devrait pas exister de sous-répertoire dans "
+
+#: controllers/admin/forms/register.php:7
+msgid "Create account"
+msgstr "Créer un compte"
+
+#: controllers/admin/file_manager/diffs.php:12
+msgid "Check file diffs"
+msgstr "Vérifier la bonne liaison des fichiers"
+
+#: controllers/admin/article_category/edit.php:16
+msgid "Category edition"
+msgstr "Modifier une catégorie"
+
+#: controllers/admin/article_category/edit.php:60
+msgid "Category successfully updated."
+msgstr "Catégorie mise à jour."
+
+#: controllers/admin/article_category/edit.php:72
+msgid "Article successfully updated."
+msgstr "Article mis à jour."
+
+#: controllers/admin/article_category/edit.php:76
+msgid "Unexpected error while loading the article of category."
+msgstr "Erreur inattendue lors du chargement de la catégorie."
+
+#: controllers/admin/article_category/edit.php:81
+msgid "Unexpected error: unable to load category."
+msgstr "Erreur inattendue : impossible de charger la catégorie."
+
+#: controllers/admin/article_category/edit.php:95
+#: controllers/admin/article_category/create.php:85
+#, php-format
+msgid "There is already a category named \"%s\""
+msgstr "Il y a déjà une catégorie nommée \"%s\""
+
+#: controllers/admin/article_category/create.php:19
+msgid "Add a new category of articles"
+msgstr "Ajouter une nouvelle catégorie darticles"
+
+#: controllers/admin/article_category/create.php:53
+msgid "New category successfully added."
+msgstr "Nouvelle catégorie ajoutée."
+
+#: controllers/admin/article_category/create.php:63
+msgid "New article successfully added and linked to this category."
+msgstr "Nouvel article ajouté et associé à la catégorie."
+
+#: controllers/admin/article_category/create.php:65
+msgid "Unexpected error while linking article to category."
+msgstr "Erreur inattendue lors du chargement de la catégorie d'articles."
+
+#: controllers/admin/article_category/create.php:68
+msgid "Failed to add new article."
+msgstr "Article non ajouté."
+
+#: controllers/admin/article_category/create.php:73
+msgid "Failed to add new category."
+msgstr "Catégorie non ajoutée."
+
+#: controllers/blocks/header.php:13
+msgid "Home"
+msgstr "Accueil"
+
+#: controllers/blocks/header.php:14
+msgid "Downloads"
+msgstr "Téléchargements"
+
+#: controllers/blocks/header.php:15
+msgid "Contact us"
+msgstr "Nous contacter"
+
+#: controllers/blocks/header.php:20
+msgid "Login/Register"
+msgstr "S'identifier/S'enregistrer"
+
+#: controllers/blocks/category_carousel.php:20
+msgid "Error on category load."
+msgstr "Erreur lors du chargement de la catégorie."
+
+#: templates/views/files.phtml:3
+msgid "Download links:"
+msgstr "Liens téléchargeables :"
+
+#: templates/views/404.phtml:1
+msgid "Error 404: The requested page could not be found."
+msgstr "Erreur 404 : Page introuvable"
+
+#: templates/views/admin.phtml:1
+msgid "Common informations"
+msgstr "Informations courantes"
+
+#: templates/views/admin.phtml:5
+#, php-format
+msgid "There are %s new USERS registered from these last 10 days."
+msgstr "Il y a %s nouveaux utilisateurs enregistrés depuis ces 10 derniers jours."
+
+#: templates/views/admin.phtml:6
+#: templates/views/admin.phtml:15
+#: templates/views/admin.phtml:24
+msgid "See"
+msgstr "Voir"
+
+#: templates/views/admin.phtml:14
+#, php-format
+msgid "There are %s new CATEGORIES registered from these last 10 days."
+msgstr "Il y a %s nouvelles catégories enregistrées depuis ces 10 derniers jours."
+
+#: templates/views/admin.phtml:23
+#, php-format
+msgid "There are %s new ARTICLES registered from these last 10 days."
+msgstr "Il y a %s nouveaux articles enregistrés depuis ces 10 derniers jours."
+
+#: templates/views/admin.phtml:32
+#, php-format
+msgid "There are %s files in uploads folder that are not registered in the database."
+msgstr "Il y a %s fichiers dans le répertoire \"uploads\" qui ne sont pas répertoriés dans la base."
+
+#: templates/views/admin.phtml:33
+#: templates/views/admin.phtml:42
+msgid "Go manage them"
+msgstr "Gérer ces cas"
+
+#: templates/views/admin.phtml:41
+#, php-format
+msgid "There are %s files registered in the database that are not in the uploads folder."
+msgstr "Il y a %s fichiers enregistrés dans la base qui n'ont pas (ou plus) leur trace physique dans le répertoire \"uploads\"."
+
+#: templates/views/admin/users.phtml:3
+msgid "Registered users:"
+msgstr "Utilisateurs enregistrés :"
+
+#: templates/views/admin/users.phtml:7
+msgid "Pseudo"
+msgstr "Pseudo"
+
+#: templates/views/admin/users.phtml:7
+msgid "E-mail"
+msgstr "E-mail"
+
+#: templates/views/admin/users.phtml:8
+msgid "Last name"
+msgstr "Nom"
+
+#: templates/views/admin/users.phtml:8
+msgid "First name"
+msgstr "Prénom"
+
+#: templates/views/admin/users.phtml:11
+msgid "Is active"
+msgstr "Est actif"
+
+#: templates/views/admin/users.phtml:22
+msgid "Yes"
+msgstr "Oui"
+
+#: templates/views/admin/users.phtml:22
+msgid "No"
+msgstr "Non"
+
+#: templates/views/admin/users.phtml:30
+msgid "No users found"
+msgstr "Aucun utilisateur enregistré"
+
+#: templates/views/admin/users.phtml:33
+msgid "Add"
+msgstr "Ajouter"
+
+#: templates/views/admin/system.phtml:1
+msgid "Parameters"
+msgstr "Paramètres"
+
+#: templates/views/admin/article_categories.phtml:3
+msgid "Registered article categories:"
+msgstr "Catégories d'articles enregistrées :"
+
+#: templates/views/admin/article_categories.phtml:7
+#: templates/views/admin/file_manager.phtml:8
+msgid "Name"
+msgstr "Nom"
+
+#: templates/views/admin/article_categories.phtml:7
+msgid "Label"
+msgstr "&Eacute;tiquette"
+
+#: templates/views/admin/article_categories.phtml:7
+#: templates/views/admin/forms/article_category.phtml:64
+msgid "Parent category"
+msgstr "Catégorie parente"
+
+#: templates/views/admin/article_categories.phtml:26
+msgid "No categories found"
+msgstr "Aucune catégorie trouvée"
+
+#: templates/views/admin/file_manager.phtml:3
+msgid "Uploaded files stored into the database"
+msgstr "Fichiers téléchargés et répertoriés dans la base de données"
+
+#: templates/views/admin/file_manager.phtml:9
+#: templates/views/admin/file_manager.phtml:113
+msgid "Mime type"
+msgstr "Mime-type"
+
+#: templates/views/admin/file_manager.phtml:10
+#: templates/views/admin/file_manager.phtml:69
+msgid "Preview"
+msgstr "Aperçu"
+
+#: templates/views/admin/file_manager.phtml:11
+#: templates/views/admin/file_manager.phtml:41
+msgid "Delete"
+msgstr "Supprimer"
+
+#: templates/views/admin/file_manager.phtml:22
+#: templates/views/admin/file_manager.phtml:84
+msgid "Visualize"
+msgstr "Visualiser"
+
+#: templates/views/admin/file_manager.phtml:41
+#: templates/views/admin/file_manager.phtml:56
+msgid "Confirm this action"
+msgstr "Confirmez cette action"
+
+#: templates/views/admin/file_manager.phtml:48
+msgid "Upload and list new files"
+msgstr "Téléverser et répertorier de nouveaux fichiers"
+
+#: templates/views/admin/file_manager.phtml:56
+msgid "Upload"
+msgstr "Téléverser"
+
+#: templates/views/admin/file_manager.phtml:63
+msgid "Physical files that are not registered into the database"
+msgstr "Fichiers physiques qui ne sont pas répertoriés dans la base"
+
+#: templates/views/admin/file_manager.phtml:67
+#: templates/views/admin/file_manager.phtml:112
+msgid "File name"
+msgstr "Nom de fichier"
+
+#: templates/views/admin/file_manager.phtml:68
+msgid "Type|Path"
+msgstr "Type|Chemin"
+
+#: templates/views/admin/file_manager.phtml:100
+#: templates/views/admin/file_manager.phtml:127
+msgid "Manage"
+msgstr "Gérer"
+
+#: templates/views/admin/file_manager.phtml:107
+msgid "Files in database that are not physically presents"
+msgstr "Fichiers répertoriés qui ne sont pas physiquement présents"
+
+#: templates/views/admin/file_manager.phtml:132
+msgid "Check for unregistered files"
+msgstr "Vérifier l'existence de fichiers non inventoriés."
+
+#: templates/views/admin/file_manager.phtml:134
+msgid "Be aware that this process can take a while if your database is huge."
+msgstr "Attention : cette action peut durer longtemps en fonction de la quantité de données et de fichiers à inspecter."
+
+#: templates/views/admin/articles.phtml:3
+msgid "Registered articles:"
+msgstr "Articles enregistrés :"
+
+#: templates/views/admin/articles.phtml:8
+#: templates/views/admin/forms/article.phtml:28
+#: templates/views/admin/forms/article_category.phtml:101
+msgid "Title"
+msgstr "Titre"
+
+#: templates/views/admin/articles.phtml:8
+#: templates/views/admin/forms/article.phtml:81
+#: templates/views/admin/forms/article_category.phtml:143
+msgid "View template"
+msgstr "Gabarit de l'affichage"
+
+#: templates/views/admin/articles.phtml:8
+#: templates/views/admin/forms/article.phtml:70
+#: templates/views/admin/forms/article_category.phtml:132
+msgid "Url alias"
+msgstr "Alias de l'URL"
+
+#: templates/views/admin/articles.phtml:9
+#: templates/views/admin/forms/article.phtml:117
+#: templates/views/admin/forms/article_category.phtml:179
+msgid "Published"
+msgstr "Publié"
+
+#: templates/views/admin/articles.phtml:9
+msgid "Last edit"
+msgstr "Dernière modif."
+
+#: templates/views/admin/articles.phtml:32
+msgid "No articles found"
+msgstr "Aucun article trouvé"
+
+#: templates/views/admin/header.phtml:2
+msgid "Admin panel"
+msgstr "Panneau d'administration"
+
+#: templates/views/admin/user/edit.phtml:1
+msgid "Account informations"
+msgstr "Informations sur le compte"
+
+#: templates/views/admin/user/edit.phtml:5
+#: templates/views/admin/article/edit.phtml:4
+msgid "Update"
+msgstr "Modifier"
+
+#: templates/views/admin/user/edit.phtml:7
+msgid "You are not allowed to modify this user."
+msgstr "Vous n'êtes pas autorisé à modifier cet utilisateur."
+
+#: templates/views/admin/user/create.phtml:1
+msgid "Register a new user"
+msgstr "Enregistrer un nouvel utilisateur"
+
+#: templates/views/admin/user/create.phtml:4
+#: templates/views/admin/article/create.phtml:4
+msgid "Register"
+msgstr "Enregistrer"
+
+#: templates/views/admin/article/edit.phtml:1
+msgid "Edit article informations"
+msgstr "Modifier les infos de l'article"
+
+#: templates/views/admin/article/edit.phtml:4
+msgid "Just save it"
+msgstr "Seulement enregistrer"
+
+#: templates/views/admin/article/edit.phtml:5
+msgid "Store this article version"
+msgstr "Stocker cette version de l'article"
+
+#: templates/views/admin/article/edit.phtml:5
+msgid "Historicize"
+msgstr "Archiver"
+
+#: templates/views/admin/article/edit.phtml:6
+msgid "Update and store this article version"
+msgstr "Modifier et enregistrer l'ancienne version dans l'historique"
+
+#: templates/views/admin/article/edit.phtml:6
+msgid "Update and historicize"
+msgstr "Modifier et archiver"
+
+#: templates/views/admin/article/create.phtml:1
+msgid "Add new article"
+msgstr "Ajouter un nouvel article"
+
+#: templates/views/admin/forms/article.phtml:10
+#: templates/views/admin/forms/article_category.phtml:84
+msgid "Article ID"
+msgstr "ID article"
+
+#: templates/views/admin/forms/article.phtml:11
+#: templates/views/admin/forms/article_category.phtml:85
+msgid "go to front page"
+msgstr "Voir la page"
+
+#: templates/views/admin/forms/article.phtml:16
+#: templates/views/admin/forms/article_category.phtml:91
+msgid "Edited on"
+msgstr "Modifié le"
+
+#: templates/views/admin/forms/article.phtml:20
+#: templates/views/admin/forms/article_category.phtml:20
+#: templates/views/admin/forms/article_category.phtml:27
+#: templates/views/admin/forms/article_category.phtml:93
+#: templates/views/admin/forms/user.phtml:11
+#: templates/views/admin/forms/user.phtml:18
+msgid "By"
+msgstr "par"
+
+#: templates/views/admin/forms/article.phtml:32
+#: templates/views/admin/forms/article.phtml:41
+#: templates/views/admin/forms/article.phtml:74
+#: templates/views/admin/forms/article.phtml:102
+#: templates/views/admin/forms/article.phtml:111
+#: templates/views/admin/forms/article_category.phtml:39
+#: templates/views/admin/forms/article_category.phtml:49
+#: templates/views/admin/forms/article_category.phtml:105
+#: templates/views/admin/forms/article_category.phtml:114
+#: templates/views/admin/forms/article_category.phtml:136
+#: templates/views/admin/forms/article_category.phtml:164
+#: templates/views/admin/forms/article_category.phtml:173
+msgid "characters max."
+msgstr "caractères max."
+
+#: templates/views/admin/forms/article.phtml:33
+#: templates/views/admin/forms/article_category.phtml:40
+#: templates/views/admin/forms/article_category.phtml:50
+#: templates/views/admin/forms/article_category.phtml:106
+msgid "No HTML tags."
+msgstr "Ne pas mettre de tags HTML."
+
+#: templates/views/admin/forms/article.phtml:38
+#: templates/views/admin/forms/article_category.phtml:111
+msgid "Summary"
+msgstr "Résumé"
+
+#: templates/views/admin/forms/article.phtml:43
+#: templates/views/admin/forms/article_category.phtml:116
+msgid "Must contain a little summary that will be displayed into the \"latest news\" box."
+msgstr "Doit contenir un petit résumé qui sera affiché dans la boîte \"Dernières nouvelles\"."
+
+#: templates/views/admin/forms/article.phtml:48
+msgid "Category"
+msgstr "Catégorie"
+
+#: templates/views/admin/forms/article.phtml:51
+#: templates/views/admin/forms/article_category.phtml:67
+msgid "None"
+msgstr "Aucun(e)"
+
+#: templates/views/admin/forms/article.phtml:60
+#: templates/views/admin/forms/article_category.phtml:122
+msgid "Access level"
+msgstr "Niveau d'accès"
+
+#: templates/views/admin/forms/article.phtml:64
+#: templates/views/admin/forms/article_category.phtml:126
+msgid "Degree of accessibility: 1=Only for super-admin, 2=For administrators, empty=access for all"
+msgstr "Degré d'accessibilité : 1=\"Seulement pour Super-Admins\", 2=\"Pour Admins\", vide=\"Accès public\""
+
+#: templates/views/admin/forms/article.phtml:76
+#: templates/views/admin/forms/article_category.phtml:138
+msgid "Url alias must be unique for each article."
+msgstr "L'alias d'URL doit être strictement unique à chaque article."
+
+#: templates/views/admin/forms/article.phtml:90
+#: templates/views/admin/forms/article_category.phtml:152
+msgid "These layouts are stored in \"apps/templates/views/cms\"."
+msgstr "Ces gabarits sont stockés dans \"apps/templates/views/cms\"."
+
+#: templates/views/admin/forms/article.phtml:95
+#: templates/views/admin/forms/article_category.phtml:157
+msgid "Body"
+msgstr "Corps de texte"
+
+#: templates/views/admin/forms/article.phtml:99
+#: templates/views/admin/forms/article_category.phtml:161
+msgid "Greeting text"
+msgstr "Message de salutation"
+
+#: templates/views/admin/forms/article.phtml:104
+#: templates/views/admin/forms/article_category.phtml:166
+msgid "A litle ending message such as \"Cheers!\"."
+msgstr "Un petit message en fin de texte, comme \"Cordialement\"."
+
+#: templates/views/admin/forms/article.phtml:108
+#: templates/views/admin/forms/article_category.phtml:170
+msgid "Signature"
+msgstr "Signature"
+
+#: templates/views/admin/forms/article.phtml:113
+#: templates/views/admin/forms/article_category.phtml:175
+msgid "Author signature."
+msgstr "Signature de l'auteur."
+
+#: templates/views/admin/forms/article_category.phtml:12
+msgid "Category ID"
+msgstr "ID catégorie"
+
+#: templates/views/admin/forms/article_category.phtml:18
+#: templates/views/admin/forms/user.phtml:9
+msgid "Created on"
+msgstr "Créé le"
+
+#: templates/views/admin/forms/article_category.phtml:25
+#: templates/views/admin/forms/user.phtml:16
+msgid "Last edited on"
+msgstr "Dernière modif."
+
+#: templates/views/admin/forms/article_category.phtml:35
+msgid "Category name"
+msgstr "Nom de la catégorie"
+
+#: templates/views/admin/forms/article_category.phtml:45
+msgid "Category label"
+msgstr "&Eacute;tiquette de la catégorie"
+
+#: templates/views/admin/forms/article_category.phtml:51
+msgid "A very short description."
+msgstr "Description très courte."
+
+#: templates/views/admin/forms/article_category.phtml:56
+msgid "Vignette"
+msgstr "Vignette"
+
+#: templates/views/admin/forms/article_category.phtml:70
+msgid "Leave empty to define it as a super category."
+msgstr "Laisser vide si la catégorie est une super-catégorie."
+
+#: templates/views/admin/forms/article_category.phtml:75
+msgid "Update only category informations"
+msgstr "Modifier seulement les infos de la catégorie"
+
+#: templates/views/admin/forms/article_category.phtml:78
+msgid "Article informations"
+msgstr "Infos article"
+
+#: templates/views/admin/forms/article_category.phtml:184
+msgid "Update only article informations"
+msgstr "Modifier uniquement les infos de l'article"
+
+#: templates/views/admin/forms/login.phtml:4
+msgid "Admin only"
+msgstr "Admin uniquement"
+
+#: templates/views/admin/forms/login.phtml:7
+msgid "Login:"
+msgstr "Pseudo :"
+
+#: templates/views/admin/forms/login.phtml:11
+msgid "Password:"
+msgstr "Mot de passe :"
+
+#: templates/views/admin/forms/login.phtml:15
+msgid "Submit"
+msgstr "Valider"
+
+#: templates/views/admin/forms/login.phtml:17
+msgid "Not registred yet?"
+msgstr ""
+
+#: templates/views/admin/forms/user.phtml:26
+msgid "User ID"
+msgstr "ID utilisateur"
+
+#: templates/views/admin/forms/user.phtml:31
+msgid "Login*"
+msgstr "Pseudo*"
+
+#: templates/views/admin/forms/user.phtml:41
+#: templates/views/admin/forms/user.phtml:82
+msgid "New password"
+msgstr "Nouveau mdp"
+
+#: templates/views/admin/forms/user.phtml:43
+#: templates/views/admin/forms/user.phtml:84
+msgid "Passwords mismatch."
+msgstr "Mots de passe non concordants."
+
+#: templates/views/admin/forms/user.phtml:46
+#: templates/views/admin/forms/user.phtml:87
+msgid "Retype password"
+msgstr "Confirmer mdp"
+
+#: templates/views/admin/forms/user.phtml:60
+msgid "Date of birth"
+msgstr "Date de naissance"
+
+#: templates/views/admin/forms/user.phtml:65
+msgid "Use the universal date format YYYY-MM-DD if your browser does not support natively the date picker."
+msgstr "Utiliser le format universel de date AAAA-MM-JJ si votre navigateur n'intègre pas par défaut un sélecteur de date."
+
+#: templates/views/admin/forms/user.phtml:70
+msgid "Activate"
+msgstr "Activé"
+
+#: templates/views/admin/forms/user.phtml:78
+msgid "Change password"
+msgstr "Modifier le mot de passe"
+
+#: templates/views/admin/forms/user.phtml:96
+msgid "Roles"
+msgstr "Rôles"
+
+#: templates/views/admin/file_manager/diffs.phtml:11
+msgid "Erase"
+msgstr "Effacer"
+
+#: templates/views/admin/file_manager/diffs.phtml:55
+msgid "Remove from database"
+msgstr "Enlever de la base"
+
+#: templates/views/admin/file_manager/diffs.phtml:75
+msgid "Status: OK"
+msgstr "Statut : OK"
+
+#: templates/views/admin/elements/file_upload.phtml:9
+msgid "Upload a file"
+msgstr "Téléverser un fichier"
+
+#: templates/views/admin/elements/file_upload.phtml:11
+msgid "Or choose an existing one (auto-completion)"
+msgstr "Ou choisir un fichier existant (par auto-complétion)"
+
+#: templates/views/admin/elements/datagrid_searches.phtml:8
+msgid "Display"
+msgstr "Afficher"
+
+#: templates/views/admin/elements/datagrid_searches.phtml:14
+msgid "rows"
+msgstr "lignes"
+
+#: templates/views/admin/elements/datagrid_searches.phtml:18
+msgid "Page"
+msgstr "Page"
+
+#: templates/views/admin/elements/datagrid_searches.phtml:24
+msgid "of"
+msgstr "sur"
+
+#: templates/views/admin/article_category/edit.phtml:1
+msgid "Edit category informations"
+msgstr "Modifier les infos de la catégorie"
+
+#: templates/views/admin/article_category/create.phtml:1
+msgid "Add new category"
+msgstr "Ajouter une nouvelle catégorie"
+
+#: templates/views/blocks/chatbox.phtml:8
+msgid "chars max."
+msgstr "caractères max."
+
+#: templates/views/blocks/chatbox.phtml:9
+msgid "Send"
+msgstr "Envoyer"
+
+#: templates/views/blocks/mumble.phtml:6
+msgid "Connect to Mumble"
+msgstr "Connexion à Mumble"
+
+#: templates/views/blocks/mumble.phtml:17
+msgid "View profile"
+msgstr "Voir le profil"
+
+#: templates/views/blocks/mumble.phtml:23
+msgid "Nobody's logged"
+msgstr "Chat room vide"
+
+#: templates/views/blocks/list_of_articles.phtml:13
+msgid "This is the only article of this category."
+msgstr "C'est le seul article de cette catégorie."
+
+#: templates/views/blocks/footer.phtml:3
+msgid "Sitemap"
+msgstr "Plan du site"
+
+#: templates/views/blocks/footer.phtml:28
+msgid "Recommended links"
+msgstr "Liens recommandés"
+
+#: templates/views/blocks/header.phtml:25
+msgid "your profile"
+msgstr "modifiez votre profile"
+
+#: templates/views/blocks/header.phtml:27
+msgid "go to admin panel"
+msgstr "Espace admin"
+
+#: templates/views/forms/article_comments.phtml:2
+msgid "Comments"
+msgstr "Commentaires"
+
+#: templates/views/forms/article_comments.phtml:12
+msgid "Be the first to post a comment."
+msgstr "Soyez le premier à poster un commentaire."
+
+#: templates/views/forms/article_comments.phtml:18
+msgid "Post comment"
+msgstr "Commenter"
+
+#: templates/views/forms/article_comments.phtml:21
+msgid "You must be logged in to post a comment."
+msgstr "Vous devez être connecté pour taper un commentaire."
+
+#~ msgid "Login"
+#~ msgstr "Se connecter"
+
+#~ msgid "Unexpected error while loading new article category."
+#~ msgstr "Erreur inattendue lors du chargement de la nouvelle catégorie."
+
+#~ msgid "Log for a list of connected users"
+#~ msgstr "Connectez-vous pour voir la liste d'utilisateurs"
+
+#~ msgid "See profile"
+#~ msgstr "Voir le profil"
+
+#~ msgid "Update user informations"
+#~ msgstr "Modifier les infos utilisateur"
+
+#~ msgid "Update your informations"
+#~ msgstr "Modifier vos informations"
+
+#~ msgid "Action"
+#~ msgstr "Action"
+
+#~ msgid "Birth date"
+#~ msgstr "Date de naissance"
+
+#~ msgid "Rules"
+#~ msgstr "Rôles"
+
+#~ msgid "Accueil"
+#~ msgstr "Home"
+
+#~ msgid "Téléchargements"
+#~ msgstr "Téléchargements"
+
+#~ msgid "Nous contacter"
+#~ msgstr "Nous contacter"
+
+#~ msgid "Se déconnecter"
+#~ msgstr "Se déconnecter"
+
+#~ msgid "Se connecter"
+#~ msgstr "Se connecter"
+
+#~ msgid "no"
+#~ msgstr "Non"
+
+#~ msgid "This is my footer"
+#~ msgstr "Ceci est mon pied de page"

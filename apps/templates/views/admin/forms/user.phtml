@@ -1,0 +1,106 @@
+<?php 
+$user = $view->getParentView()->user;
+$tmpUser = clone $user;
+$user_roles = !empty($view->getParentView()->user_roles) ? $view->getParentView()->user_roles : array();
+$inCreation = empty($user->uid);?>
+<div style="float:right">
+	<?php $tmpUser->load('uid='.$user->cre_uid);?>
+	<div class="description alignright">
+		<?php echo _('Created on')?>
+		<span class="bold"><?php echo date('d/m/Y H:i', strtotime($user->cre_date));?></span>
+		<?php echo _('By')?>
+		<span class="bold"><?php echo $tmpUser->login;?></span>
+	</div>
+	<div class="description">
+		<?php $tmpUser->load('uid='.$user->upd_uid);?>
+		<?php echo _('Last edited on')?>
+		<span class="bold"><?php echo date('d/m/Y H:i', strtotime($user->upd_date))?></span>
+		<?php echo _('By')?>
+		<span class="bold"><?php echo $tmpUser->login;?></span>
+	</div>
+</div>
+<div class="form-content">
+	<table>
+		<?php if (!$inCreation && $view->userIsAdmin()){?>
+		<tr>
+			<td><label><?php echo _('User ID')?></label></td>
+			<td><?php echo $user->uid?></td>			
+		</tr>
+		<?php }?>
+		<tr>
+			<td width="170px"><label for="login"><?php echo _('Login*')?></label></td>
+			<td><input type="text" id="login" name="login" class="text mandatory" value="<?php if (!empty($user->login)) echo $user->login;?>" /></td>
+		</tr>
+		<tr>
+			<td><label for="email"><?php echo _('E-mail')?>*</label></td>
+			<td><input type="text" id="email" name="email" class="text mandatory" value="<?php if (!empty($user->email)) echo $user->email;?>" /></td>
+			<td><span id="email_error_msg" class="user_end_error hidden"><?php echo _('Invalid e-mail address.')?></span></td>
+		</tr>
+		<?php if ($inCreation){?>
+		<tr>
+			<td><label for="password"><?php echo _('New password')?>*</label></td>
+			<td><input type="password" id="password" name="password" class="text mandatory" /></td>
+			<td><span id="pwd_error_msg" class="user_end_error hidden"><?php echo _('Passwords mismatch.')?></span></td>
+		</tr>
+		<tr>
+			<td><label for="chk_pwd"><?php echo _('Retype password')?>*</label></td>
+			<td><input type="password" id="chk_pwd" class="text mandatory" /></td>
+		</tr>
+		<?php }?>
+		<tr>
+			<td><label for="firstname"><?php echo _('First name')?></label></td>
+			<td><input type="text" id="firstname" name="firstname" class="text" value="<?php if (!empty($user->firstname)) echo $user->firstname;?>" /></td>
+		</tr>
+		<tr>
+			<td><label for="lastname"><?php echo _('Last name')?></label></td>
+			<td><input type="text" id="lastname" name="lastname" class="text" value="<?php if (!empty($user->lastname)) echo $user->lastname;?>" /></td>
+		</tr>
+		<tr>
+			<td>
+				<label for="bir_date"><?php echo _('Date of birth')?></label>
+			</td>
+			<td>
+				<input type="date" id="bir_date" name="bir_date" class="text date" value="<?php
+					if (!empty($user->bir_date)) echo date('Y-m-d', strtotime($user->bir_date));?>" title="<?php
+					echo _('Use the universal date format YYYY-MM-DD if your browser does not support natively the date picker.')?>" />
+			</td>
+		</tr>
+		<?php if ($view->userIsAdmin()){?>
+		<tr>
+			<td><label for="active"><?php echo _('Activate')?></label></td>
+			<td><input type="checkbox" id="active" name="active" <?php if (!empty($user->active)) echo 'checked="checked"';?> /></td>
+		</tr>
+		<?php }?>
+	</table>
+</div>
+<?php if (!$inCreation && empty($view->parentView->noWriting)){?>
+<div class="form-content">
+	<a id="open_pwd_box" href="#"><?php echo _('Change password')?></a>
+	<div id="pwd_box" class="hidden">
+		<table>
+			<tr>
+				<td width="170px"><label for="password"><?php echo _('New password')?>*</label></td>
+				<td><input type="password" id="password" class="text" /></td>
+				<td><span id="pwd_error_msg" class="user_end_error hidden"><?php echo _('Passwords mismatch.')?></span></td>
+			</tr>
+			<tr>
+				<td><label for="chk_pwd"><?php echo _('Retype password')?>*</label></td>
+				<td><input type="password" id="chk_pwd" class="text" /></td>
+			</tr>
+		</table>
+	</div>
+</div>
+<?php }?>
+<?php if ($view->userIsAdmin()){?>
+<fieldset class="form-content">
+	<legend><?php echo _('Roles')?></legend>
+	<?php foreach ($view->roles as $role){
+		//Only Super Admin is able to grant super privileges to another user
+		if ($role['rid']=='1' && !$view->userIsSuperAdmin()) continue;?>
+	<span class="user_role">
+		<input type="checkbox" id="role_<?php echo $role['rid']?>" name="role[<?php echo $role['rid']?>]" <?php if (in_array($role['rid'], $user_roles)) echo 'checked="checked"';?> />
+		<label for="role_<?php echo $role['rid']?>"><?php echo $role['name']?></label>
+	</span>
+	<?php }?>
+</fieldset>
+<?php }?>

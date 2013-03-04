@@ -1,0 +1,34 @@
+<?php
+use \Bonz\CMS\Files;
+$view->addJS(WEB_ROOT.'/js/admin/file_autocomplete.js');
+$objectName = !empty($view->getParentView()->file_upload['object_name']) ? $view->getParentView()->file_upload['object_name'] : 'item';
+$input_id	= 'file_'.rand(0, 1000000);
+$fid		= !empty($view->getParentView()->file_upload['fid']) ? $view->getParentView()->file_upload['fid'] : null;?>
+<div class="file_item">
+	<div class="inline">
+		<div class="description"><?php echo _('Upload a file')?></div>
+		<input type="file" class="text file" id="<?php echo $objectName?>_fid" name="<?php echo $objectName?>[fid]" value="" />
+		<div class="description"><?php echo _('Or choose an existing one (auto-completion)')?></div>
+		<input type="text" class="text autocomplete" id="<?php echo $input_id?>" />
+		<div class="autocompletebox <?php echo $input_id?>"></div>
+		<input type="hidden" id="hidden_<?php echo $input_id?>" name="<?php echo $objectName?>[selected_fid]" />
+	</div><?php
+	
+	if ($fid){
+		$file = new Files();
+		$file->load("fid='$fid'");?>
+	<div class="inline aligntop">
+		<div class="pic_toggle">
+			<div class="toggle_open"><?php echo _('Visualize')?></div>
+			<div class="toggle_preview">
+				<div><em><?php echo $file->filename?></em></div>
+				<?php if (stripos($file->mime_type, 'image')===false){?>
+				<object class="preview" type="<?php echo $file->mime_type?>" data="<?php echo WEB_ROOT.'/'.$file->path;?>"></object>
+				<?php }else{?>
+				<img class="preview" src="<?php echo WEB_ROOT.'/'.$file->path;?>" />
+				<?php }?>
+			</div>
+		</div>
+	</div>
+	<?php }?>
+</div>

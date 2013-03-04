@@ -1,0 +1,13 @@
+### URL rewriting
+## -> Il faut s'assurer que le mod_rewrite est chargé dans la conf Apache
+## Sur un système de type RedHat : aller dans le fichier /etc/httpd/conf/httpd.conf
+## Chercher la ligne "LoadModule rewrite_module modules/mod_rewrite.so" et décommenter si c'esy le cas
+## Sinon installer ce module Apache
+
+## De plus, pour que ce fichier htaccess soit pris en compte par Apache, toujours dans la conf Apache, section <Directory /var/www/html>
+## appliquer "AllowOverride All"
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?my_current_view=$1 [L,QSA]

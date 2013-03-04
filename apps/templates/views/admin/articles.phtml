@@ -1,0 +1,35 @@
+<?php if (!empty($view->articles)){?>
+<div class="grid_container">
+	<h1><?php echo _('Registered articles:')?></h1>
+	<?php echo $view->getBlock('admin/elements/datagrid_searches');?>
+	<table id="articles_grid" class="datagrid">
+		<thead>
+			<tr>
+				<?php foreach (array('aid'=>'AID', 'uid'=>'UID', 'catid'=>'CATID',
+						'title'=>_('Title'), 'view'=>_('View template'), 'request_uri'=>_('Url alias'),
+						'publish'=>_('Published'), 'edit_date'=>_('Last edit')) as $field=>$title){?>
+				<th><a href="#" id="field_<?php echo $field?>" class="<?php if (!empty($_GET['order']) && $_GET['order']==$field) echo 'current';?>"><?php echo $title?></a></th>
+				<?php }?>
+			</tr>
+		</thead>
+		<tbody>
+		<?php foreach ($view->articles as $article){?>
+			<tr id="aid_<?php echo $article['aid']?>" object="article" class="trigger <?php if (empty($trclass)) $trclass = 'iter'; else $trclass = ''; echo $trclass;?>">
+				<td><?php echo $article['aid']?></td>
+				<td><?php echo $article['uid']?></td>
+				<td><?php echo $article['catid']?></td>
+				<td><?php echo $article['title']?></td>
+				<td><?php echo $article['view']?></td>
+				<td><?php echo $article['request_uri']?></td>
+				<td><?php echo $article['publish'] ? _('Yes') : _('No')?></td>
+				<td><?php echo date('d/m/Y H:i:s', strtotime($article['edit_date']))?></td>
+			</tr>
+		<?php }?>
+		</tbody>
+	</table>
+</div>
+<?php }else{?>
+<h1><?php echo _('No articles found')?></h1>
+<?php }?>
+
+<a class="add_new" href="<?php echo ADMIN_WEB_ROOT?>/article/create"><?php echo _('Add')?></a>

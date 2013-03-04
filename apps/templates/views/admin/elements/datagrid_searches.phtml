@@ -1,0 +1,29 @@
+<div class="criterias"><?php
+	$currentCount	= !empty($_GET['count'])? $_GET['count']: 10;
+	$currentPage	= !empty($_GET['page'])	? $_GET['page']	: 1;
+	$totalPages		= ceil($view->getMetaView()->rowCount/$currentCount);?>
+	<table class="criterias">
+		<tr>
+			<td class="alignleft">
+				<label><?php echo _('Display')?></label>
+				<select class="gridcount">
+					<?php foreach (array(10, 20, 50) as $count){?>
+					<option value="<?php echo $count?>" <?php if ($count==$currentCount) echo 'selected'?>><?php echo $count?></option>
+					<?php }?>
+				</select>
+				<label><?php echo _('rows')?></label>
+			</td>
+			<?php if ($totalPages>1){?>
+			<td class="alignright">
+				<label><?php echo _('Page')?></label>
+				<select class="gridpage">
+					<?php for ($i=1; $i<=$totalPages; $i++){?>
+					<option value="<?php echo $i?>" <?php if ($i==$currentPage) echo 'selected'?>><?php echo $i?></option>
+					<?php }?>
+				</select>
+				<label><?php echo _('of')?> <?php echo $totalPages?></label>
+			</td>
+			<?php }?>
+		</tr>
+	</table>
+</div>

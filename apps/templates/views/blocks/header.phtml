@@ -1,0 +1,33 @@
+<div class="banner">
+	<a class="home-link" href="<?php echo WEB_ROOT?>">
+		<h1>BoN's CMS</h1>
+	</a>
+</div>
+<nav>
+	<ul class="left">
+		<?php foreach ($view->menu as $page=>$title){?>
+		<li class="mainmenu">
+			<a href="<?php echo WEB_ROOT?>/<?php echo $page!='home'? $page : ''?>" class="mainmenu_link <?php
+				echo $page==$view->current ? 'current' : '';?> <?php
+				echo $page=='logout' ? 'logout' : ''?>">
+				<?php echo $title?>
+			</a>
+		</li>
+		<?php }?>
+	</ul>
+</nav>
+<div class="loggedin">
+	<?php if ($view->userIsLogged()){?>
+	<div class="inline alignmiddle user_login">
+		<?php echo $_SESSION['REG_USER']['login'];?>,
+		<?php if (!$view->userIsAdmin()){?>
+		<a href="<?php echo WEB_ROOT?>/user_edit"><?php echo _('your profile')?></a>
+		<?php } else {?>
+		<a href="<?php echo ADMIN_WEB_ROOT?>" target="_blank"><?php echo _('go to admin panel')?></a>
+		<?php }?>
+	</div>
+	<?php }?>
+	<div class="inline alignmiddle">
+		<?php $grade = $view->userIsSuperAdmin() ? 1 : ($view->userIsAdmin() ? 2 : ($view->userIsLogged() ? 3 : 4));?>
+	</div>
+</div>

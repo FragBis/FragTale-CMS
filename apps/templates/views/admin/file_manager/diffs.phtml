@@ -1,0 +1,76 @@
+<?php if (!empty($view->files['not_in_db'])){?>
+<form method="post">
+	<h1><?php echo _('Physical files that are not registered into the database')?></h1>
+	<table class="datagrid">
+		<thead>
+			<tr>
+				<th><?php echo _('File name')?></th>
+				<th><?php echo _('Type|Path')?></th>
+				<th><?php echo _('Preview')?></th>
+				<th><?php echo _('Add')?></th>
+				<th><?php echo _('Erase')?></th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php foreach ($view->files['not_in_db'] as $path=>$filename){
+				$type	= reset(explode(' ', $path));
+				$isImg	= stripos($type, 'image')!==false;?>
+			<tr>
+				<td><?php echo $filename?></td>
+				<td><?php echo $path?></td>
+				<td>
+					<div class="pic_toggle">
+						<div class="toggle_open"><?php echo _('Visualize')?></div>
+						<div class="toggle_preview">
+							<div><em><?php echo $filename?></em></div>
+							<?php if ($isImg){?>
+							<img class="preview" src="<?php echo WEB_ROOT.'/uploads/'.$type.'/'.$filename;?>" />
+							<?php }else{?>
+							<object class="preview" data="<?php echo WEB_ROOT.'/uploads/'.$type.'/'.$filename;?>"></object>
+							<?php }?>
+						</div>
+					</div>
+				</td>
+				<td class="center"><input type="checkbox" name="add[<?php echo $filename;?>]" /></td>
+				<td class="center"><input type="checkbox" name="erase[<?php echo $filename;?>]" /></td>
+			</tr>
+			<?php }?>
+		</tbody>
+	</table>
+	<div class="buttons">
+		<button type="submit" class="validate" onclick="return confirm('<?php echo _('Confirm this action');?>');"><?php echo _('Submit')?></button>
+	</div>
+</form>
+<?php }?>
+
+<?php if (!empty($view->files['not_in_dir'])){?>
+<form method="post">
+	<h1><?php echo _('Files in database that are not physically presents')?></h1>
+	<table class="datagrid">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th><?php echo _('File name')?></th>
+				<th><?php echo _('Mime type')?></th>
+				<th><?php echo _('Remove from database')?></th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php foreach ($view->files['not_in_dir'] as $file){?>
+			<tr>
+				<td><?php echo $file['fid']?></td>
+				<td><?php echo $file['filename']?></td>
+				<td><?php echo $file['mime_type']?></td>
+				<td><input type="checkbox" name="delete[<?php echo $file['fid'];?>]" /></td>
+			</tr>
+			<?php }?>
+		</tbody>
+	</table>
+	<div class="buttons">
+		<button type="submit" class="validate" onclick="return confirm('<?php echo _('Confirm this action');?>');"><?php echo _('Delete')?></button>
+	</div>
+</form>
+<?php }?>
+<?php if (empty($view->files['not_in_dir']) && empty($view->files['not_in_db'])){?>
+<h1><?php echo _('Status: OK')?></h1>
+<?php }?>

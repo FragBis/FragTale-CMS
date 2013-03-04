@@ -1,0 +1,21 @@
+<?php $isAdminAccess = ($view->getMetaView()->getViewName()=='admin/login');?>
+<form class="login-form" method="post">
+	<?php if ($isAdminAccess){?>
+	<h1><?php echo _('Admin only')?></h1>
+	<?php }?>
+	<div class="login-elt">
+		<label for="login"><?php echo _('Login:')?></label>
+		<input type="text" id="login" name="login" class="text login" />
+	</div>
+	<div class="login-elt">
+		<label for="pwd"><?php echo _('Password:')?></label>
+		<input type="password" id="pwd" name="pwd" class="text pwd" />
+	</div>
+	<div class="login-elt">
+		<button type="submit" class="validate"><?php echo _('Submit')?></button>
+	</div>
+	<div class="register"><a href="<?php echo WEB_ROOT."/register"; ?>"><?php echo _('Not registred yet?');?></a></div>
+</form>
+<script>
+	document.getElementById('login').focus();
+</script>
