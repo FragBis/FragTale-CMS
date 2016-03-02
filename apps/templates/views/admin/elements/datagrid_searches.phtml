@@ -1,29 +1,32 @@
-<div class="criterias"><?php
-	$currentCount	= !empty($_GET['count'])? $_GET['count']: 10;
-	$currentPage	= !empty($_GET['page'])	? $_GET['page']	: 1;
-	$totalPages		= ceil($view->getMetaView()->rowCount/$currentCount);?>
+<?php if ($grid = !empty($view->getParentView()->_datagrid) ? $view->getParentView()->_datagrid :
+		(!empty($view->getMetaView()->_datagrid) ? $view->getMetaView()->_datagrid : null)){?>
+<div class="criterias">
 	<table class="criterias">
 		<tr>
-			<td class="alignleft">
+			<td align="left" width="33%">
+				<?php echo _('Total:').' '.$grid['rows']['total'].' '._('row(s)');?>
+			</td>
+			<td align="center" width="33%">
 				<label><?php echo _('Display')?></label>
 				<select class="gridcount">
 					<?php foreach (array(10, 20, 50) as $count){?>
-					<option value="<?php echo $count?>" <?php if ($count==$currentCount) echo 'selected'?>><?php echo $count?></option>
+					<option value="<?php echo $count?>" <?php if ($count==$grid['rows']['current']) echo 'selected'?>><?php echo $count?></option>
 					<?php }?>
 				</select>
 				<label><?php echo _('rows')?></label>
 			</td>
-			<?php if ($totalPages>1){?>
-			<td class="alignright">
-				<label><?php echo _('Page')?></label>
+			<td align="right" width="33%">
+			<?php if ($grid['pages']['total'] > 1){?>
+			<label><?php echo _('Page')?></label>
 				<select class="gridpage">
-					<?php for ($i=1; $i<=$totalPages; $i++){?>
-					<option value="<?php echo $i?>" <?php if ($i==$currentPage) echo 'selected'?>><?php echo $i?></option>
+					<?php for ($i=1; $i<=$grid['pages']['total']; $i++){?>
+					<option value="<?php echo $i?>" <?php if ($i==$grid['pages']['current']+1) echo 'selected'?>><?php echo $i?></option>
 					<?php }?>
 				</select>
-				<label><?php echo _('of')?> <?php echo $totalPages?></label>
-			</td>
+				<label><?php echo _('of')?> <?php echo $grid['pages']['total']?></label>
 			<?php }?>
+			</td>
 		</tr>
 	</table>
 </div>
+<?php }?>

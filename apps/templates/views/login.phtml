@@ -1,1 +1,37 @@
-<?php echo $view->form;
+<?php $view->addCSS(WEB_ROOT.'/css/login.css');?>
+<div class="login-content">
+	<div class="inline-half parent">
+		<form class="login-content-form" method="post" action="<?php echo WEB_ROOT?>/login">
+			<h1><?php echo _('You have got an account yet')?></h1>
+			<div class="input-cont">
+				<div class="login-email nowrap">
+					<div class="inline-third alignright">
+						<label><?php echo _('Email Address')?></label>
+					</div>
+					<div class="inline-2third">
+						<input type="email" id="email" name="email" class="text login">
+					</div>
+				</div>
+				<div class="login-pwd">
+					<div class="inline-third alignright">
+						<label><?php echo _('Password')?></label>
+					</div>
+					<div class="inline-2third">
+						<input type="password" id="pwd" name="pwd" class="text pwd">
+						<a href="<?php echo WEB_ROOT?>/password_recovery" class="register"><?php echo _('Password forgotten?')?></a>
+					</div>
+					<button type="submit" class="validate"><?php echo _('Log In')?></button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="inline-half parent">
+		<div class="input-content-right">
+			<h1><?php echo _('Not registered yet?')?></h1>
+			<p><?php echo _('Registering only takes a few seconds.');?></p>
+			<button type="button" onclick="document.location='<?php echo WEB_ROOT?>/register<?php if (!empty($_GET['case_package'])) echo '/?case_package='.$_GET['case_package'];?>';" class="validate">
+				<?php echo _('Create your account')?>
+			</button>
+		</div>
+	</div>
+</div>

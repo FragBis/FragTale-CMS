@@ -2,10 +2,11 @@
 $user = $view->getParentView()->user;
 $tmpUser = clone $user;
 $user_roles = !empty($view->getParentView()->user_roles) ? $view->getParentView()->user_roles : array();
-$inCreation = empty($user->uid);?>
-<div style="float:right">
+$inCreation = empty($user->uid);
+if (!$inCreation){?>
+<div class="alignright">
 	<?php $tmpUser->load('uid='.$user->cre_uid);?>
-	<div class="description alignright">
+	<div class="description">
 		<?php echo _('Created on')?>
 		<span class="bold"><?php echo date('d/m/Y H:i', strtotime($user->cre_date));?></span>
 		<?php echo _('By')?>
@@ -19,79 +20,116 @@ $inCreation = empty($user->uid);?>
 		<span class="bold"><?php echo $tmpUser->login;?></span>
 	</div>
 </div>
+<?php }?>
 <div class="form-content">
-	<table>
-		<?php if (!$inCreation && $view->userIsAdmin()){?>
-		<tr>
-			<td><label><?php echo _('User ID')?></label></td>
-			<td><?php echo $user->uid?></td>			
-		</tr>
-		<?php }?>
-		<tr>
-			<td width="170px"><label for="login"><?php echo _('Login*')?></label></td>
-			<td><input type="text" id="login" name="login" class="text mandatory" value="<?php if (!empty($user->login)) echo $user->login;?>" /></td>
-		</tr>
-		<tr>
-			<td><label for="email"><?php echo _('E-mail')?>*</label></td>
-			<td><input type="text" id="email" name="email" class="text mandatory" value="<?php if (!empty($user->email)) echo $user->email;?>" /></td>
-			<td><span id="email_error_msg" class="user_end_error hidden"><?php echo _('Invalid e-mail address.')?></span></td>
-		</tr>
-		<?php if ($inCreation){?>
-		<tr>
-			<td><label for="password"><?php echo _('New password')?>*</label></td>
-			<td><input type="password" id="password" name="password" class="text mandatory" /></td>
-			<td><span id="pwd_error_msg" class="user_end_error hidden"><?php echo _('Passwords mismatch.')?></span></td>
-		</tr>
-		<tr>
-			<td><label for="chk_pwd"><?php echo _('Retype password')?>*</label></td>
-			<td><input type="password" id="chk_pwd" class="text mandatory" /></td>
-		</tr>
-		<?php }?>
-		<tr>
-			<td><label for="firstname"><?php echo _('First name')?></label></td>
-			<td><input type="text" id="firstname" name="firstname" class="text" value="<?php if (!empty($user->firstname)) echo $user->firstname;?>" /></td>
-		</tr>
-		<tr>
-			<td><label for="lastname"><?php echo _('Last name')?></label></td>
-			<td><input type="text" id="lastname" name="lastname" class="text" value="<?php if (!empty($user->lastname)) echo $user->lastname;?>" /></td>
-		</tr>
-		<tr>
-			<td>
-				<label for="bir_date"><?php echo _('Date of birth')?></label>
-			</td>
-			<td>
-				<input type="date" id="bir_date" name="bir_date" class="text date" value="<?php
-					if (!empty($user->bir_date)) echo date('Y-m-d', strtotime($user->bir_date));?>" title="<?php
-					echo _('Use the universal date format YYYY-MM-DD if your browser does not support natively the date picker.')?>" />
-			</td>
-		</tr>
-		<?php if ($view->userIsAdmin()){?>
-		<tr>
-			<td><label for="active"><?php echo _('Activate')?></label></td>
-			<td><input type="checkbox" id="active" name="active" <?php if (!empty($user->active)) echo 'checked="checked"';?> /></td>
-		</tr>
-		<?php }?>
-	</table>
+	<?php if (!$inCreation && $view->userIsSuperAdmin()){?>
+	<div class="form-elt">
+		<div class="form-label mobile-stayinline"><label><?php echo _('User ID')?></label></div>
+		<div class="form-input mobile-stayinline"><?php echo $user->uid?></div>			
+	</div>
+	<?php }?>
+	<div class="form-elt">
+		<div class="form-label"><label for="login"><?php echo _('Nickname (login)*')?></label></div>
+		<div class="form-input">
+			<input type="text" id="login" name="login" class="text medium mandatory" autocomplete="off"
+				value="<?php if (!empty($user->login)) echo $user->login;?>" />
+		</div>
+		<span id="login_error_msg" class="user_end_error hidden"><?php echo _('Your login can not be an email address.')?></span>
+	</div>
+	<div class="form-elt">
+		<div class="form-label"><label for="email"><?php echo _('E-mail')?>*</label></div>
+		<div class="form-input">
+			<input type="email" id="email" name="email" class="text medium mandatory" autocomplete="off"
+				value="<?php if (!empty($user->email)) echo $user->email;?>" />
+			<span id="email_error_msg" class="user_end_error hidden"><?php echo _('Invalid e-mail address.')?></span>
+		</div>
+	</div>
+	<?php if ($inCreation){?>
+	<div class="form-elt">
+		<div class="form-label"><label for="password"><?php echo _('New password')?>*</label></div>
+		<div class="form-input">
+			<input type="password" id="password" name="password" class="text medium mandatory" autocomplete="off" />
+			<span id="pwd_error_msg" class="user_end_error hidden"><?php echo _('Passwords mismatch.')?></span>
+		</div>
+	</div>
+	<div class="form-elt">
+		<div class="form-label"><label for="chk_pwd"><?php echo _('Retype password')?>*</label></div>
+		<div class="form-input"><input type="password" id="chk_pwd" class="text medium mandatory" /></div>
+	</div>
+	<?php }?>
+	<?php if ($view->userIsAdmin() || $view->getUser()->uid == $view->getMetaView()->user->uid){?>
+	<div class="form-elt">
+		<div class="form-label"><label for="firstname"><?php echo _('First name')?></label></div>
+		<div class="form-input">
+			<input type="text" id="firstname" name="firstname" class="text medium" autocomplete="off"
+				value="<?php if (!empty($user->firstname)) echo $user->firstname;?>" />
+		</div>
+	</div>
+	<div class="form-elt">
+		<div class="form-label"><label for="lastname"><?php echo _('Last name')?></label></div>
+		<div class="form-input">
+			<input type="text" id="lastname" name="lastname" class="text medium" autocomplete="off"
+				value="<?php if (!empty($user->lastname)) echo $user->lastname;?>" />
+		</div>
+	</div>
+	<div class="form-elt">
+		<div class="form-label">
+			<label for="bir_date"><?php echo _('Date of birth')?></label>
+		</div>
+		<div class="form-input">
+			<input type="date" id="bir_date" name="bir_date" class="text date" value="<?php
+				if (!empty($user->bir_date)) echo date('Y-m-d', strtotime($user->bir_date));?>" title="<?php
+				echo _('Use the universal date format YYYY-MM-DD if your browser does not support natively the date picker.')?>" />
+		</div>
+	</div>
+	<div class="form-elt">
+		<div class="form-label">
+			<label for="profession"><?php echo _('Title or profession')?></label>
+		</div>
+		<div class="form-input">
+			<input type="text" id="profession" name="profession" class="text medium" value="<?php
+				if (!empty($user->profession)) echo $user->profession;?>" />
+		</div>
+	</div>
+	<?php if (!$inCreation){?>
+	<div class="form-elt">
+		<div class="form-label">
+			<label for="picture"><?php echo _('Picture')?></label>
+		</div>
+		<div class="form-input">
+			<!-- Block include for file upload -->
+			<?php $view->file_upload = array('fid'=>$view->getParentView()->profile_fid, 'object_name'=>'user_files'); //The user fid must be load or set in parent controller (user edit). fid is not a native property of User class?>
+			<?php echo $view->getBlock('admin/elements/file_upload')?>
+		</div>
+	</div>
+	<?php }?>
+	<?php }?>
+	<?php if ($view->userIsSuperAdmin()){?>
+	<div class="form-elt">
+		<div class="form-label"><label for="active"><?php echo _('Activate')?></label></div>
+		<div class="form-input"><input type="checkbox" id="active" name="active" <?php if (!empty($user->active)) echo 'checked="checked"';?> /></div>
+	</div>
+	<?php }?>
 </div>
-<?php if (!$inCreation && empty($view->parentView->noWriting)){?>
+<?php if (!$inCreation && ($view->getUser()->uid == $view->getMetaView()->user->uid || $view->userIsAdmin())){?>
 <div class="form-content">
-	<a id="open_pwd_box" href="#"><?php echo _('Change password')?></a>
-	<div id="pwd_box" class="hidden">
+	<a id="open_pwd_box" class="bon_toggler vertical" target="pwd_box" href="#pwd_box"><?php echo _('Change password')?></a>
+	<div id="pwd_box" class="collapsed">
 		<table>
 			<tr>
-				<td width="170px"><label for="password"><?php echo _('New password')?>*</label></td>
-				<td><input type="password" id="password" class="text" /></td>
+				<td style="width: 30%"><label for="password"><?php echo _('New password')?>*</label></td>
+				<td><input type="password" id="password" name="password" class="text medium" /></td>
 				<td><span id="pwd_error_msg" class="user_end_error hidden"><?php echo _('Passwords mismatch.')?></span></td>
 			</tr>
 			<tr>
 				<td><label for="chk_pwd"><?php echo _('Retype password')?>*</label></td>
-				<td><input type="password" id="chk_pwd" class="text" /></td>
+				<td><input type="password" id="chk_pwd" class="text medium" /></td>
 			</tr>
 		</table>
 	</div>
 </div>
 <?php }?>
-<?php if ($view->userIsAdmin()){?>
+<?php if ($view->userIsSuperAdmin()){?>
 <fieldset class="form-content">
 	<legend><?php echo _('Roles')?></legend>
 	<?php foreach ($view->roles as $role){

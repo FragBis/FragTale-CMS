@@ -1,0 +1,50 @@
+<?php
+$role = $view->getUser()->getStrongestRole();
+?>
+<div class="block_user_info">
+	<h1><?php echo _('Your words and activities')?></h1>
+	<p>
+		<?php echo _('Your account has been created on')?> <?php echo date(_('Y-m-d'), strtotime($view->getUser()->cre_date))?>.
+	</p>
+	<p>
+		<?php echo _('You have an account called')?> <strong>"<?php echo $role['name']?>"</strong>.
+	</p>
+	<p>
+		<?php if ($role['rid']==4) echo _('You have to contact an administrator to raise your roles. You can comment articles and chat.')?>
+	</p>
+</div>
+<div class="block_user_info"><?php
+		if (empty($view->articles)) echo _('You have not written any article yet.');
+		else{?>
+		<h2><?php echo _('Articles you are the author')?></h2>
+		<?php echo $view->getBlock('admin/elements/datagrid_searches');?>
+		<table id="articles_grid" class="datagrid">
+			<thead>
+				<tr>
+					<th><?php echo _('Creation date')?></th>
+					<th><?php echo _('Category')?></th>
+					<th><?php echo _('Title')?></th>
+					<th><?php echo _('Summary')?></th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php foreach ($view->articles as $i=>$article){?>
+				<tr id="aid_<?php echo $article['aid']?>" object="article" class="trigger <?php echo $i%2 ? '' : 'iter'?>">
+					<td><?php echo date(_('Y-m-d H:i'), strtotime($article['cre_date']))?></td>
+					<td><?php echo $article['catid']?></td>
+					<td><?php echo $article['title']?></td>
+					<td><?php echo $article['summary']?></td>
+				</tr>
+				<?php }?>
+			</tbody>
+		</table>
+		<?php }?>
+		<div class="buttons">
+			<?php if ($view->userCanEditArticles()){?>
+			<a class="add_new" href="<?php echo ADMIN_WEB_ROOT?>/article/create"><?php echo _('Create new article')?></a>
+			<?php }?>
+			<?php if ($view->userIsAdmin()){?>
+			<a class="add_new" href="<?php echo ADMIN_WEB_ROOT?>/article_category/create"><?php echo _('Create new category')?></a>
+			<?php }?>
+		</div>
+</div>

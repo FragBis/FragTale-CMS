@@ -1,17 +1,19 @@
 <?php
-namespace Bonz\Controller\Admin\Forms;
-use Bonz\Controller\Admin;
-use Bonz\CMS\Role;
-use Bonz\CMS\Article_Category;
-use Bonz\CMS\User;
+namespace FragTale\Controller\Admin\Forms;
+use FragTale\Controller\Admin;
+use FragTale\CMS\Role;
+use FragTale\CMS\Article_Category;
+use FragTale\CMS\User;
 
 /**
  * @author fabrice
  */
 class Article extends Admin{
+	
 	function main(){
 		$Category = new Article_Category();
 		$this->_view->article_categories = $Category->select();
+		$this->_view->htmlOptGroupCategories = $this->optGroup($Category->getTree(), $this->_meta_article->catid);
 		$this->_view->cms_views = $this->listOfViews();
 		$this->_view->author = new User();
 		if (!empty($this->_meta_article->uid))
@@ -41,8 +43,26 @@ class Article extends Admin{
 			return $views;
 		}
 		else{
-			\Bonz\Application::catchError('Missing required directory '.$dir, __CLASS__, __FUNCTION__, __LINE__);
+			\FragTale\Application::catchError('Missing required directory '.$dir, __CLASS__, __FUNCTION__, __LINE__);
 			return array();
 		}
+	}
+	/**
+	 * A custom way to fill in a hierarchical select box tree
+	 * @param array $data
+	 * @param int $selectedId
+	 * @return string
+	 */
+	function optGroup($data, $selectedId){
+		$html = '';
+		foreach ($data as $id=>$row){
+			$html .= '<option value="'.$id.'" '.($selectedId==$id ? 'selected' : '').'>'.$row['data']['name'].'</option>';
+			if (!empty($row['children']) && is_array($row['children'])){
+				$html .= '<optgroup label="'.$row['data']['name'].'">';
+				$html .= $this->optGroup($row['children'], $selectedId);
+				$html .= '</optgroup>';
+			}
+		}
+		return $html;
 	}
 }

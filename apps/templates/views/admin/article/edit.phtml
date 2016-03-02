@@ -1,7 +1,15 @@
 <h1><?php echo _('Edit article informations');?></h1>
 <form class="edit-form" method="post" enctype="multipart/form-data">
 	<?php echo $view->getBlock('admin/forms/article');?>
-	<button type="submit" name="upd" class="validate upd" title="<?php echo _('Just save it')?>"><?php echo _('Update')?></button>
-	<button type="submit" name="historicize" class="validate" title="<?php echo _('Store this article version')?>"><?php echo _('Historicize')?></button>
-	<button type="submit" name="upd_historicize" class="validate" title="<?php echo _('Update and store this article version')?>"><?php echo _('Update and historicize')?></button>
+	<?php if ($view->userIsAdmin() || ($view->userIsLogged() && $view->getArticle()->getOwnerID() == $view->getUser()->uid)){?>
+	<div class="buttons">
+		<button type="submit" name="delete" class="delete" onclick="return confirm('<?php echo _('Warning: this will definitely delete this item!')?>');"><?php echo _('Delete')?></button>
+		<button type="submit" name="upd" class="validate upd" title="<?php echo _('Just save it')?>"><?php echo _('Update')?></button>
+		<button type="submit" name="historicize" class="validate" style="float: left; margin-left: 5px;" title="<?php echo _('Store this article version')?>"><?php echo _('Historicize')?></button>
+	</div>
+	<?php }?>
 </form>
+<?php echo $view->getBlock('admin/elements/article_history')?>
+	
+<!-- Custom fields -->
+<?php echo $view->getBlock('admin/blocks/custom_fields');?>

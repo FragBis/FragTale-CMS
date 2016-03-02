@@ -1,5 +1,15 @@
 <h1><?php echo _('Edit category informations');?></h1>
 <form class="edit-form" method="post" enctype="multipart/form-data">
 	<?php echo $view->getBlock('admin/forms/article_category');?>
-	<button type="submit" name="update" class="validate upd"><?php echo _('Update')?></button>
+	<div class="buttons">
+		<button type="submit" name="update" class="validate upd"><?php echo _('Update all')?></button>
+		<?php if ($view->userIsAdmin()){?>
+		<button type="submit" name="delete" class="delete" style="float: left"><?php echo _('Delete all')?></button>
+		<?php }?>
+		<button type="submit" name="historicize" class="validate" style="float: left; margin-left: 5px;" title="<?php echo _('Store this article version')?>"><?php echo _('Historicize')?></button>
+	</div>
 </form>
+<?php echo $view->getBlock('admin/elements/article_history')?>
+
+<!-- Custom fields -->
+<?php echo $view->getBlock('admin/blocks/custom_fields');?>

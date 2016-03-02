@@ -1,6 +1,7 @@
 <?php if (!empty($view->article_categories)){?>
+<h1><?php echo _('Registered article categories:')?></h1>
 <div class="grid_container">
-	<h1><?php echo _('Registered article categories:')?></h1>
+	<a class="add_new" href="<?php echo ADMIN_WEB_ROOT?>/article_category/create" title="<?php echo _('Add')?>">+</a>
 	<?php echo $view->getBlock('admin/elements/datagrid_searches');?>
 	<table id="article_categories_grid" class="datagrid">
 		<thead>
@@ -16,7 +17,7 @@
 				<td><?php echo $category['catid']?></td>
 				<td><?php echo $category['name']?></td>
 				<td><?php echo $category['label']?></td>
-				<td><?php echo $category['parent_category']?></td>
+				<td><?php echo $category['parent_catid']?></td>
 			</tr>
 		<?php }?>
 		</tbody>
@@ -25,5 +26,4 @@
 <?php }else{?>
 <h1><?php echo _('No categories found')?></h1>
 <?php }?>
-
-<a class="add_new" href="<?php echo ADMIN_WEB_ROOT?>/article_category/create"><?php echo _('Add')?></a>
+<a class="add_new" href="<?php echo ADMIN_WEB_ROOT?>/article_category/create" title="<?php echo _('Add')?>">+</a>

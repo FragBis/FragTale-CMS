@@ -1,0 +1,385 @@
+<?php
+$view->addJS(WEB_ROOT.'/js/admin/custom_fields.js');
+$view->addCSS(WEB_ROOT.'/css/admin/custom_fields.css');
+?>
+<fieldset id="custom_fieldset">
+	<legend class="title1"><?php echo _('Custom fields')?></legend>
+	<div class="custom_field_description"><?php echo _('Create or edit some fields intending to customize this page')?></div>
+	
+	<div class="all_custom_field_templates hidden">
+	<?php foreach ($view->input_types as $type=>$props){?>
+		<fieldset class="custom_<?php echo $type?>_field_cont custom_fieldset">
+			<legend class="title2"><?php echo $props['desc']?></legend>
+			<div class="cust_field_triggers">
+				<input type="hidden" class="field_type" value="<?php echo $type?>" />
+				#<input type="text" class="field_position text short" style="border: none; font-weight: bold;" readonly />
+				<button type="button" class="movedown custom_field"title="<?php echo _('Move Down')?>">&nbsp;</button>
+				<button type="button" class="moveup custom_field" title="<?php echo _('Move Up')?>">&nbsp;</button>
+				<button type="button" class="remove custom_field"
+					value="<?php echo _('Are you sure, you want to remove this field?')?>"
+					title="<?php echo _('Remove')?>">&nbsp;</button>
+			</div>
+			<div class="custom_cont">
+				<div class="form-elt">
+					<div class="midcol">
+						<label title="<?php echo _('This is the field identifier')?>"><?php echo _('Field key:')?>*</label>
+						<br>
+						<input type="text" class="text medium field_key" maxlength="128" placeholder="<?php echo _('Field identifier')?>" />
+					</div>
+					<div class="midcol">
+						<label title="<?php echo _('Describe in 510 signs what is the purpose of this field')?>"><?php echo _('Short description:')?>*</label>
+						<br>
+						<input type="text" class="text long field_name" maxlength="510" placeholder="<?php echo _('Few words about this content...')?>" />
+					</div>
+				</div>
+				<?php switch ($type){
+					case 'text':?>
+				<div class="form-elt">
+					<label title="<?php echo _('The text that will be displayed')?>"><?php echo _('Text:')?></label>
+					<br>
+					<textarea class="field_value full_width"></textarea>
+				</div>
+					<?php break;
+							
+					case 'link':?>
+				<div class="form-elt">
+					<div class="midcol">
+						<label><?php echo _('URL:')?>*</label>
+						<br>
+						<input type="text" class="text long field_value link_href" />
+					</div>
+					<div class="midcol">
+						<label><?php echo _('Text:')?>*</label>
+						<br>
+						<input type="text" class="text long field_value link_text" />
+					</div>
+				</div>
+				<div class="form-elt">
+					<div class="midcol">
+						<label><?php echo _('Title:')?></label>
+						<br>
+						<input type="text" class="text long field_value link_title" />
+					</div>
+					<div class="midcol">
+						<div class="midcol">
+							<label><?php echo _('CSS Class:')?></label>
+							<br>
+							<input type="text" class="text long field_value link_class" />
+						</div>
+						<div class="midcol">
+							<label title="<?php echo _('On click, open in new window?')?>"><?php echo _('Target blank?')?></label>
+							<br>
+							<select class="field_value link_target">
+								<option value=""><?php echo _('No')?></option>
+								<option value="_blank"><?php echo _('Yes')?></option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<?php break;
+							
+					case 'image':?>
+				<div class="form-elt">
+					<label><?php echo _('Image URL:')?>*</label>
+					<br>
+					<input type="text" class="text long field_value image_src" placeholder="<?php echo _('Enter the file URL or click on the button to select an existing picture')?>" />
+					<button type="button" class="add_new image_picker"><?php echo _('Choose a picture')?></button>
+				</div>
+				<div class="form-elt">
+					<div class="midcol">
+						<label><?php echo _('Title:')?></label>
+						<br>
+						<input type="text" class="text long field_value image_title" />
+					</div>
+					<div class="midcol">
+						<label><?php echo _('Alt:')?></label>
+						<br>
+						<input type="text" class="text long field_value image_alt" />
+					</div>
+				</div>
+				<div class="form-elt">
+					<div class="midcol">
+						<div class="midcol">
+							<label><?php echo _('Height:')?></label>
+							<br>
+							<input type="text" class="text medium field_value image_height" />
+						</div>
+						<div class="midcol">
+							<label><?php echo _('Width:')?></label>
+							<br>
+							<input type="text" class="text medium field_value image_width" />
+						</div>
+					</div>
+					<div class="midcol">
+						<label><?php echo _('CSS Class:')?></label>
+						<br>
+						<input type="text" class="text long field_value image_class" />
+					</div>
+				</div>
+				<?php break;
+							
+					case 'html':?>
+				<div class="form-elt">
+					<label><?php echo _('HTML Content:')?></label>
+					<br>
+					<textarea class="field_value"></textarea>
+				</div>
+					<?php break;
+					
+					case 'media':?>
+				<div class="form-elt">
+					<div class="midcol">
+						<label><?php echo _('File Type:')?>*</label>
+						<br>
+						<select class="field_value media_type">
+							<option></option>
+							<?php foreach ($view->input_types['media']['types'] as $type=>$label){?>
+							<option value="<?php echo $type?>"><?php echo $label?></option>
+							<?php }?>
+						</select>
+					</div>
+					<div class="midcol">
+						<label><?php echo _('URL:')?>*</label>
+						<br>
+						<input type="text" class="text long field_value media_src" />
+					</div>
+				</div>
+					<?php break;
+				}?>
+			</div>
+		</fieldset>
+	<?php }?>		
+	</div>
+	
+	<form id="frm_custom_fields" class="edit-form" method="post" enctype="multipart/form-data">
+		<div id="custom_fields_cont">
+			<?php 
+			$i = 0;
+			foreach ($view->custom_fields as $field){
+				$i++;
+				$type = $field['input_type'];?>
+			<fieldset class="custom_<?php echo $type?>_field_cont custom_fieldset">
+				<legend class="title2"><?php echo $view->input_types[$type]['desc']?></legend>
+				<div class="cust_field_triggers">
+					<input type="hidden" class="field_type"
+						name="custom_field[<?php echo $i?>][input_type]"
+						value="<?php echo $type?>" />
+					#<input type="text" class="field_position text short" readonly
+						name="custom_field[<?php echo $i?>][position]"
+						value="<?php echo $i?>" />
+					<button type="button" class="movedown custom_field"title="<?php echo _('Move Down')?>">&nbsp;</button>
+					<button type="button" class="moveup custom_field" title="<?php echo _('Move Up')?>">&nbsp;</button>
+					<button type="button" class="remove custom_field"
+						value="<?php echo _('Are you sure, you want to remove this field?')?>"
+						title="<?php echo _('Remove')?>">&nbsp;</button>
+				</div>
+				<div class="custom_cont">
+					<div class="form-elt">
+						<div class="midcol">
+							<label title="<?php echo _('This is the field identifier')?>"><?php echo _('Field key:')?>*</label>
+							<br>
+							<input type="text" name="custom_field[<?php echo $i?>][field_key]"
+									class="text medium field_key" maxlength="128" required
+									value="<?php echo $field['field_key']?>" />
+						</div>
+						<div class="midcol">
+							<label title="<?php echo _('Describe in 510 signs what is the purpose of this field')?>"><?php echo _('Short description:')?>*</label>
+							<br>
+							<input type="text" name="custom_field[<?php echo $i?>][field_name]" class="text long field_name"
+									maxlength="510" required value="<?php echo $field['field_name']?>" />
+						</div>
+					</div>
+					
+					<?php switch ($type){
+						case 'text':?>
+					<div class="form-elt">
+						<label title="<?php echo _('The text that will be displayed')?>"><?php echo _('Text:')?></label>
+						<br>
+						<textarea name="custom_field[<?php echo $i?>][field_value]"
+								class="field_value full_width"><?php echo $field['field_value']?></textarea>
+					</div>
+						<?php break;
+								
+						case 'link':
+						$values = $field['field_value'];?>
+					<div class="form-elt">
+						<div class="midcol">
+							<label><?php echo _('URL:')?>*</label>
+							<br>
+							<input type="text" name="custom_field[<?php echo $i?>][field_value][href]" required
+								class="text long field_value link_href" value="<?php echo $values['href']?>" />
+						</div>
+						<div class="midcol">
+							<label><?php echo _('Text:')?>*</label>
+							<br>
+							<input type="text" name="custom_field[<?php echo $i?>][field_value][text]"
+								class="text long field_value link_text" required
+								value="<?php echo $values['text']?>" />
+						</div>
+					</div>
+					<div class="form-elt">
+						<div class="midcol">
+							<label><?php echo _('Title:')?></label>
+							<br>
+							<input type="text" name="custom_field[<?php echo $i?>][field_value][title]"
+								class="text long field_value link_title"
+								value="<?php echo $values['title']?>" />
+						</div>
+						<div class="midcol">
+							<div class="midcol">
+								<label><?php echo _('CSS Class:')?></label>
+								<br>
+								<input type="text" name="custom_field[<?php echo $i?>][field_value][class]"
+									class="text long field_value link_class"
+									value="<?php echo $values['class']?>" />
+							</div>
+							<div class="midcol">
+								<label title="<?php echo _('On click, open in new window?')?>"><?php echo _('Target blank?')?></label>
+								<br>
+								<select name="custom_field[<?php echo $i?>][field_value][target]" class="field_value link_target">
+									<option value=""><?php echo _('No')?></option>
+									<option value="_blank" <?php
+										if ($values['target']=='_blank') echo 'selected';
+										?>><?php echo _('Yes')?></option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<?php break;
+								
+						case 'image':
+						$values = $field['field_value'];?>
+					<div class="form-elt">
+						<div class="midcol">
+							<label><?php echo _('Preview:')?></label>
+							<br>
+							<img src="<?php echo $values['src']?>" style="max-height:100px;max-width:250px;"
+								alt="<?php echo $values['alt']?>"
+								title="<?php echo $values['title']?>">
+						</div>
+						<div class="midcol">
+							<label><?php echo _('URL:')?>*</label>
+							<br>
+							<input type="text" name="custom_field[<?php echo $i?>][field_value][src]" required
+								class="text long field_value image_src" value="<?php echo $values['src']?>" />
+							<button type="button" class="add_new image_picker"><?php echo _('Change picture')?></button>
+						</div>
+					</div>
+					<div class="form-elt">
+						<div class="midcol">
+							<label><?php echo _('Title:')?></label>
+							<br>
+							<input type="text" name="custom_field[<?php echo $i?>][field_value][title]"
+								class="text long field_value image_title"
+								value="<?php echo $values['title']?>" />
+						</div>
+						<div class="midcol">
+							<label><?php echo _('Alt:')?></label>
+							<br>
+							<input type="text" name="custom_field[<?php echo $i?>][field_value][alt]"
+								class="text long field_value image_alt"
+								value="<?php echo $values['alt']?>" />
+						</div>
+					</div>
+					<div class="form-elt">
+						<div class="midcol">
+							<div class="midcol">
+								<label><?php echo _('Height:')?></label>
+								<br>
+								<input type="text" name="custom_field[<?php echo $i?>][field_value][height]"
+									class="text medium field_value image_height"
+									value="<?php echo $values['height']?>" />
+							</div>
+							<div class="midcol">
+								<label><?php echo _('Width:')?></label>
+								<br>
+								<input type="text" name="custom_field[<?php echo $i?>][field_value][width]"
+									class="text medium field_value image_width"
+									value="<?php echo $values['width']?>" />
+							</div>
+						</div>
+						<div class="midcol">
+							<label><?php echo _('CSS Class:')?></label>
+							<br>
+							<input type="text" name="custom_field[<?php echo $i?>][field_value][class]"
+								class="text long field_value image_class"
+								value="<?php echo $values['class']?>" />
+						</div>
+					</div>
+					<?php break;
+								
+						case 'html':?>
+					<div class="form-elt">
+						<label><?php echo _('HTML Content:')?></label>
+						<br>
+						<textarea name="custom_field[<?php echo $i?>][field_value]"
+							id="custom_field_textarea_<?php echo $i?>"
+							class="ckeditor field_value full_width"><?php echo $field['field_value']?></textarea>
+					</div>
+						<?php break;
+						
+						case 'media':
+						$values = $field['field_value'];?>
+					<div class="form-elt">
+						<div class="midcol">
+							<label><?php echo _('File Type:')?>*</label>
+							<br>
+							<select class="field_value media_type" name="custom_field[<?php echo $i?>][field_value][type]" required>
+								<option></option>
+								<?php foreach ($view->input_types['media']['types'] as $key=>$label){?>
+								<option value="<?php echo $key?>" <?php if ($key==$values['type']) echo 'selected'?>><?php echo $label?></option>
+								<?php }?>
+							</select>
+							<br>
+							<br>
+							<label><?php echo _('URL:')?>*</label>
+							<br>
+							<input type="text" class="text long field_value media_src" required
+								name="custom_field[<?php echo $i?>][field_value][src]"value="<?php echo $values['src']?>" />
+						</div>
+						<div class="midcol">
+							<label><?php echo _('Preview:')?></label>
+							<?php switch ($values['type']){
+								case 'video':?>
+							<video height="160" controls>
+								<source src="<?php echo $values['src']?>"></source>
+							</video>
+							<?php break;
+								case 'audio':?>
+							<audio controls><source src="<?php echo $values['src']?>"></source></audio>
+							<?php break;
+								case 'iframe':?>
+							<iframe height="160" width="200" src="<?php echo $values['src']?>"></iframe>
+							<?php break;
+								default:?>
+							<object data="<?php echo $values['src']?>" height="160"></object>
+							<?php }?>
+						</div>
+					</div>
+						<?php break;
+					}?>
+				</div>
+			</fieldset>
+			<?php }?>
+		</div>
+		<div>
+			<br>
+			<label><?php echo _('Add new custom field:')?></label>
+			<select id="custom_field_type_selector">
+				<?php foreach($view->input_types as $type=>$input){?>
+				<option value="<?php echo $type?>"
+				title="<?php echo $input['desc']?>"><?php echo $input['label']?></option>
+				<?php }?>
+			</select>
+			<button type="button" id="add_new_custom_field" class="add_new">+</button>
+			<button type="submit" id="save_custom_fields" class="add_new"><?php echo _('Validate')?></button>
+			<span id="duplicate_err_msg" class="user_end_error" style="float:right; display: none"><?php echo _('There are duplicate field keys')?>&nbsp;&nbsp;</span>
+		</div>
+	</form>
+	<div class="custom_field_picture_selector">
+		<span class="close"></span>
+		<div class="margin">
+			<?php echo $view->getBlock('blocks/picture_selector')?>
+		</div>
+	</div>
+</fieldset>

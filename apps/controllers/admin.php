@@ -1,28 +1,47 @@
 <?php
-namespace Bonz\Controller;
-use Bonz\Controller;
-use Bonz\Db\Adapter;
-use Bonz\CMS\User;
-use Bonz\CMS\Parameter;
-use Bonz\CMS\Article;
-use Bonz\CMS\Article_History;
-use Bonz\CMS\Article_Category;
+namespace FragTale\Controller;
+use FragTale\Db\Table;
+use FragTale\Controller;
+use FragTale\Db\Adapter;
+use FragTale\CMS\User;
+use FragTale\CMS\Parameters;
+use FragTale\CMS\Article;
+use FragTale\CMS\Article_History;
+use FragTale\CMS\Article_Category;
 
 
 /**
  * Each admin controllers must inherit from this class
+ * IMPORTANT!: You must consider the rules defined into the $rules array. It must contain all restricted admin pages
  * @author fabrice
  *
  */
 class Admin extends Controller{
 	
 	/**
+	 * Bind roles and view names that are strictly reserved
+	 * @var array
+	 */
+	protected $rules = array(
+		#Only superadmin
+		1	=>array('system'),
+		# Admin
+		2	=>array('article_categories', 'article_category', 'forms/article_category'),
+		# Front-end user
+		//3	=>array('users', 'articles', 'article', 'forms/article', 'elements/article_history', 'file_manager'),
+		# The user must be at least registered
+		//4	=>array('index', 'header', 'user', 'forms/user', 'elements/user_info', 'messages', 'user/validate'),
+	);
+	
+	/**
 	 * Custom run for admin pages
-	 * @see \Bonz\Controller::run()
+	 * @see \FragTale\Controller::run()
 	 */
 	function run(){
-		if (!$this->checkRoles())
-			$this->redirect(ADMIN_WEB_ROOT.'/login');
+		if (!in_array($this->_view->getViewName(), array('admin/forms/login', 'admin/login'))){
+			if (!$this->userIsLogged() || !$this->checkRules())
+				$this->redirect(WEB_ROOT.'/login');
+		}
 		$this->initialize();
 		if ($this->doPostBack()){
 			if (!empty($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], ADMIN_WEB_ROOT)!==false)
@@ -35,63 +54,95 @@ class Admin extends Controller{
 	
 	function main(){
 		$this->_view->setTitle(_('Dashboard'));
-		$this->getStats();
 	}
-	
 	/**
-	 * Only users with roles 1 & 2 can access to the admin pages
-	 * To be overrided for specific pages allowed only for super admin
+	 * Check if the current logged user is allowed to access the defined admin page.
+	 * @param string	$page	Admin page name. If empty, the function will check the current page
 	 * @return boolean
 	 */
-	function checkRoles(){
-		#Allowed for admins
-		if ($this->userIsAdmin()) return true;
+	function checkRules($page=null){
 		#Check from DB if a page has been authorized
-		if ($this->checkDbRoles()) return true;
-		$_SESSION['USER_END_MSGS']['ERRORS'][] = _('You are not allowed to access the entire administration space.');
+		$viewRole = $this->getRole($page);
+		if (empty($viewRole)){
+			return true;
+		}
+		$userRole = $this->getUser()->getStrongestRole();
+		if ($rid = !empty($userRole['rid']) ? $userRole['rid'] : null){
+			# In any case, if rid > 4, return false;
+			if ($rid > 4) return false;
+			return $rid <= $viewRole;
+		}
+		$this->addUserEndMsg('ERRORS', _('You are not allowed to access this page or this content.'));
 		return false;
 	}
 	/**
-	 * Macth permission from database
-	 * @return boolean
+	 * Read out the parameters to find if rules has been stored
 	 */
-	function checkDbRoles(){
-		$Article = new Article();
-		$request_uri = trim($_GET['my_current_view'], '/');
-		if ($Article->load("request_uri='$request_uri'")){
-			if (!empty($Article->access) && $this->view->userIsLogged()){
-				foreach ($_SESSION['REG_USER']['ROLES'] as $rid){
-					#For basic admin roles, the power is descendant
-					if (in_array($Article->access, array(1, 2, 3)) && $rid>=$Article->access)
-						return true;
-					## For other roles, their role ID must match the authorization, knowing that an account can have multiple roles
-					elseif ($rid==$Article->access)
-						return true;
+	function getRole($page=null){
+		static $admin_rules, $loaded;
+		if (empty($admin_rules) && empty($loaded)){
+			$params = new Parameters();
+			$params->load("param_key='ADMIN_PAGE_RULES'");
+			if (!empty($params->param_value)){
+				$admin_rules = unserialize($params->param_value);
+			}
+			$loaded = true;
+		}
+		if ($role = $this->getViewRole($admin_rules, $page))
+			return $role;
+		return $this->getViewRole();
+	}
+	/**
+	 * 
+	 * @return int|NULL
+	 */
+	function getViewRole($rules=null, $page=null){
+		if (empty($rules)){
+			$rules = $this->rules;
+		}
+		$view2Match = $page ? $page : trim(str_replace('admin', '', $this->getViewName()), '/');
+		if (empty($view2Match)){
+			$view2Match = 'index';
+		}
+		foreach ($rules as $rid=>$views){
+			if (in_array($view2Match, $views)){
+				return $rid;
+			}
+		}
+		while (!empty($view2Match)){
+			$view2Match = explode('/', trim($view2Match, '/'));
+			array_pop($view2Match);
+			$view2Match = implode('/', $view2Match);
+			foreach ($rules as $rid=>$views){
+				if (in_array($view2Match, $views)){
+					return $rid;
 				}
 			}
 		}
-		return false;
+		return null;
 	}
 	
 	/**
-	 * Few stats & activities
+	 * A custom function returning the data grid results into the admin panel lists (articles, users etc.)
+	 * @param \FragTale\Db\Table $object
+	 * @return array
 	 */
-	function getStats(){
-		$db = Adapter::getInstanceOf();
-		$user = new User();
-		$this->_view->newUsers = $user->select('cre_date > DATE_SUB(now(), INTERVAL 10 DAY)');//Last users created from 10 days
+	function getGridSortedResult(\FragTale\Db\Table $dbTable, $where=null){
+		$order	= !empty($_GET['order'])? $_GET['order'].(!empty($_GET['desc']) ? ' DESC' : ' ASC'): null;
+		$count	= !empty($_GET['count'])? $_GET['count'] : (!empty($_COOKIE['gridcount']) ? $_COOKIE['gridcount'] : 10);
+		$page	= !empty($_GET['page'])	? $_GET['page']-1	: 0;
 		
-		$category = new Article_Category();
-		$this->_view->newCategories = $category->select('cre_date > DATE_SUB(now(), INTERVAL 10 DAY)');
+		$totalCount = $dbTable->count($where);
+		$this->_view->_datagrid['rows']['total']	= $totalCount;
+		$this->_view->_datagrid['pages']['total']	= ceil($totalCount/$count);
+		$this->_view->_datagrid['rows']['current']	= $count;
+		$this->_view->_datagrid['pages']['current']	= $page;
 		
-		$articleH = new Article_History();
-		$this->_view->newArticles = $db->getTable('SELECT * FROM '.$articleH->getFullTableName().' GROUP BY aid HAVING MIN(edit_date) > DATE_SUB(now(), INTERVAL 10 DAY)');
-		
-		$param = new Parameter();
-		if ($param->load("param_key='FILES_NOT_IN_DB'"))
-			$this->_view->files['not_in_db'] = @unserialize($param->param_value);
-		if ($param->load("param_key='FILES_NOT_IN_DIR'"))
-			$this->_view->files['not_in_dir'] = @unserialize($param->param_value);
+		$conditions = ($order ? ' '.$order : '1');
+		if ($page*$count < $totalCount){
+			$conditions .= (' LIMIT '.($page*$count).', '.$count);
+		}
+		return $dbTable->selectDistinct($where, null, $conditions);
 	}
 }
 

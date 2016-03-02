@@ -1,8 +1,8 @@
 <?php
-namespace Bonz\Controller\Admin;
-use Bonz\Controller\Admin;
-use Bonz\CMS\Parameter;
-use Bonz\CMS\Files;
+namespace FragTale\Controller\Admin;
+use FragTale\Controller\Admin;
+use FragTale\CMS\Parameters;
+use FragTale\CMS\Files;
 
 /**
  * @author fragbis
@@ -24,15 +24,9 @@ class File_Manager extends Admin{
 	}
 	
 	function main(){
-		$order	= !empty($_GET['order'])? $_GET['order'].(!empty($_GET['desc']) ? ' DESC' : ' ASC'): null;
-		$count	= !empty($_GET['count'])? $_GET['count']	: 10;
-		$page	= !empty($_GET['page'])	? $_GET['page']-1	: 0;
-		$conditions = ($order ? ' '.$order : '1').(' LIMIT '.($page*$count).', '.$count);
+		$this->_view->files['whole_db_list'] = $this->getGridSortedResult($this->File);		
 		
-		$this->_view->files['whole_db_list'] = $this->File->selectDistinct(null, null, $conditions);
-		$this->_view->rowCount = $this->File->count();
-		
-		$param = new Parameter();
+		$param = new Parameters();
 		if ($param->load("param_key='FILES_NOT_IN_DB'"))
 			$this->_view->files['not_in_db'] = @unserialize($param->param_value);
 		if ($param->load("param_key='FILES_NOT_IN_DIR'"))

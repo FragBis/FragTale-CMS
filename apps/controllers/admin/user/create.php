@@ -1,12 +1,13 @@
 <?php
-namespace Bonz\Controller\Admin\User;
-use Bonz\Controller\Admin;
-use Bonz\CMS\User;
-use Bonz\CMS\User_Roles;
+namespace FragTale\Controller\Admin\User;
+use FragTale\Controller\Admin;
+use FragTale\CMS\User;
+use FragTale\CMS\User_Roles;
 
 class Create extends Admin{
 	
 	function initialize(){
+		$this->setTitle(_('Add a new user account'));
 		$this->_view->user = new User();
 	}
 	
@@ -26,8 +27,8 @@ class Create extends Admin{
 		
 		if(!$this->checkDuplicates($this->_view->user, $values))
 			return false;
-		$values['upd_uid'] = $_SESSION['REG_USER']['uid'];
-		$values['cre_uid'] = $_SESSION['REG_USER']['uid'];
+		$values['upd_uid'] = $this->getUser()->uid;
+		$values['cre_uid'] = $this->getUser()->uid;
 		$values['cre_date'] = date('Y-m-d H:i:s');
 		## Insert new user
 		$login = $this->_view->user->escape($values['login']);
@@ -45,11 +46,7 @@ class Create extends Admin{
 		$this->redirect(ADMIN_WEB_ROOT.'/user/edit?uid='.$this->view->user->uid);
 	}
 	
-	function main(){
-		#Include Wysiwyg
-		$this->addJS(WEB_ROOT.'/js/wysiwyg.js');
-		$this->setTitle(_('Add a new user account'));
-	}
+	function main(){}
 	
 	/**
 	 * Before inserting: check if login and email are free.
@@ -60,12 +57,12 @@ class Create extends Admin{
 	function checkDuplicates(User $User, $values){
 		$login = $values['login'];
 		if ($User->load("login='$login'")){
-			$this->addUserEndMsg('ERRORS', '"'.$login.'"'._(': login already used.'));
+			$this->addUserEndMsg('ERRORS', sprintf(_('The nickname "%s" is already taken.'), $login));
 			return false;
 		}
 		$email = $values['email'];
 		if ($User->load("email='$email'")){
-			$this->addUserEndMsg('ERRORS', '"'.$email.'"'._(': E-mail already registered.'));
+			$this->addUserEndMsg('ERRORS', sprintf(_('The e-mail "%s" is already registered.'), $email));
 			return false;
 		}
 		return true;

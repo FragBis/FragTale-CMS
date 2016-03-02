@@ -1,9 +1,10 @@
 <?php
-namespace Bonz\Controller\Admin\Article;
-use Bonz\Controller\Admin;
-use Bonz\Controller;
-use Bonz\CMS\Article;
-use Bonz\CMS\Article_Category;
+namespace FragTale\Controller\Admin\Article;
+use FragTale\Controller\Admin;
+use FragTale\Controller;
+use FragTale\CMS\Article;
+use FragTale\CMS\Article_Category;
+use FragTale\CMS\Files;
 
 /**
  * 
@@ -24,8 +25,26 @@ class Create extends Admin{
 			if (property_exists($this->_article, $key))
 				$values[$key] = $value;
 		}
+		
+		if (empty($_POST['article']['selected_fid'])){
+			#File upload
+			$Files = new Files();
+			if (!empty($_FILES['article'])){
+				if ($files = $Files->store($_FILES['article'])){
+					$keys = array_keys($files);
+					$values['fid'] = reset($keys);
+				}
+			}
+		}
+		else
+			$values['fid'] = $_POST['article']['selected_fid'];
+		unset($values['article']);
+		
 		$values['publish'] = !empty($values['publish']) ? 1 : 0;
-		$values['uid'] = $_SESSION['REG_USER']['uid'];
+		$values['uid']		= $this->getUser()->uid;
+		$values['owner_id'] = $this->getUser()->uid;
+		$values['cre_date'] = date('Y-m-d H:i:s');
+		$values['position'] = (int)$this->getArticle()->selectMax('position') + 1;
 		if (empty($values['catid']))
 			unset($values['catid']);
 		
@@ -43,8 +62,8 @@ class Create extends Admin{
 	}
 	
 	function main(){
-		#Include Wysiwyg
-		$this->addJS(WEB_ROOT.'/js/wysiwyg.js');
+		#Include ckeditor
+		$this->addJS(WEB_ROOT.'/js/ckeditor/ckeditor.js');
 		$this->setTitle(_('Add a new article'));
 	}
 	

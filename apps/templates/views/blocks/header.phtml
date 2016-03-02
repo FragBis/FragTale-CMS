@@ -1,8 +1,24 @@
+<?php echo $view->getBlock('blocks/category_carousel')?>
+
 <div class="banner">
 	<a class="home-link" href="<?php echo WEB_ROOT?>">
-		<h1>BoN's CMS</h1>
+		<h1>CMS</h1>
+		<h2>FragTale</h2>
 	</a>
+	<?php if ($view->userIsLogged()){?>
+	<div class="loggedin">
+		<div class="inline alignmiddle user_login">
+			<?php echo $view->getUser()->login.',';?>
+			<?php if ($view->userIsAdmin()){?>
+			<a href="<?php echo ADMIN_WEB_ROOT?>" target="_blank"><?php echo _('go to admin panel')?></a>
+			<?php }elseif ($view->userIsLogged()){?>
+			<a href="<?php echo ADMIN_WEB_ROOT?>/user/edit?uid=<?php echo $view->getUser()->uid?>" target="_blank"><?php echo _('your profile')?></a>
+			<?php }?>
+		</div>
+	</div>
+	<?php }?>
 </div>
+
 <nav>
 	<ul class="left">
 		<?php foreach ($view->menu as $page=>$title){?>
@@ -16,18 +32,5 @@
 		<?php }?>
 	</ul>
 </nav>
-<div class="loggedin">
-	<?php if ($view->userIsLogged()){?>
-	<div class="inline alignmiddle user_login">
-		<?php echo $_SESSION['REG_USER']['login'];?>,
-		<?php if (!$view->userIsAdmin()){?>
-		<a href="<?php echo WEB_ROOT?>/user_edit"><?php echo _('your profile')?></a>
-		<?php } else {?>
-		<a href="<?php echo ADMIN_WEB_ROOT?>" target="_blank"><?php echo _('go to admin panel')?></a>
-		<?php }?>
-	</div>
-	<?php }?>
-	<div class="inline alignmiddle">
-		<?php $grade = $view->userIsSuperAdmin() ? 1 : ($view->userIsAdmin() ? 2 : ($view->userIsLogged() ? 3 : 4));?>
-	</div>
-</div>
+
+<?php echo $view->getBlock('blocks/subcategory_carousel')?>

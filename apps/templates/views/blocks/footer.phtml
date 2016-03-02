@@ -1,13 +1,21 @@
+<?php $catTree = !empty($view->getMetaView()->category_tree) ? $view->getMetaView()->category_tree : array();?>
 <div class="main_footer">
-	<div class="footer_col separate">
-		<p><?php echo _('Sitemap')?></p>
+	<p><?php echo _('Sitemap')?></p>
+	<div>
 		<ul class="footer">
 			<li>
-				<a href="<?php echo WEB_ROOT;?>"><?php echo _('Home')?></a>
+				<a href="<?php echo WEB_ROOT;?>"><b><?php echo _('Home')?></b></a>
 			</li>
-			<?php if (!empty($view->getMetaView()->category_tree)) foreach ($view->getMetaView()->category_tree as $category){?>
+			<?php if (!empty($view->mainArticles)) foreach ($view->mainArticles as $article){?>
 			<li>
-				<a href="<?php echo WEB_ROOT.'/'.$category['data']['request_uri']?>"><?php echo $category['data']['name']?></a>
+				<a href="<?php echo WEB_ROOT.'/'.$article['request_uri'];?>"><b><?php echo $article['title']?></b></a>
+			</li>
+			<?php }?>
+		</ul>
+		<?php foreach ($catTree as $category){?>
+		<ul class="footer">
+			<li>
+				<a href="<?php echo WEB_ROOT.'/'.$category['data']['request_uri']?>"><b><?php echo $category['data']['name']?></b></a>
 				<?php if (!empty($category['children'])){?>
 				<ul>
 					<?php foreach ($category['children'] as $subCategory){?>
@@ -16,30 +24,12 @@
 				</ul>
 				<?php }?>
 			</li>
-			<?php }?>
-			<?php if (!empty($view->mainArticles)) foreach ($view->mainArticles as $article){?>
-			<li>
-				<a href="<?php echo WEB_ROOT.'/'.$article['request_uri'];?>"><?php echo $article['title']?></a>
-			</li>
-			<?php }?>
 		</ul>
+		<?php }?>
 	</div>
-	<div class="footer_col separate">
-		<p><?php echo _('Recommended links')?></p>
-		<ul class="footer">
-			<li>
-				<a href="http://alimentation.gouv.fr/manger-bio">Mangez bio</a>
-			</li>
-			<li>
-				<a href="http://www.fatalspicards.com/">Les Fatals Picards</a>
-			</li>
-		</ul>
-	</div>
-	<div class="footer_col">
-		<div class="footer_ending">
-			This website is powered by the BoN Team founders, based on a home-made Open Source CMS. Ask for us.
-			<br />
-			Toulouse-Paris-Lyon, France.
-		</div>
+	<div class="footer_ending">
+		<!-- This website is powered by the BoN Team founders, based on a home-made Open Source CMS. Ask for us.
+		<br />
+		Toulouse-Paris-Lyon, France. -->
 	</div>
 </div>

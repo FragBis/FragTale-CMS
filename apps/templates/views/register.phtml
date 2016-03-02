@@ -1,0 +1,88 @@
+<?php
+$view->addCSS(WEB_ROOT.'/css/register.css');
+if (defined('ENV') && ENV=='devel')
+	$view->addJS(WEB_ROOT.'/js/register.js');
+else
+	$view->addJS(WEB_ROOT.'/js/register.min.js');
+$user = $view->user;
+$values = (!empty($_POST)) ? $_POST : null; 
+?>
+<div class="register-content">
+	<form method="post" class="login-form" autocomplete="off">
+		<table class="register-table">
+			<thead>
+				<tr><td colspan="4" class="information-form-title"><?php echo _('Registration Form')?></td></tr>
+			</thead>
+			<tbody class="gray-border">
+				<tr>
+					<td class="alignright" style="padding-top: 10px"><label><?php echo _('Civility*:')?></label></td>
+					<td colspan="3" style="padding-top: 10px">
+						<label for="civility-m"><input type="radio" name="civility" id="civility-m" value="2" required tabindex="1"<?php if (!empty($values['civility']) && $values['civility']=='2') echo 'checked'; ?> /><?php echo _('Mrs')?></label>
+						<label for="civility-s"><input type="radio" name="civility" id="civility-s" value="1" required tabindex="2"<?php if (!empty($values['civility']) && $values['civility']=='1') echo 'checked'; ?> /><?php echo _('Mr')?></label>
+					</td>
+
+				</tr>
+				
+				<tr>
+					<td class="alignright" style="width:25%;"><label for="lastname"><?php echo _('Married name*:')?></label></td>
+					<td style="width:25%;">
+						<input type="text" id="lastname" name="lastname" class="text inputcent mandatory" value="<?php
+							if (!empty($values['lastname'])) echo $values['lastname'];?>" autocomplete="off" required tabindex="3"/>
+					</td>
+					<td class="alignright" style="width:25%;"><label for="bir_name"><?php echo _('Birth name*:')?></label></td>
+					<td style="width:25%;">
+						<input type="text" id="bir_name" name="bir_name" class="text inputcent mandatory" value="<?php
+							if (!empty($values['bir_name'])) echo $values['bir_name'];?>" autocomplete="off" required tabindex="4"/>
+					</td>
+				</tr>
+				<tr>
+					<td class="alignright" style="width:25%;"><label for="firstname"><?php echo _('Firstname*:')?></label></td>
+					<td style="width:25%;">
+						<input type="text" id="firstname" name="firstname" class="text inputcent mandatory" value="<?php
+							if (!empty($values['firstname'])) echo $values['firstname'];?>" autocomplete="off" required tabindex="4"/>
+					</td>
+					<td colspan="2"></td>
+				</tr>
+				<tr>
+					<td class="alignright" style="width:25%;"><label for="phone" ><?php echo _('Telephone*:')?></label></td>
+					<td colspan="3">
+						<input type="tel" id="phone" name="phone" class="text inputcent mandatory" value="<?php if (!empty($values['phone'])) echo $values['phone'];?>" autocomplete="off" required tabindex="13"/>
+					</td>
+				</tr>
+				
+				<tr>
+					<td class="alignright" style="width:25%;"><label for="email"><?php echo _('E-mail*:')?></label></td>
+					<td style="width:25%;">
+						<input type="email" id="email" name="email" class="text inputcent mandatory" value="<?php
+							if (!empty($values['email'])) echo $values['email'];?>" autocomplete="off" required tabindex="14"/>
+							<span id="email_error_msg" class="user_end_error hidden"><?php echo _('Invalid e-mail address.')?></span>
+					</td>
+					<td class="alignright"><label for="password" ><?php echo _('Password*:')?></label></td>
+					<td>
+						<input type="password" id="password" name="password" class="text inputcent mandatory" autocomplete="off" required tabindex="16"/>
+					</td>
+				</tr>
+				<tr>
+					<td class="alignright"><label for="chk_email" ><?php echo _('Retype email*:')?></label></td>
+					<td>
+						<input type="email" id="chk_email" class="text inputcent mandatory" autocomplete="off" required tabindex="15"/>
+						<span id="chk_email_error_msg" class="user_end_error hidden"><?php echo _('Emails mismatch.')?></span>
+					</td>
+					<td class="alignright"><label for="chk_pwd" ><?php echo _('Retype password*:')?></label></td>
+					<td>
+						<input type="password" id="chk_pwd" class="text inputcent mandatory" required tabindex="17"/>
+						<span id="pwd_error_msg" class="user_end_error hidden"><?php echo _('Passwords mismatch.')?></span>
+					</td>
+				</tr>
+				
+				<tr><td colspan="4">&nbsp;</td></tr>
+				<tr>
+					<td colspan="4" class="alignright" style="padding-top: 10px;">
+						<span class="required_fields"><?php echo _('Required fields')?>*</span>
+						<button type="submit" name="register" class="validate reg" tabindex="18"><?php echo _('Create account')?></button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+</div>

@@ -1,16 +1,49 @@
 <section class="header_title">
-	<span><?php echo _('Admin panel')?></span>
-	<a class="userlogged current" href="<?php echo ADMIN_WEB_ROOT?>/user/edit"><?php echo $_SESSION['REG_USER']['login']?></a>
+	<div class="header_margin">
+		<a class="italic current" href="<?php echo WEB_ROOT?>">Justice Pour Tous</a> -
+		<span><?php echo _('Content Management System')?></span>
+		<a class="userlogged current" href="<?php echo ADMIN_WEB_ROOT?>/user/edit"><?php echo $view->getUser()->login?></a>
+	</div>
 </section>
 <section class="admin_menu">
-	<ul>
-		<?php foreach ($view->menu as $page=>$title){?>
-		<li class="mainmenu">
-			<a href="<?php echo WEB_ROOT?>/admin/<?php echo $page?>" class="mainmenu_link <?php
-				echo ($page==$view->current || $page==$view->current.'s') ? 'current' : $page?>">
+	<?php
+		$matchUid = '?uid='.$view->getUser()->uid;
+		$currentFound = false;
+		foreach ($view->menu as $page=>$title){
+		?><div class="mainmenu">
+			<a href="<?php echo ADMIN_WEB_ROOT.'/'.$page?>" class="mainmenu_link<?php
+				if (!$currentFound && (
+						(strpos($_SERVER['REQUEST_URI'], $matchUid)!==false && strpos($page, $matchUid)!==false)
+						|| $page==$view->current || $page==$view->current.'s'
+						)
+					){
+					$currentFound = true;
+					echo ' current';
+				}
+				if (empty($page))
+					echo ' home';
+				elseif (strpos($page, '?')===false)
+					echo ' '.$page;	
+				else
+					echo ' user';?>">
 				<?php echo $title?>
 			</a>
-		</li>
+		</div><?php }?>
+		<?php if ($view->userIsAdmin()){?>
+		<div class="mainmenu">
+			<a href="<?php echo WEB_ROOT.'/manager_account'?>" class="mainmenu_link" target="_blank">
+				<?php echo _('Go To Management Space')?>
+			</a>
+		</div>
+		<div class="mainmenu">
+			<a href="<?php echo WEB_ROOT.'/user_account'?>" class="mainmenu_link" target="_blank">
+				<?php echo _('Go To Client Space')?>
+			</a>
+		</div>
 		<?php }?>
-	</ul>
+		<div class="mainmenu">
+			<a href="<?php echo ADMIN_WEB_ROOT.'/logout'?>" class="mainmenu_link logout">
+				<?php echo _('Logout')?>
+			</a>
+		</div>
 </section>

@@ -1,8 +1,15 @@
-<h1><span class="user_login"><?php echo $view->user->login;?></span> - <?php echo _('Account informations')?></h1>
-<form class="edit-form" method="post" enctype="multipart/form-data">
+<h1><?php echo _('Account informations')?> - <span class="italic"><?php echo $view->user->login;?></span></h1>
+<form class="edit-form" method="post" enctype="multipart/form-data" autocomplete="off">
 	<?php echo $view->getBlock('admin/forms/user');?>
-	<?php if (empty($view->noWriting)){?>
-	<button type="submit" class="validate upd"><?php echo _('Update')?></button>
+	<?php if ($view->userIsAdmin() || $view->userIsOwner){?>
+	<div class="buttons">
+		<button type="submit" class="validate upd"><?php echo _('Update')?></button>
+		<?php if ($view->userIsSuperAdmin()){?>
+		<button type="submit" name="delete" class="delete" style="float: left" onclick="return confirm('<?php echo _('Warning: this will definitely delete this user.')?>');"><?php
+			echo _('Delete')?></button>
+		<button type="reset" style="float: left; margin-left: .5em" class="validate" title="<?php echo _('Remove all current changes')?>"><?php echo _('Reset')?></button>
+		<?php }?>
+	</div>
 	<?php }else{?>
 	<span class="user_end_error"><?php echo _('You are not allowed to modify this user.')?></span>
 	<?php }?>

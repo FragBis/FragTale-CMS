@@ -12,35 +12,39 @@
 			</tr>
 		</thead>
 		<tbody>
-			<?php foreach ($view->files['not_in_db'] as $path=>$filename){
-				$type	= reset(explode(' ', $path));
+			<?php $i=0;foreach ($view->files['not_in_db'] as $path=>$filename){
+				$paths	= explode(' ', $path);
+				$type	= reset($paths);
 				$isImg	= stripos($type, 'image')!==false;?>
-			<tr>
+			<tr class="<?php echo $i%2 ? '' : 'iter'?>">
 				<td><?php echo $filename?></td>
 				<td><?php echo $path?></td>
 				<td>
+					<?php if ($isImg){?>
 					<div class="pic_toggle">
-						<div class="toggle_open"><?php echo _('Visualize')?></div>
-						<div class="toggle_preview">
+						<div class="bon_toggler" target="file_<?php echo $i?>"><?php echo _('Visualize')?></div>
+						<div id="file_<?php echo $i?>" class="collapsed">
 							<div><em><?php echo $filename?></em></div>
-							<?php if ($isImg){?>
 							<img class="preview" src="<?php echo WEB_ROOT.'/uploads/'.$type.'/'.$filename;?>" />
-							<?php }else{?>
-							<object class="preview" data="<?php echo WEB_ROOT.'/uploads/'.$type.'/'.$filename;?>"></object>
-							<?php }?>
 						</div>
-					</div>
+					</div><?php
+					}
+					else echo _('N/A');?>
 				</td>
 				<td class="center"><input type="checkbox" name="add[<?php echo $filename;?>]" /></td>
 				<td class="center"><input type="checkbox" name="erase[<?php echo $filename;?>]" /></td>
 			</tr>
-			<?php }?>
+			<?php $i++;}?>
 		</tbody>
+		<tr class="iter">
+			<td colspan="3"></td>
+			<td colspan="2" class="aligncenter">
+				<button type="submit" class="validate upd" onclick="return confirm('<?php echo _('Confirm this action');?>');"><?php echo _('Submit')?></button>
+			</td>
+		</tr>
 	</table>
-	<div class="buttons">
-		<button type="submit" class="validate" onclick="return confirm('<?php echo _('Confirm this action');?>');"><?php echo _('Submit')?></button>
-	</div>
 </form>
+<br><br>
 <?php }?>
 
 <?php if (!empty($view->files['not_in_dir'])){?>
@@ -52,23 +56,26 @@
 				<th>ID</th>
 				<th><?php echo _('File name')?></th>
 				<th><?php echo _('Mime type')?></th>
-				<th><?php echo _('Remove from database')?></th>
+				<th style="width: 129px"><?php echo _('Remove from database')?></th>
 			</tr>
 		</thead>
 		<tbody>
-			<?php foreach ($view->files['not_in_dir'] as $file){?>
-			<tr>
+			<?php foreach ($view->files['not_in_dir'] as $i=>$file){?>
+			<tr class="<?php echo $i%2 ? '' : 'iter'?>">
 				<td><?php echo $file['fid']?></td>
 				<td><?php echo $file['filename']?></td>
 				<td><?php echo $file['mime_type']?></td>
-				<td><input type="checkbox" name="delete[<?php echo $file['fid'];?>]" /></td>
+				<td class="aligncenter"><input type="checkbox" name="delete[<?php echo $file['fid'];?>]" /></td>
 			</tr>
 			<?php }?>
 		</tbody>
+		<tr class="iter">
+			<td colspan="3"></td>
+			<td class="aligncenter">
+				<button type="submit" class="delete" onclick="return confirm('<?php echo _('Confirm this action');?>');"><?php echo _('Delete')?></button>
+			</td>
+		</tr>
 	</table>
-	<div class="buttons">
-		<button type="submit" class="validate" onclick="return confirm('<?php echo _('Confirm this action');?>');"><?php echo _('Delete')?></button>
-	</div>
 </form>
 <?php }?>
 <?php if (empty($view->files['not_in_dir']) && empty($view->files['not_in_db'])){?>

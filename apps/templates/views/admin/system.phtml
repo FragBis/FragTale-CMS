@@ -1,1 +1,74 @@
+<h1><?php echo _('Generate sitemap')?></h1>
+<form method="post" class="form-content">
+	<table style="width: 95%; margin: auto;">
+		<tr>
+			<td class="aligntop" style="padding-bottom: 2em; padding-right: .5em; width: 75%;">
+				<div class="description" style="font-size: .9em; margin-top: .5em;"><?php
+					echo _('By clicking this button, you will place in the website root, the required XML file that gives all your website indexes. This is useful for search engines.')?>
+				</div>
+			</td>
+			<td class="aligntop">
+				<button class="validate" id="generate_sitemap" name="generate_sitemap" value="1">
+					<?php echo _('Generate')?>
+				</button>
+			</td>
+		</tr>
+	</table>
+</form>
 <h1><?php echo _('Parameters')?></h1>
+<form method="post" class="form-content">
+	<?php foreach ($view->params as $type=>$paramgroup){
+		foreach ($paramgroup as $legend=>$params){?>
+	<fieldset class="param-group">
+	<legend><?php echo $legend?></legend>
+	<table style="width: 95%; margin: auto;">
+		<?php foreach ($params as $key=>$param){?>
+		<tr>
+			<td class="aligntop" style="padding-bottom: 2em; padding-right: .5em;">
+				<label for="<?php echo $key?>"><?php echo $param['label']?></label>
+				<div class="description" style="font-size: .9em; margin-top: .5em;"><?php echo $param['description']?></div>
+			</td>
+			<td class="aligntop" style="padding-bottom: 2em;width: 70%">
+			<?php if ($type=='scalar'){?>
+				<input type="text" class="text long" id="<?php echo $key?>" name="params[<?php echo $key?>]" value="<?php echo $param['value']?>"/>
+			<?php }elseif ($type=='table'){?>
+			<?php if ($key=='ADMIN_PAGE_RULES'){?>
+			<table id="params_<?php echo $key?>" class="table_param datagrid">
+				<thead>
+					<tr>
+						<th><?php echo _('Role')?></th>
+						<th><?php echo _('Admin Pages')?></th>
+					</tr>
+				</thead>
+				<?php foreach ($param['value'] as $k=>$v){?>
+				<tr class="<?php echo $k%2 ? 'iter':''?>" style="cursor: default;">
+					<td class="aligntop"><label for="<?php echo $key.'_'.$k?>"><?php echo $k?></label></td>
+					<td style="padding-bottom: 1em;">
+					<?php foreach ($v as $i=>$p){?>
+						<input type="text" class="text long" name="params[<?php echo $key?>][<?php echo $k?>][<?php echo $i?>]" value="<?php echo $p?>"/>
+					<?php }?>
+						<button type="button" class="validate add_new_param_field" value="params[<?php echo $key?>][<?php echo $k?>]">+</button>
+						<button type="button" class="validate remove_param_field">-</button>
+					</td>
+				</tr>
+				<?php }?>
+				<tr class="iter" style="cursor: default;">
+					<td colspan="2" class="alignright">
+						<button type="submit" name="reset_admin_rules" class="delete"><?php echo _('Back to defaults')?></button>
+					</td>
+				</tr>
+			</table>
+			<?php }?>
+			<?php }?>
+			</td>
+		</tr>
+	<?php }?>
+	</table>
+	</fieldset>
+	<div class="alignright">
+		<button type="reset" class="validate"><?php echo _('Reset')?></button>
+		<button type="submit" name="register_params" class="upd"><?php echo _('Save')?></button>
+	</div>
+	<?php }}?>
+	
+</form>

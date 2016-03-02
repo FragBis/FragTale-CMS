@@ -1,0 +1,67 @@
+<div class="block_user_info">
+	<h1><?php echo _('Common informations')?></h1><?php
+	
+	echo $view->getBlock('blocks/inbox');
+	
+	if ($view->userCanEditArticles()){
+		if ($nbUsers = count($view->newUsers)){?>
+	<div>
+		<p><?php
+			if ($nbUsers<2)
+				echo sprintf(_('There is %d new USER registered from these last 10 days.'), $nbUsers);
+			else
+				echo sprintf(_('There are %d new USERS registered from these last 10 days.'), $nbUsers);?>
+			<a class="user_end_success" href="<?php echo ADMIN_WEB_ROOT?>/users?order=cre_date&desc=1">>><?php echo _('See')?></a>
+		</p>
+	</div>
+	<?php }?>
+	
+	<?php if ($nbCat = count($view->newCategories)){?>
+	<div>
+		<p><?php
+			if ($nbCat<2)
+				echo sprintf(_('There is %d new CATEGORY registered from these last 10 days.'), $nbCat);
+			else
+				echo sprintf(_('There are %d new CATEGORIES registered from these last 10 days.'), $nbCat);?>
+			<a class="user_end_success" href="<?php echo ADMIN_WEB_ROOT?>/articles?order=aid&desc=1">>><?php echo _('See')?></a>
+		</p>
+	</div>
+	<?php }?>
+	
+	<?php if ($nbArt = count($view->newArticles)){?>
+	<div>
+		<p><?php
+			if ($nbArt<2)
+				echo sprintf(_('There is %d new ARTICLE registered from these last 10 days.'), $nbArt);
+			else
+				echo sprintf(_('There are %d new ARTICLES registered from these last 10 days.'), $nbArt);?>
+			<a class="user_end_success" href="<?php echo ADMIN_WEB_ROOT?>/articles?order=aid&desc=1">>><?php echo _('See')?></a>
+		</p>
+	</div>
+	<?php }?>
+	
+	<?php if ($nbFiles = !empty($view->files['not_in_db']) ? count($view->files['not_in_db']) : 0){?>
+	<div>
+		<p><?php
+			if ($nbFiles<2)
+				echo sprintf(_('There is %d file in uploads folder that is not registered into the database.'), $nbFiles);
+			else
+				echo sprintf(_('There are %d files in uploads folder that are not registered into the database.'), $nbFiles);?>
+			<a class="user_end_warning validate" href="<?php echo ADMIN_WEB_ROOT?>/file_manager">>><?php echo _('Go manage them')?></a>
+		</p>
+	</div>
+	<?php }?>
+	
+	<?php if ($nbFiles = !empty($view->files['not_in_dir']) ? count($view->files['not_in_dir']) : 0){?>
+	<div>
+		<p><?php
+			if ($nbFiles<2)
+				echo sprintf(_('There is %d file registered into the database that is not in the uploads folder.'), $nbFiles);
+			else
+				echo sprintf(_('There are %d files registered into the database that are not in the uploads folder.'), $nbFiles);?>
+			<a class="user_end_warning validate" href="<?php echo ADMIN_WEB_ROOT?>/file_manager">>><?php echo _('Go manage them')?></a>
+		</p>
+	</div><?php
+		}
+	}?>
+</div>

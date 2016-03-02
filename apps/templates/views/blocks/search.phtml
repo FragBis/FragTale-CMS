@@ -1,0 +1,7 @@
+<div class="search" id="search_box">
+	<form method="get" action="<?php echo WEB_ROOT.'/search'?>">
+		<input type="text" id="search" name="terms" placeholder="<?php echo _('Search...')?>" autocomplete="off"
+			class="search" value="<?php echo (!empty($view->terms)?$view->terms:'')?>"/>
+		<input type="submit" class="search_button" value=" ">
+	</form>
+</div>

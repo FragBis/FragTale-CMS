@@ -1,0 +1,20 @@
+<?php if(!empty($view->subCategories)){?>
+<div class="sub_category">
+	<ul class="sub_menu">
+	<?php foreach ($view->subCategories as $category){
+		if (empty($category['data']['publish'])) continue;
+		$isCurrent = $category['data']['catid']==$view->getMetaView()->getArticle()->catid;?>
+		<li class="<?php if ($isCurrent) echo 'current';?>">
+			<a class="sub_menu_item" href="<?php echo WEB_ROOT.'/'.$category['data']['request_uri'];?>">
+				<span><?php echo $category['data']['label'];//echo $category['data']['name'];?></span>
+				<!-- 
+				<img src="<?php
+					//echo WEB_ROOT.$category['data']['image_filepath']?>" alt="<?php
+					//echo $category['data']['label']?>" />
+				 -->
+			</a>
+		</li>
+	<?php }?>
+	</ul>
+</div>
+<?php }?>

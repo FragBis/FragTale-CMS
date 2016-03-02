@@ -1,0 +1,14 @@
+<form class="login-form" method="post" action="<?php echo WEB_ROOT?>/login">
+	<div class="aligncenter"><?php echo _('Log In')?> / <a href="<?php echo WEB_ROOT.'/register'?>"><?php echo _('Sign up')?></a></div>
+	<div class="input-cont">
+		<div class="login-email">
+			<input type="email" id="email" name="email" class="text login" placeholder="<?php echo _('Email Address')?>">
+		</div>
+		<div class="login-pwd">
+			<input type="password" id="pwd" name="pwd" class="text pwd" placeholder="<?php echo _('Password')?>">
+			<button type="submit" class="validate"><?php echo _('Validate')?></button>
+			<br>
+			<a href="<?php echo WEB_ROOT?>/password_recovery" class="register"><?php echo _('Password forgotten?')?></a>
+		</div>
+	</div>
+</form>

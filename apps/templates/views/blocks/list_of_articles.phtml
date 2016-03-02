@@ -1,0 +1,27 @@
+<?php if (!empty($view->articles)){
+	$n			= count($view->articles);
+	$split		= (int)($n/2);
+	$splitStart	= 5;
+	$lim		= $split>$splitStart?$split+1:$n;?>
+<div class="posts">
+	<h1><?php echo _('Articles')?></h1>
+	<ul>
+		<?php for ($i=1; $i<=$lim; $i++){
+			$article = array_shift($view->articles);?>
+		<li>
+			<a href="<?php echo WEB_ROOT.'/'.$article['request_uri']?>"><?php echo $i.'. '.$article['title']?></a>
+		</li>
+		<?php }?>
+	</ul>
+	<?php if ($split>$splitStart){?>
+	<ul>
+		<?php for ($i=$lim; $i<$n; $i++){
+			$article = array_shift($view->articles);?>
+		<li>
+			<a href="<?php echo WEB_ROOT.'/'.$article['request_uri']?>"><?php echo ($i+1).'. '.$article['title']?></a>
+		</li>
+		<?php }?>
+	</ul>
+	<?php }?>
+</div>
+<?php }?>

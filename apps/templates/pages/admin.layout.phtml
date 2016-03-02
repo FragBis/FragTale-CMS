@@ -11,23 +11,35 @@
 		</script>
 	</head>
 	
-	<body class="<?php echo str_replace(array('/', ' '), '-', $view->getViewName());?>">
-	<div class="page">
-	
-		<?php if ($view->userIsAdmin()) echo $view->getBlock('admin/header');?>
+	<body class="admin <?php echo str_replace(array('/', ' '), '-', $view->getViewName());?>">
+	<div class="admin-body">
+		<div class="page">
 		
-		<section class="content <?php if (!$view->userIsAdmin()) echo 'centerblock'?>">
-			<?php echo $view->getUserEndMsgs()?>
-			<?php echo $view;?>
-		</section>
-		
-		<?php if (!empty($_SESSION['REG_USER']['uid'])){?>
-		<section class="footer">
-			<?php echo $view->getBlock('admin/footer')?>
-		</section>
-		<?php }?>
-		
+			<?php if ($view->userIsLogged()) echo $view->getBlock('admin/header');?>
+			
+			<section class="content <?php if (!$view->userIsLogged()) echo 'centerblock';?>">
+				<?php echo $view;?>
+				<?php if ($msgs = $view->getUserEndMsgs()){?>
+				<div id="user_end_msg_container">
+					<span class="close" onclick="document.getElementById('user_end_msg_container').style.display='none';">&nbsp;</span>
+					<?php echo $msgs;?>
+				</div>
+				<?php }?>
+			</section>
+			
+			<section class="footer">
+				<?php echo $view->getBlock('admin/footer')?>
+			</section>
+			
+		</div>
 	</div>
+	<script type="text/javascript" src="<?php echo WEB_ROOT?>/js/jquery.min.js"></script>
+	<!--[if lte IE 8]>
+		<script type="text/javascript">
+			alert('Cet espace n\'est pas compatible avec les versions Internet Explorer < 9');
+			location = '<?php echo WEB_ROOT?>';
+		</script>
+	<![endif]-->
 	<?php echo $view->getJsTags()?>
 	</body>
 </html>

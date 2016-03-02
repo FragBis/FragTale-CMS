@@ -1,901 +1,929 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: FragTale CMS - V1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-19 00:36+0100\n"
-"PO-Revision-Date: 2013-02-19 00:38+0100\n"
+"POT-Creation-Date: 2016-03-02 15:37+0100\n"
+"PO-Revision-Date: 2016-03-02 15:37+0100\n"
 "Last-Translator: FragBis <fabricedant@gmail.com>\n"
 "Language-Team: \n"
-"Language: \n"
+"Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
-"X-Poedit-Basepath: /var/www/html/bon/apps/\n"
-"X-Poedit-Language: French\n"
-"X-Poedit-Country: FRANCE\n"
-"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: ../../../apps\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SearchPath-0: controllers\n"
 "X-Poedit-SearchPath-1: templates\n"
+"X-Poedit-SearchPath-2: library\n"
+"X-Poedit-SearchPath-3: models\n"
 
-#: controllers/files.php:17
-msgid "Empty"
-msgstr "Vide"
-
-#: controllers/admin.php:18
-#: controllers/admin/header.php:12
+#: controllers/admin.php:56 controllers/admin/header.php:10
 msgid "Dashboard"
 msgstr "Tableau de bord"
 
-#: controllers/admin.php:43
-msgid "You are not allowed to access the entire administration space."
-msgstr "Vous n'êtes pas autorisé à accéder à cet espace."
+#: controllers/admin.php:75
+msgid "You are not allowed to access this page or this content."
+msgstr "Vous n'êtes pas autorisé à accéder à cette page ou à ce contenu."
 
-#: controllers/admin/article_categories.php:14
-msgid "List of categories"
-msgstr "Liste des catégories"
+#: controllers/login.php:25
+msgid "Please, enter your email and password."
+msgstr "Veuillez saisir votre adresse e-mail et votre mot de passe."
 
-#: controllers/admin/file_manager.php:12
-#: controllers/admin/header.php:16
+#: controllers/login.php:32 controllers/admin/forms/login.php:31
+msgid "Your account has been deactivated."
+msgstr "Votre compte n'est pas activé."
+
+#: controllers/login.php:45 controllers/login.php:60
+#: controllers/admin/forms/login.php:55
+msgid "Authentication failed."
+msgstr "L'identification a échoué."
+
+#: controllers/password_recovery.php:15 controllers/password_recovery.php:43
+#: controllers/admin/user/password_recovery.php:14
+msgid "Password recovery"
+msgstr "Récupération du mot de passe"
+
+#: controllers/password_recovery.php:24
+msgid "The username or email address you entered is empty."
+msgstr "Le pseudo ou l'adresse e-mail entrée est vide."
+
+#: controllers/password_recovery.php:29
+msgid "The username or email address you entered is not registered."
+msgstr "Le pseudo ou l'adresse e-mail entrée n'existe pas dans la base."
+
+#: controllers/password_recovery.php:46
+msgid ""
+"An email has been sent to your mailbox. Please, check in. The mail might be "
+"placed in your spam box."
+msgstr ""
+"Un e-mail vous a été envoyé à l'adresse indiquée lors de votre inscription. "
+"Merci de vérifier dans votre boîte aux lettres électronique le bon envoi de "
+"cet e-mail. Celui-ci est peut-être placé dans les SPAMS (courrier "
+"indésirable)."
+
+#: controllers/search.php:37
+msgid "Search result"
+msgstr "Résultat de la recherche"
+
+#: controllers/register.php:37
+msgid "Create a new account"
+msgstr "Créer un nouveau compte"
+
+#: controllers/register.php:43 controllers/admin/user/create.php:17
+msgid "Invalid e-mail address."
+msgstr "E-mail invalide."
+
+#: controllers/register.php:55 controllers/admin/user/create.php:36
+msgid "Registration failed."
+msgstr "L'enregistrement a échoué."
+
+#: controllers/register.php:66
+msgid "Error occured."
+msgstr "Une erreur s'est produite."
+
+#: controllers/register.php:66
+msgid "No rule matched"
+msgstr "Les droits d'accès utilisateur n'ont pu être trouvés"
+
+#: controllers/register.php:74 controllers/register.php:148
+#: library/FragTale/class.controller.php:487
+msgid "System error:"
+msgstr "Erreur système :"
+
+#: controllers/register.php:92 controllers/register.php:99
+msgid "All fields are required."
+msgstr "Tous les champs sont requis."
+
+#: controllers/register.php:119 controllers/admin/user/create.php:65
+#: controllers/admin/user/edit.php:142
+#, php-format
+msgid "The e-mail \"%s\" is already registered."
+msgstr "L'adresse e-mail \"%s\" est déjà enregistrée."
+
+#: controllers/register.php:142
+msgid "Email account validation"
+msgstr "Vérification de votre adresse e-mail"
+
+#: controllers/register.php:154
+msgid "You must be logged in to be able to complete the registration form."
+msgstr ""
+"Vous devez être connecté pour pouvoir terminer le formulaire d'inscription."
+
+#: controllers/forms/article_comments.php:28
+#: controllers/forms/article_comments.php:33
+#: controllers/forms/article_comments.php:39
+#: controllers/admin/article/edit.php:55 controllers/ajax/json.php:118
+msgid "Error occured"
+msgstr "Une erreur s'est produite"
+
+#: controllers/admin/messages.php:24 controllers/admin/header.php:14
+msgid "Letter Box"
+msgstr "Boîte aux lettres"
+
+#: controllers/admin/messages.php:51
+msgid "Choose a recipient"
+msgstr "Choisissez un destinataire"
+
+#: controllers/admin/messages.php:56
+msgid "Please type a message"
+msgstr "Veuillez saisir un message"
+
+#: controllers/admin/messages.php:65
+msgid "An error occured"
+msgstr "Une erreur s'est produite"
+
+#: controllers/admin/messages.php:74
+msgid "New message from"
+msgstr "Nouveau message de la part de"
+
+#: controllers/admin/login.php:12
+msgid "Accessing the admin panel"
+msgstr "Espace d'administration"
+
+#: controllers/admin/file_manager.php:15
 msgid "File manager"
 msgstr "Gestionnaire de fichiers"
 
 #: controllers/admin/file_manager.php:47
+#: controllers/admin/file_manager/diffs.php:109
 #, php-format
 msgid "File identified by ID #%s successfully removed."
 msgstr "Le fichier avec l'ID %s a été enlevé."
 
-#: controllers/admin/login.php:13
-msgid "Accessing the admin panel"
-msgstr "Espace d'administration"
+#: controllers/admin/article_categories.php:11
+msgid "List of categories"
+msgstr "Liste des catégories"
 
-#: controllers/admin/header.php:13
-msgid "Article categories"
+#: controllers/admin/header.php:11
+msgid "My Account"
+msgstr "Mon compte"
+
+#: controllers/admin/header.php:16
+msgid "Article Categories"
 msgstr "Catégories d'articles"
 
-#: controllers/admin/header.php:14
+#: controllers/admin/header.php:18
 msgid "Articles"
 msgstr "Articles"
 
-#: controllers/admin/header.php:15
+#: controllers/admin/header.php:20
 msgid "Users"
 msgstr "Utilisateurs"
 
-#: controllers/admin/header.php:18
+#: controllers/admin/header.php:22
+msgid "File Manager"
+msgstr "Gestionnaire de fichiers"
+
+#: controllers/admin/header.php:24
 msgid "System"
 msgstr "Système"
-
-#: controllers/admin/header.php:19
-#: controllers/admin/logout.php:12
-msgid "Logout"
-msgstr "Déconnexion"
-
-#: controllers/admin/users.php:13
-msgid "User accounts"
-msgstr "Comptes utilisateurs"
 
 #: controllers/admin/articles.php:13
 msgid "List of articles"
 msgstr "Liste d'articles"
 
-#: controllers/admin/user/edit.php:9
-msgid "User account edition"
-msgstr "Modification du compte utilisateur"
+#: controllers/admin/users.php:12
+msgid "User accounts"
+msgstr "Comptes utilisateurs"
 
-#: controllers/admin/user/edit.php:23
-msgid "Unexpected error: User ID cannot be empty."
-msgstr "Erreur inattendue : l'ID utilisateur ne doit pas être vide."
+#: controllers/admin/system.php:23
+msgid "General"
+msgstr "Paramètres généraux"
 
-#: controllers/admin/user/edit.php:63
-msgid "has been successfully updated."
-msgstr "a été mis(e) à jour avec succès."
+#: controllers/admin/system.php:25
+msgid "E-mail to \"Contact Us\""
+msgstr "E-mail du responsable courrier"
 
-#: controllers/admin/user/edit.php:79
+#: controllers/admin/system.php:26
+msgid "E-mail of the person in charge of the \"Contact Us\" mails"
+msgstr ""
+"Adresse e-mail du responsable courrier (i.e., réception du courrier envoyé "
+"depuis le formulaire \"Nous Contacter\")"
+
+#: controllers/admin/system.php:29
+msgid "Admin e-mail"
+msgstr "Adresse e-mail de l'admin"
+
+#: controllers/admin/system.php:30
+msgid "The super-admin e-mail address"
+msgstr "L'adresse e-mail du super-admin en chef"
+
+#: controllers/admin/system.php:33
+msgid "\"No reply\" e-mail"
+msgstr "Adresse e-mail \"no reply\""
+
+#: controllers/admin/system.php:34
+msgid "Fake sender address for the e-mail sent by the website"
+msgstr ""
+"Adresse e-mail fictive indiquant au destinataire d'un courrier envoyé par le "
+"site qu'il ne faut pas y répondre"
+
+#: controllers/admin/system.php:39
+msgid "Google Analytics follower ID"
+msgstr "ID de suivi Google Analytics"
+
+#: controllers/admin/system.php:40
+msgid ""
+"Type here your GA ID intending to send and collect some informations for "
+"Google"
+msgstr ""
+"Saisissez ici votre ID de suivi Google Analytics afin de collecter et "
+"d'envoyer les informations à Google liées à la fréquentation du site, entre "
+"autres"
+
+#: controllers/admin/system.php:43
+msgid "Google Tag Manager"
+msgstr "Google Tag Manager"
+
+#: controllers/admin/system.php:44
+msgid ""
+"Paste here the entire code given by Google to include the Google Tagmanager "
+"stuffs"
+msgstr ""
+"Collez ici le code complet fourni par Google afin d'inclure les "
+"fonctionnalités Google Tagmanager à votre site"
+
+#: controllers/admin/system.php:47
+msgid "Google+ Page"
+msgstr "Page Google+"
+
+#: controllers/admin/system.php:48
+msgid "Your Google+ Page URL"
+msgstr "URL de votre page Google+"
+
+#: controllers/admin/system.php:53
+msgid "Your Website name"
+msgstr "Le nom de votre site Web"
+
+#: controllers/admin/system.php:54
+msgid "This will be used for example into the Open Graph meta tags"
+msgstr ""
+"Ceci sera utilisé par exemple dans l'Open Graph situé dans les méta-tags des "
+"pages Webs"
+
+#: controllers/admin/system.php:57
+msgid "My website image file URL (for Facebook)"
+msgstr "URL de l'image de mon site (pour Facebook)"
+
+#: controllers/admin/system.php:58
+msgid "Image that will be bound to your website (on Facebook)"
+msgstr "Image qui sera associée à mon site Web (sur le réseau social Facebook)"
+
+#: controllers/admin/system.php:61
+msgid "My website video file URL (for Facebook)"
+msgstr "URL de la vidéo de mon site (pour Facebook)"
+
+#: controllers/admin/system.php:62
+msgid "Video that will be bound to your website (on Facebook)"
+msgstr "Vidéo qui sera associée à mon site Web (sur le réseau social Facebook)"
+
+#: controllers/admin/system.php:65
+msgid "My website audio file URL (for Facebook)"
+msgstr "URL du fichier audio de mon site (pour Facebook)"
+
+#: controllers/admin/system.php:66
+msgid "Audio that will be bound to your website (on Facebook)"
+msgstr ""
+"Fichier audio qui sera associé à mon site Web (sur le réseau social Facebook)"
+
+#: controllers/admin/system.php:71
+msgid "Facebook page"
+msgstr "Page Facebook"
+
+#: controllers/admin/system.php:72
+msgid "Url of your personal facebook page"
+msgstr "URL de votre page Facebook"
+
+#: controllers/admin/system.php:75
+msgid "Facebook page ID"
+msgstr "ID de ma page Facebook"
+
+#: controllers/admin/system.php:76
+msgid "ID of your personal facebook page"
+msgstr "ID de votre page Facebook"
+
+#: controllers/admin/system.php:81
+msgid "Twitter page"
+msgstr "Page Twitter"
+
+#: controllers/admin/system.php:82
+msgid "Url of your personal Twitter page"
+msgstr "URL de votre page Twitter"
+
+#: controllers/admin/system.php:87
+msgid "PayPal e-mail"
+msgstr "E-mail PayPal"
+
+#: controllers/admin/system.php:88
+msgid "E-mail address of the PayPal business account"
+msgstr "Adresse e-mail du compte PayPal pro associé aux paiements sur ce site"
+
+#: controllers/admin/system.php:91
+msgid "PayPal submission URL"
+msgstr "URL de soumission du formulaire de paiement PayPal"
+
+#: controllers/admin/system.php:92
+msgid "Redirection through the PayPal payment system"
+msgstr "Redirection vers le site de paiement PayPal"
+
+#: controllers/admin/system.php:97
+msgid "Pathfile"
+msgstr "Pathfile"
+
+#: controllers/admin/system.php:98
+msgid "Path to pathfile"
+msgstr "Chemin d'accès au fichier \"pathfile\""
+
+#: controllers/admin/system.php:101
+msgid "Merchant ID"
+msgstr "ID de la société (merchant ID)"
+
+#: controllers/admin/system.php:102
+msgid "Your merchant ID, normally given by your bank"
+msgstr ""
+"Votre ID marchand vous a été fourni par votre banque. C'est un code a 15 "
+"chiffres qui est mentionné sur votre certificat."
+
+#: controllers/admin/system.php:105
+msgid "Merchant country"
+msgstr "Pays de la société (merchant country)"
+
+#: controllers/admin/system.php:106
+msgid "Country code with 2 characters (ex.: fr)"
+msgstr "Code pays à 2 caractères (ex. : fr)"
+
+#: controllers/admin/system.php:109
+msgid "SMTP server"
+msgstr "Serveur SMTP (envoi d'e-mails)"
+
+#: controllers/admin/system.php:111
+msgid "SMTP Host"
+msgstr "Hôte SMTP"
+
+#: controllers/admin/system.php:112
+msgid "Leave blank if you use \"sendmail\" on localhost"
+msgstr ""
+"Laisser vide si vous utilisez \"sendmail\" (et non \"postfix\") en "
+"\"localhost\""
+
+#: controllers/admin/system.php:115
+msgid "SMTP Port"
+msgstr "Port SMTP"
+
+#: controllers/admin/system.php:116
+msgid ""
+"Leave blank if you use \"sendmail\" on localhost or if you use default port "
+"25"
+msgstr ""
+"Laisser vide si vous utilisez \"sendmail\" (et non \"postfix\") en "
+"\"localhost\" ou si le port par défaut de votre serveur de mail est 25"
+
+#: controllers/admin/system.php:119
+msgid "SMTP Username"
+msgstr "Nom d'utilisateur SMTP"
+
+#: controllers/admin/system.php:120 controllers/admin/system.php:124
+msgid ""
+"Leave blank if you use \"sendmail\" on localhost or if you do not use any "
+"username/password"
+msgstr ""
+"Laisser vide si vous utilisez \"sendmail\" (et non \"postfix\") en "
+"\"localhost\" ou si vous n'avez pas configuré d'utilisateur et de mot de "
+"passe restrictifs sur votre serveur de mail"
+
+#: controllers/admin/system.php:123
+msgid "SMTP Password"
+msgstr "Mot de passe SMTP"
+
+#: controllers/admin/system.php:127
+msgid "No more emails"
+msgstr ""
+
+#: controllers/admin/system.php:128
+msgid ""
+"Set 1 if you want to block any email to be sent. Usually, this is useful for "
+"debug"
+msgstr ""
+
+#: controllers/admin/system.php:134
+msgid "Access rules"
+msgstr "Gestion des droits d'accès"
+
+#: controllers/admin/system.php:136
+msgid "Rules for the admin pages"
+msgstr "Gestion des droits d'accès aux pages d'admin"
+
+#: controllers/admin/system.php:137
+msgid "This is the rules to define for each page of the admin space."
+msgstr "Ce sont les règles d'accès aux pages d'admin."
+
+#: controllers/admin/system.php:138
+msgid ""
+"The column \"Role\" displays a number that corresponds to the ID of the role."
+msgstr "La colonne \"Rôle\" affiche l'identifiant numérique (ID) du rôle."
+
+#: controllers/admin/system.php:139
+msgid "For example, \"1\" is for super-admin and \"2\" is for admin."
+msgstr "Par exemple, \"1\" correspond au super-admin et \"2\" à l'admin."
+
+#: controllers/admin/system.php:140
+msgid ""
+"The column \"Admin Pages\" lists every admin pages that are only accessible "
+"for the corresponding role."
+msgstr ""
+"La colonne  \"Pages d'admin\" liste toutes les pages de l'espace admin qui "
+"nécessitent une restriction particulière suivant les rôles."
+
+#: controllers/admin/system.php:141
 #, php-format
-msgid "Login \"%s\" already used."
-msgstr "Pseudo \"%s\" déjà utilisé."
+msgid "The fields only show the part of the URL after %s."
+msgstr ""
+"Les champs ne font apparaître que la partie de l'URL qui vient après %s."
 
-#: controllers/admin/user/edit.php:86
+#: controllers/admin/system.php:142
+msgid ""
+"Example: the admin page \"system\" is associated to role 1. So, only the "
+"super-admins are allowed to access this page. Etc."
+msgstr ""
+"Exemple : la page \"système\" est associée au rôle 1. Donc, seuls les super-"
+"admins auront le droit d'accéder à cette page. Et ainsi de suite."
+
+#: controllers/admin/system.php:143
+msgid ""
+"If you are not sure, do not change anything, or click on the \"Back to "
+"defaults\" button."
+msgstr ""
+"Si vous n'êtes pas sûr(e), ne changez rien ou cliquez sur le bouton "
+"\"Revenir aux valeurs par défaut\"."
+
+#: controllers/admin/system.php:144
+msgid ""
+"The admin pages are contained into the project code source folder. You "
+"should take a look at this tree."
+msgstr ""
+"Les pages d'admin sont contenues dans le répertoire \"admin\" à l'intérieur "
+"du code source de votre site. Vous devriez jeter un oeil à l'arborescence du "
+"projet."
+
+#: controllers/admin/system.php:154
+msgid "Server manager"
+msgstr "Gestion des serveurs"
+
+#: controllers/admin/system.php:164
+msgid "The sitemap has been successfully created and located at"
+msgstr "Le sitemap a été créé correctement et placé à l'adresse"
+
+#: controllers/admin/system.php:166
+msgid ""
+"Failed to generate the sitemap, probably due to write access upon the root "
+"folder"
+msgstr ""
+"Impossible de créer le fichier sitemap.xml, ceci est probablement dû à un "
+"droit d'écriture refusé dans le répertoire"
+
+#: controllers/admin/system.php:179
 #, php-format
-msgid "E-mail \"%s\" already registered."
-msgstr "E-mail \"%s\" déjà enregistré."
+msgid "A new parameter \"%s\" has been successfully inserted"
+msgstr "Le nouveau paramètre \"%s\" a été inséré avec succès"
 
-#: controllers/admin/user/create.php:9
-msgid "Add a new user account"
-msgstr "Ajouter un nouveau compte"
+#: controllers/admin/system.php:182
+#, php-format
+msgid "Insertion failure for new parameter \"%s\""
+msgstr "Échec de l'insertion du paramètre \"%s\""
 
-#: controllers/admin/user/create.php:21
-msgid "Invalid e-mail address."
-msgstr "E-mail invalide."
+#: controllers/admin/system.php:186
+#, php-format
+msgid "The parameter \"%s\" has been successfully updated"
+msgstr "Le paramètre \"%s\" a été mis à jour avec succès"
 
-#: controllers/admin/user/create.php:42
-msgid "Registration failed."
-msgstr "L'enregistrement a échoué."
+#: controllers/admin/forms/login.php:23
+msgid "Please, enter your login (nickname) and password."
+msgstr "Veuillez saisir votre pseudonyme et votre mot de passe."
 
-#: controllers/admin/user/create.php:51
-msgid "has been successfully added."
-msgstr "a été ajouté avec succès."
+#: controllers/admin/forms/article_category.php:35
+#: controllers/admin/forms/article.php:36
+msgid "It should not exist subdirectory in "
+msgstr "Il ne devrait pas exister de sous-répertoire dans "
 
-#: controllers/admin/user/create.php:64
-msgid ": login already used."
-msgstr " : pseudo déjà utilisé."
+#: controllers/admin/file_manager/diffs.php:16
+msgid "Check file diffs"
+msgstr "Vérifier la bonne liaison des fichiers"
 
-#: controllers/admin/user/create.php:69
-msgid ": E-mail already registered."
-msgstr " : e-mail déjà enregistré."
+#: controllers/admin/file_manager/diffs.php:85
+msgid "successfully removed"
+msgstr "a été supprimé avec succès"
 
-#: controllers/admin/article/edit.php:18
-msgid "Article edition"
-msgstr "Edition"
+#: controllers/admin/blocks/custom_fields.php:18
+#: controllers/admin/blocks/custom_fields.php:50
+msgid "Text"
+msgstr "Texte"
+
+#: controllers/admin/blocks/custom_fields.php:19
+msgid "Text Input"
+msgstr "Entrée de type texte"
+
+#: controllers/admin/blocks/custom_fields.php:22
+msgid "HTML"
+msgstr "HTML"
+
+#: controllers/admin/blocks/custom_fields.php:23
+msgid "HTML Content In Wysiwyg"
+msgstr "Contenu HTML avec Wysiwyg"
+
+#: controllers/admin/blocks/custom_fields.php:26
+msgid "Link"
+msgstr "Lien"
+
+#: controllers/admin/blocks/custom_fields.php:27
+msgid "Hyperlink"
+msgstr "Hyperlien"
+
+#: controllers/admin/blocks/custom_fields.php:30
+msgid "Image"
+msgstr "Image"
+
+#: controllers/admin/blocks/custom_fields.php:31
+msgid "Picture"
+msgstr "Image"
+
+#: controllers/admin/blocks/custom_fields.php:42
+msgid "Media"
+msgstr "Média"
+
+#: controllers/admin/blocks/custom_fields.php:43
+msgid "Media File"
+msgstr "Fichier média"
+
+#: controllers/admin/blocks/custom_fields.php:45
+msgid "Video"
+msgstr "Vidéo"
+
+#: controllers/admin/blocks/custom_fields.php:46
+msgid "Audio"
+msgstr "Audio"
+
+#: controllers/admin/blocks/custom_fields.php:47
+msgid "PDF"
+msgstr "PDF"
+
+#: controllers/admin/blocks/custom_fields.php:48
+msgid "Flash"
+msgstr "Flash"
+
+#: controllers/admin/blocks/custom_fields.php:49
+msgid "Frame"
+msgstr "Cadre"
+
+#: controllers/admin/blocks/custom_fields.php:77
+msgid "Meta description of webpage"
+msgstr "Méta-description de la page Web"
+
+#: controllers/admin/blocks/custom_fields.php:78
+msgid "Keywords for search engine"
+msgstr "Mots clés pour les moteurs de recherche"
+
+#: controllers/admin/blocks/custom_fields.php:79
+msgid ""
+"Meta title of webpage (if this field is empty, meta title is article title)"
+msgstr ""
+"Méta-titre de la page Web (si le champ ci-dessous est vide, le système "
+"choisira le titre de l'article)"
+
+#: controllers/admin/blocks/custom_fields.php:125
+msgid "Custom fields changes saved"
+msgstr "Champs customisés mis à jour"
+
+#: controllers/admin/blocks/article_lists.php:25
+msgid "Changes saved"
+msgstr "Modifications enregistrées"
+
+#: controllers/admin/blocks/article_lists.php:70
+msgid "Create new item for category:"
+msgstr "Créer nouvel élément dans catégorie :"
+
+#: controllers/admin/blocks/article_lists.php:71
+msgid "Create new item without category"
+msgstr "Créer nouvel élément sans catégorie"
+
+#: controllers/admin/article/create.php:52
+msgid "This article has been successfully registered."
+msgstr "Article enregistré."
+
+#: controllers/admin/article/create.php:58
+#: controllers/admin/article/create.php:61
+msgid "Article not registered."
+msgstr "Article non enregistré."
+
+#: controllers/admin/article/create.php:67
+msgid "Add a new article"
+msgstr "Ajouter un nouvel article"
+
+#: controllers/admin/article/create.php:80
+#: controllers/admin/article_category/create.php:110
+msgid "There is already a web page with this Url alias: "
+msgstr "Il y a déjà une page Web avec l'alias d'URL :"
 
 #: controllers/admin/article/edit.php:25
 msgid "Unexpected error: unable to load article properly."
 msgstr "Erreur inattendue : impossible de charger l'article."
 
-#: controllers/admin/article/edit.php:55
+#: controllers/admin/article/edit.php:51
+msgid "Article successfully removed"
+msgstr "L'article a été supprimé avec succès"
+
+#: controllers/admin/article/edit.php:91
 msgid "This article has been successfully updated."
 msgstr "Article mis à jour."
 
-#: controllers/admin/article/edit.php:62
+#: controllers/admin/article/edit.php:99
+#: controllers/admin/article_category/edit.php:88
 msgid "This article has been historicize."
-msgstr "Article historicisé."
+msgstr "Article archivé."
 
-#: controllers/admin/article/edit.php:64
+#: controllers/admin/article/edit.php:101
+#: controllers/admin/article_category/edit.php:90
 msgid "Historization failed."
 msgstr "Archivage échoué."
 
-#: controllers/admin/article/edit.php:81
+#: controllers/admin/article/edit.php:109
+msgid "Article edition"
+msgstr "Edition"
+
+#: controllers/admin/article/edit.php:139
 msgid "There is already a web page having the following Url alias: "
 msgstr "Il y a déjà une page Web possédant l'alias d'URL : "
 
-#: controllers/admin/article/create.php:15
-msgid "Add a new article"
-msgstr "Ajouter un nouvel article"
+#: controllers/admin/user/create.php:10
+msgid "Add a new user account"
+msgstr "Ajouter un nouveau compte"
 
-#: controllers/admin/article/create.php:38
-msgid "This article has been successfully registered."
-msgstr "Article enregistré."
+#: controllers/admin/user/create.php:45
+msgid "has been successfully added."
+msgstr "a été ajouté avec succès."
 
-#: controllers/admin/article/create.php:44
-#: controllers/admin/article/create.php:47
-msgid "Article not registered."
-msgstr "Article non enregistré."
-
-#: controllers/admin/article/create.php:60
-#: controllers/admin/article_category/edit.php:105
-#: controllers/admin/article_category/create.php:93
-msgid "There is already a web page with this Url alias: "
-msgstr "Il y a déjà une page Web avec l'alias d'URL :"
-
-#: controllers/admin/forms/login.php:16
-msgid "Please, enter your login and password."
-msgstr "Veuillez saisir votre pseudo et votre mot de passe."
-
-#: controllers/admin/forms/login.php:24
-msgid "Your account has been deactivated."
-msgstr "Votre compte a été désactivé."
-
-#: controllers/admin/forms/login.php:35
-msgid "Authentication failed."
-msgstr "L'identification a échoué."
-
-#: controllers/admin/forms/article_category.php:37
-#: controllers/admin/forms/article.php:36
-msgid "It should not exist subdirectory in "
-msgstr "Il ne devrait pas exister de sous-répertoire dans "
-
-#: controllers/admin/forms/register.php:7
-msgid "Create account"
-msgstr "Créer un compte"
-
-#: controllers/admin/file_manager/diffs.php:12
-msgid "Check file diffs"
-msgstr "Vérifier la bonne liaison des fichiers"
-
-#: controllers/admin/article_category/edit.php:16
-msgid "Category edition"
-msgstr "Modifier une catégorie"
-
-#: controllers/admin/article_category/edit.php:60
-msgid "Category successfully updated."
-msgstr "Catégorie mise à jour."
-
-#: controllers/admin/article_category/edit.php:72
-msgid "Article successfully updated."
-msgstr "Article mis à jour."
-
-#: controllers/admin/article_category/edit.php:76
-msgid "Unexpected error while loading the article of category."
-msgstr "Erreur inattendue lors du chargement de la catégorie."
-
-#: controllers/admin/article_category/edit.php:81
-msgid "Unexpected error: unable to load category."
-msgstr "Erreur inattendue : impossible de charger la catégorie."
-
-#: controllers/admin/article_category/edit.php:95
-#: controllers/admin/article_category/create.php:85
+#: controllers/admin/user/create.php:60 controllers/admin/user/edit.php:135
 #, php-format
-msgid "There is already a category named \"%s\""
-msgstr "Il y a déjà une catégorie nommée \"%s\""
+msgid "The nickname \"%s\" is already taken."
+msgstr "Le pseudonyme \"%s\" est déjà pris."
 
-#: controllers/admin/article_category/create.php:19
-msgid "Add a new category of articles"
-msgstr "Ajouter une nouvelle catégorie darticles"
+#: controllers/admin/user/validate.php:12
+msgid "Account validation"
+msgstr "Validation du compte"
+
+#: controllers/admin/user/validate.php:31
+msgid "Your account is now active."
+msgstr "Votre compte est désormais activé."
+
+#: controllers/admin/user/password_recovery.php:39
+msgid "Password successfully updated."
+msgstr "Le mot de passe a bien été mis à jour."
+
+#: controllers/admin/user/edit.php:18
+msgid "User account edition"
+msgstr "Modification du compte utilisateur"
+
+#: controllers/admin/user/edit.php:102
+msgid "has been successfully updated."
+msgstr "a été mis(e) à jour avec succès."
+
+#: controllers/admin/user/edit.php:121
+msgid "Invalid user ID."
+msgstr "L'ID utilisateur est incorrect"
+
+#: controllers/admin/user/edit.php:161
+#, php-format
+msgid ""
+"You own \"%s\" articles(s). You or an administrator must delete all these "
+"articles first."
+msgstr ""
+"Vous êtes l'auteur de \"%s\" article(s). Vous ou l'un des administrateurs "
+"doit supprimer tout article dont vous êtes le créateur avant d'être en "
+"mesure de procéder à la suppression du compte."
+
+#: controllers/admin/user/edit.php:163
+#, php-format
+msgid ""
+"This user owns \"%s\" article(s). He/she or an administrator must delete all "
+"these articles first."
+msgstr ""
+"Cet utilisateur possède \"%s\" article(s). Il/elle ou l'un des "
+"administrateurs doit supprimer tout article dont il/elle est l'auteur(e) "
+"avant d'être en mesure de procéder à la suppression du compte."
+
+#: controllers/admin/user/edit.php:168
+#, php-format
+msgid "Hello %s,"
+msgstr "Bonjour %s,"
+
+#: controllers/admin/user/edit.php:169
+msgid "This is a confirmation of your account deletion."
+msgstr ""
+"Ceci est une confirmation de la suppression définitive de votre compte."
+
+#: controllers/admin/user/edit.php:171
+msgid ""
+"Your account was deleted by an administrator. If you are not agree about "
+"this decision, you can use our \"Contact Us\" form."
+msgstr ""
+"Votre compte a été supprimé par un administrateur. Si vous en contestez la "
+"décision, vous pouvez utiliser le formulaire de contact présent sur notre "
+"site."
+
+#: controllers/admin/user/edit.php:172
+msgid "User account deletion"
+msgstr "Suppression de compte"
+
+#: controllers/admin/user/edit.php:173
+#, php-format
+msgid "The user \"%s\" has been successfully deleted."
+msgstr "L'utilisateur \"%s\" a été supprimé avec succès"
+
+#: controllers/admin/user/edit.php:177
+msgid "An error occured from the database."
+msgstr "Une erreur s'est produite depuis la base de données."
 
 #: controllers/admin/article_category/create.php:53
 msgid "New category successfully added."
 msgstr "Nouvelle catégorie ajoutée."
 
-#: controllers/admin/article_category/create.php:63
+#: controllers/admin/article_category/create.php:66
 msgid "New article successfully added and linked to this category."
 msgstr "Nouvel article ajouté et associé à la catégorie."
 
-#: controllers/admin/article_category/create.php:65
+#: controllers/admin/article_category/create.php:68
 msgid "Unexpected error while linking article to category."
 msgstr "Erreur inattendue lors du chargement de la catégorie d'articles."
 
-#: controllers/admin/article_category/create.php:68
+#: controllers/admin/article_category/create.php:71
 msgid "Failed to add new article."
 msgstr "Article non ajouté."
 
-#: controllers/admin/article_category/create.php:73
+#: controllers/admin/article_category/create.php:77
+msgid "Error while loading new category."
+msgstr "Erreur lors du chargement de la nouvelle catégorie."
+
+#: controllers/admin/article_category/create.php:82
 msgid "Failed to add new category."
 msgstr "Catégorie non ajoutée."
 
-#: controllers/blocks/header.php:13
+#: controllers/admin/article_category/create.php:88
+msgid "Add a new category of articles"
+msgstr "Ajouter une nouvelle catégorie darticles"
+
+#: controllers/admin/article_category/create.php:102
+#: controllers/admin/article_category/edit.php:119
+#, php-format
+msgid "There is already a category named \"%s\""
+msgstr "Il y a déjà une catégorie nommée \"%s\""
+
+#: controllers/admin/article_category/edit.php:32
+msgid "Category successfully deleted."
+msgstr "Catégorie supprimée."
+
+#: controllers/admin/article_category/edit.php:64
+msgid "Category successfully updated."
+msgstr "Catégorie mise à jour."
+
+#: controllers/admin/article_category/edit.php:77
+msgid "Article successfully updated."
+msgstr "Article mis à jour."
+
+#: controllers/admin/article_category/edit.php:81
+msgid "Unexpected error while loading the article of category."
+msgstr "Erreur inattendue lors du chargement de la catégorie."
+
+#: controllers/admin/article_category/edit.php:94
+msgid "Unexpected error: unable to load category."
+msgstr "Erreur inattendue : impossible de charger la catégorie."
+
+#: controllers/admin/article_category/edit.php:104
+msgid "Category edition"
+msgstr "Modifier une catégorie"
+
+#: controllers/admin/article_category/edit.php:129
+#, php-format
+msgid "There is already a web page with the Url alias \"%s\""
+msgstr "Il y a déjà une page Web possédant l'alias d'URL \"%s\""
+
+#: controllers/blocks/category_carousel.php:17
+#: controllers/blocks/subcategory_carousel.php:17
+msgid "Error on category load."
+msgstr "Erreur lors du chargement de la catégorie."
+
+#: controllers/blocks/header.php:11
 msgid "Home"
 msgstr "Accueil"
 
 #: controllers/blocks/header.php:14
-msgid "Downloads"
-msgstr "Téléchargements"
-
-#: controllers/blocks/header.php:15
-msgid "Contact us"
-msgstr "Nous contacter"
-
-#: controllers/blocks/header.php:20
-msgid "Login/Register"
-msgstr "S'identifier/S'enregistrer"
-
-#: controllers/blocks/category_carousel.php:20
-msgid "Error on category load."
-msgstr "Erreur lors du chargement de la catégorie."
-
-#: templates/views/files.phtml:3
-msgid "Download links:"
-msgstr "Liens téléchargeables :"
-
-#: templates/views/404.phtml:1
-msgid "Error 404: The requested page could not be found."
-msgstr "Erreur 404 : Page introuvable"
-
-#: templates/views/admin.phtml:1
-msgid "Common informations"
-msgstr "Informations courantes"
-
-#: templates/views/admin.phtml:5
-#, php-format
-msgid "There are %s new USERS registered from these last 10 days."
-msgstr "Il y a %s nouveaux utilisateurs enregistrés depuis ces 10 derniers jours."
-
-#: templates/views/admin.phtml:6
-#: templates/views/admin.phtml:15
-#: templates/views/admin.phtml:24
-msgid "See"
-msgstr "Voir"
-
-#: templates/views/admin.phtml:14
-#, php-format
-msgid "There are %s new CATEGORIES registered from these last 10 days."
-msgstr "Il y a %s nouvelles catégories enregistrées depuis ces 10 derniers jours."
-
-#: templates/views/admin.phtml:23
-#, php-format
-msgid "There are %s new ARTICLES registered from these last 10 days."
-msgstr "Il y a %s nouveaux articles enregistrés depuis ces 10 derniers jours."
-
-#: templates/views/admin.phtml:32
-#, php-format
-msgid "There are %s files in uploads folder that are not registered in the database."
-msgstr "Il y a %s fichiers dans le répertoire \"uploads\" qui ne sont pas répertoriés dans la base."
-
-#: templates/views/admin.phtml:33
-#: templates/views/admin.phtml:42
-msgid "Go manage them"
-msgstr "Gérer ces cas"
-
-#: templates/views/admin.phtml:41
-#, php-format
-msgid "There are %s files registered in the database that are not in the uploads folder."
-msgstr "Il y a %s fichiers enregistrés dans la base qui n'ont pas (ou plus) leur trace physique dans le répertoire \"uploads\"."
-
-#: templates/views/admin/users.phtml:3
-msgid "Registered users:"
-msgstr "Utilisateurs enregistrés :"
-
-#: templates/views/admin/users.phtml:7
-msgid "Pseudo"
-msgstr "Pseudo"
-
-#: templates/views/admin/users.phtml:7
-msgid "E-mail"
-msgstr "E-mail"
-
-#: templates/views/admin/users.phtml:8
-msgid "Last name"
-msgstr "Nom"
-
-#: templates/views/admin/users.phtml:8
-msgid "First name"
-msgstr "Prénom"
-
-#: templates/views/admin/users.phtml:11
-msgid "Is active"
-msgstr "Est actif"
-
-#: templates/views/admin/users.phtml:22
-msgid "Yes"
-msgstr "Oui"
-
-#: templates/views/admin/users.phtml:22
-msgid "No"
-msgstr "Non"
-
-#: templates/views/admin/users.phtml:30
-msgid "No users found"
-msgstr "Aucun utilisateur enregistré"
-
-#: templates/views/admin/users.phtml:33
-msgid "Add"
-msgstr "Ajouter"
-
-#: templates/views/admin/system.phtml:1
-msgid "Parameters"
-msgstr "Paramètres"
-
-#: templates/views/admin/article_categories.phtml:3
-msgid "Registered article categories:"
-msgstr "Catégories d'articles enregistrées :"
-
-#: templates/views/admin/article_categories.phtml:7
-#: templates/views/admin/file_manager.phtml:8
-msgid "Name"
-msgstr "Nom"
-
-#: templates/views/admin/article_categories.phtml:7
-msgid "Label"
-msgstr "&Eacute;tiquette"
-
-#: templates/views/admin/article_categories.phtml:7
-#: templates/views/admin/forms/article_category.phtml:64
-msgid "Parent category"
-msgstr "Catégorie parente"
-
-#: templates/views/admin/article_categories.phtml:26
-msgid "No categories found"
-msgstr "Aucune catégorie trouvée"
-
-#: templates/views/admin/file_manager.phtml:3
-msgid "Uploaded files stored into the database"
-msgstr "Fichiers téléchargés et répertoriés dans la base de données"
-
-#: templates/views/admin/file_manager.phtml:9
-#: templates/views/admin/file_manager.phtml:113
-msgid "Mime type"
-msgstr "Mime-type"
-
-#: templates/views/admin/file_manager.phtml:10
-#: templates/views/admin/file_manager.phtml:69
-msgid "Preview"
-msgstr "Aperçu"
-
-#: templates/views/admin/file_manager.phtml:11
-#: templates/views/admin/file_manager.phtml:41
-msgid "Delete"
-msgstr "Supprimer"
-
-#: templates/views/admin/file_manager.phtml:22
-#: templates/views/admin/file_manager.phtml:84
-msgid "Visualize"
-msgstr "Visualiser"
-
-#: templates/views/admin/file_manager.phtml:41
-#: templates/views/admin/file_manager.phtml:56
-msgid "Confirm this action"
-msgstr "Confirmez cette action"
-
-#: templates/views/admin/file_manager.phtml:48
-msgid "Upload and list new files"
-msgstr "Téléverser et répertorier de nouveaux fichiers"
-
-#: templates/views/admin/file_manager.phtml:56
-msgid "Upload"
-msgstr "Téléverser"
-
-#: templates/views/admin/file_manager.phtml:63
-msgid "Physical files that are not registered into the database"
-msgstr "Fichiers physiques qui ne sont pas répertoriés dans la base"
-
-#: templates/views/admin/file_manager.phtml:67
-#: templates/views/admin/file_manager.phtml:112
-msgid "File name"
-msgstr "Nom de fichier"
-
-#: templates/views/admin/file_manager.phtml:68
-msgid "Type|Path"
-msgstr "Type|Chemin"
-
-#: templates/views/admin/file_manager.phtml:100
-#: templates/views/admin/file_manager.phtml:127
-msgid "Manage"
-msgstr "Gérer"
-
-#: templates/views/admin/file_manager.phtml:107
-msgid "Files in database that are not physically presents"
-msgstr "Fichiers répertoriés qui ne sont pas physiquement présents"
-
-#: templates/views/admin/file_manager.phtml:132
-msgid "Check for unregistered files"
-msgstr "Vérifier l'existence de fichiers non inventoriés."
-
-#: templates/views/admin/file_manager.phtml:134
-msgid "Be aware that this process can take a while if your database is huge."
-msgstr "Attention : cette action peut durer longtemps en fonction de la quantité de données et de fichiers à inspecter."
-
-#: templates/views/admin/articles.phtml:3
-msgid "Registered articles:"
-msgstr "Articles enregistrés :"
-
-#: templates/views/admin/articles.phtml:8
-#: templates/views/admin/forms/article.phtml:28
-#: templates/views/admin/forms/article_category.phtml:101
-msgid "Title"
-msgstr "Titre"
-
-#: templates/views/admin/articles.phtml:8
-#: templates/views/admin/forms/article.phtml:81
-#: templates/views/admin/forms/article_category.phtml:143
-msgid "View template"
-msgstr "Gabarit de l'affichage"
-
-#: templates/views/admin/articles.phtml:8
-#: templates/views/admin/forms/article.phtml:70
-#: templates/views/admin/forms/article_category.phtml:132
-msgid "Url alias"
-msgstr "Alias de l'URL"
-
-#: templates/views/admin/articles.phtml:9
-#: templates/views/admin/forms/article.phtml:117
-#: templates/views/admin/forms/article_category.phtml:179
-msgid "Published"
-msgstr "Publié"
-
-#: templates/views/admin/articles.phtml:9
-msgid "Last edit"
-msgstr "Dernière modif."
-
-#: templates/views/admin/articles.phtml:32
-msgid "No articles found"
-msgstr "Aucun article trouvé"
-
-#: templates/views/admin/header.phtml:2
-msgid "Admin panel"
-msgstr "Panneau d'administration"
-
-#: templates/views/admin/user/edit.phtml:1
-msgid "Account informations"
-msgstr "Informations sur le compte"
-
-#: templates/views/admin/user/edit.phtml:5
-#: templates/views/admin/article/edit.phtml:4
-msgid "Update"
-msgstr "Modifier"
-
-#: templates/views/admin/user/edit.phtml:7
-msgid "You are not allowed to modify this user."
-msgstr "Vous n'êtes pas autorisé à modifier cet utilisateur."
-
-#: templates/views/admin/user/create.phtml:1
-msgid "Register a new user"
-msgstr "Enregistrer un nouvel utilisateur"
-
-#: templates/views/admin/user/create.phtml:4
-#: templates/views/admin/article/create.phtml:4
-msgid "Register"
-msgstr "Enregistrer"
-
-#: templates/views/admin/article/edit.phtml:1
-msgid "Edit article informations"
-msgstr "Modifier les infos de l'article"
-
-#: templates/views/admin/article/edit.phtml:4
-msgid "Just save it"
-msgstr "Seulement enregistrer"
-
-#: templates/views/admin/article/edit.phtml:5
-msgid "Store this article version"
-msgstr "Stocker cette version de l'article"
-
-#: templates/views/admin/article/edit.phtml:5
-msgid "Historicize"
-msgstr "Archiver"
-
-#: templates/views/admin/article/edit.phtml:6
-msgid "Update and store this article version"
-msgstr "Modifier et enregistrer l'ancienne version dans l'historique"
-
-#: templates/views/admin/article/edit.phtml:6
-msgid "Update and historicize"
-msgstr "Modifier et archiver"
-
-#: templates/views/admin/article/create.phtml:1
-msgid "Add new article"
-msgstr "Ajouter un nouvel article"
-
-#: templates/views/admin/forms/article.phtml:10
-#: templates/views/admin/forms/article_category.phtml:84
-msgid "Article ID"
-msgstr "ID article"
-
-#: templates/views/admin/forms/article.phtml:11
-#: templates/views/admin/forms/article_category.phtml:85
-msgid "go to front page"
-msgstr "Voir la page"
-
-#: templates/views/admin/forms/article.phtml:16
-#: templates/views/admin/forms/article_category.phtml:91
-msgid "Edited on"
-msgstr "Modifié le"
-
-#: templates/views/admin/forms/article.phtml:20
-#: templates/views/admin/forms/article_category.phtml:20
-#: templates/views/admin/forms/article_category.phtml:27
-#: templates/views/admin/forms/article_category.phtml:93
-#: templates/views/admin/forms/user.phtml:11
-#: templates/views/admin/forms/user.phtml:18
-msgid "By"
-msgstr "par"
-
-#: templates/views/admin/forms/article.phtml:32
-#: templates/views/admin/forms/article.phtml:41
-#: templates/views/admin/forms/article.phtml:74
-#: templates/views/admin/forms/article.phtml:102
-#: templates/views/admin/forms/article.phtml:111
-#: templates/views/admin/forms/article_category.phtml:39
-#: templates/views/admin/forms/article_category.phtml:49
-#: templates/views/admin/forms/article_category.phtml:105
-#: templates/views/admin/forms/article_category.phtml:114
-#: templates/views/admin/forms/article_category.phtml:136
-#: templates/views/admin/forms/article_category.phtml:164
-#: templates/views/admin/forms/article_category.phtml:173
-msgid "characters max."
-msgstr "caractères max."
-
-#: templates/views/admin/forms/article.phtml:33
-#: templates/views/admin/forms/article_category.phtml:40
-#: templates/views/admin/forms/article_category.phtml:50
-#: templates/views/admin/forms/article_category.phtml:106
-msgid "No HTML tags."
-msgstr "Ne pas mettre de tags HTML."
-
-#: templates/views/admin/forms/article.phtml:38
-#: templates/views/admin/forms/article_category.phtml:111
-msgid "Summary"
-msgstr "Résumé"
-
-#: templates/views/admin/forms/article.phtml:43
-#: templates/views/admin/forms/article_category.phtml:116
-msgid "Must contain a little summary that will be displayed into the \"latest news\" box."
-msgstr "Doit contenir un petit résumé qui sera affiché dans la boîte \"Dernières nouvelles\"."
-
-#: templates/views/admin/forms/article.phtml:48
-msgid "Category"
-msgstr "Catégorie"
-
-#: templates/views/admin/forms/article.phtml:51
-#: templates/views/admin/forms/article_category.phtml:67
-msgid "None"
-msgstr "Aucun(e)"
-
-#: templates/views/admin/forms/article.phtml:60
-#: templates/views/admin/forms/article_category.phtml:122
-msgid "Access level"
-msgstr "Niveau d'accès"
-
-#: templates/views/admin/forms/article.phtml:64
-#: templates/views/admin/forms/article_category.phtml:126
-msgid "Degree of accessibility: 1=Only for super-admin, 2=For administrators, empty=access for all"
-msgstr "Degré d'accessibilité : 1=\"Seulement pour Super-Admins\", 2=\"Pour Admins\", vide=\"Accès public\""
-
-#: templates/views/admin/forms/article.phtml:76
-#: templates/views/admin/forms/article_category.phtml:138
-msgid "Url alias must be unique for each article."
-msgstr "L'alias d'URL doit être strictement unique à chaque article."
-
-#: templates/views/admin/forms/article.phtml:90
-#: templates/views/admin/forms/article_category.phtml:152
-msgid "These layouts are stored in \"apps/templates/views/cms\"."
-msgstr "Ces gabarits sont stockés dans \"apps/templates/views/cms\"."
-
-#: templates/views/admin/forms/article.phtml:95
-#: templates/views/admin/forms/article_category.phtml:157
-msgid "Body"
-msgstr "Corps de texte"
-
-#: templates/views/admin/forms/article.phtml:99
-#: templates/views/admin/forms/article_category.phtml:161
-msgid "Greeting text"
-msgstr "Message de salutation"
-
-#: templates/views/admin/forms/article.phtml:104
-#: templates/views/admin/forms/article_category.phtml:166
-msgid "A litle ending message such as \"Cheers!\"."
-msgstr "Un petit message en fin de texte, comme \"Cordialement\"."
-
-#: templates/views/admin/forms/article.phtml:108
-#: templates/views/admin/forms/article_category.phtml:170
-msgid "Signature"
-msgstr "Signature"
-
-#: templates/views/admin/forms/article.phtml:113
-#: templates/views/admin/forms/article_category.phtml:175
-msgid "Author signature."
-msgstr "Signature de l'auteur."
-
-#: templates/views/admin/forms/article_category.phtml:12
-msgid "Category ID"
-msgstr "ID catégorie"
-
-#: templates/views/admin/forms/article_category.phtml:18
-#: templates/views/admin/forms/user.phtml:9
-msgid "Created on"
-msgstr "Créé le"
-
-#: templates/views/admin/forms/article_category.phtml:25
-#: templates/views/admin/forms/user.phtml:16
-msgid "Last edited on"
-msgstr "Dernière modif."
-
-#: templates/views/admin/forms/article_category.phtml:35
-msgid "Category name"
-msgstr "Nom de la catégorie"
-
-#: templates/views/admin/forms/article_category.phtml:45
-msgid "Category label"
-msgstr "&Eacute;tiquette de la catégorie"
-
-#: templates/views/admin/forms/article_category.phtml:51
-msgid "A very short description."
-msgstr "Description très courte."
-
-#: templates/views/admin/forms/article_category.phtml:56
-msgid "Vignette"
-msgstr "Vignette"
-
-#: templates/views/admin/forms/article_category.phtml:70
-msgid "Leave empty to define it as a super category."
-msgstr "Laisser vide si la catégorie est une super-catégorie."
-
-#: templates/views/admin/forms/article_category.phtml:75
-msgid "Update only category informations"
-msgstr "Modifier seulement les infos de la catégorie"
-
-#: templates/views/admin/forms/article_category.phtml:78
-msgid "Article informations"
-msgstr "Infos article"
-
-#: templates/views/admin/forms/article_category.phtml:184
-msgid "Update only article informations"
-msgstr "Modifier uniquement les infos de l'article"
-
-#: templates/views/admin/forms/login.phtml:4
-msgid "Admin only"
-msgstr "Admin uniquement"
-
-#: templates/views/admin/forms/login.phtml:7
-msgid "Login:"
-msgstr "Pseudo :"
-
-#: templates/views/admin/forms/login.phtml:11
-msgid "Password:"
-msgstr "Mot de passe :"
-
-#: templates/views/admin/forms/login.phtml:15
-msgid "Submit"
-msgstr "Valider"
-
-#: templates/views/admin/forms/login.phtml:17
-msgid "Not registred yet?"
+msgid "Logout"
+msgstr "Se déconnecter"
+
+#: controllers/blocks/header.php:16
+msgid "Sign In"
+msgstr "Se connecter"
+
+#: controllers/ajax/json.php:83
+msgid "User is not logged in"
+msgstr "Utilisateur non identifié"
+
+#: controllers/ajax/json.php:87
+msgid "Action not allowed"
+msgstr "Action non permise"
+
+#: controllers/ajax/json.php:121 controllers/ajax/html.php:27
+msgid "Bad Request"
+msgstr "Requête invalide"
+
+#: controllers/cms/contact.php:22
+msgid "Lastname*"
+msgstr "Nom*"
+
+#: controllers/cms/contact.php:23 controllers/cms/contact.php:30
+#: controllers/cms/contact.php:37 controllers/cms/contact.php:44
+#: controllers/cms/contact.php:51
+msgid "This field is required."
+msgstr "Champ requis."
+
+#: controllers/cms/contact.php:29
+msgid "Firstname*"
+msgstr "Prénom*"
+
+#: controllers/cms/contact.php:36
+msgid "Your email address*"
+msgstr "Votre adresse e-mail*"
+
+#: controllers/cms/contact.php:37
+msgid "Invalid email address format."
+msgstr "Format de l'adresse e-mail invalide."
+
+#: controllers/cms/contact.php:43
+msgid "Subject*"
+msgstr "Objet*"
+
+#: controllers/cms/contact.php:50
+msgid "Message*"
+msgstr "Message*"
+
+#: controllers/cms/contact.php:64
+msgid ""
+"The system seems to have found that you are trying something like spaming"
+msgstr "Le système semble avoir détecté que vous essayez de spammer le site."
+
+#: controllers/cms/contact.php:108
+msgid "Your message has been sent"
+msgstr "Votre message a été envoyé"
+
+#: controllers/cms/contact.php:116
+msgid "An error occured while sending the email"
+msgstr "Une erreur est survenue lors de l'envoi du courrier."
+
+#: library/FragTale/class.controller.php:354
+msgid ""
+"You are trying to send an email, but your admin have set no email sending "
+"allowed."
 msgstr ""
 
-#: templates/views/admin/forms/user.phtml:26
-msgid "User ID"
-msgstr "ID utilisateur"
+#: library/FragTale/class.controller.php:466
+msgid "Empty content"
+msgstr "Contenu vide"
 
-#: templates/views/admin/forms/user.phtml:31
-msgid "Login*"
-msgstr "Pseudo*"
+#: library/FragTale/class.controller.php:472
+#: library/FragTale/class.controller.php:475
+msgid "Error while sending the email."
+msgstr "Une erreur est survenue lors de l'envoi du courrier."
 
-#: templates/views/admin/forms/user.phtml:41
-#: templates/views/admin/forms/user.phtml:82
-msgid "New password"
-msgstr "Nouveau mdp"
+#: library/FragTale/class.view.php:383
+msgid "Attempt to store the following message in an unknown type"
+msgstr ""
+"Tentative d'enregistrement du message suivant dans un type ou une catégorie "
+"inconnus"
 
-#: templates/views/admin/forms/user.phtml:43
-#: templates/views/admin/forms/user.phtml:84
-msgid "Passwords mismatch."
-msgstr "Mots de passe non concordants."
+#: models/FragTale/cms/class.files.php:100
+msgid "Unable to upload "
+msgstr "Le système n'a pu télécharger le fichier"
 
-#: templates/views/admin/forms/user.phtml:46
-#: templates/views/admin/forms/user.phtml:87
-msgid "Retype password"
-msgstr "Confirmer mdp"
+#: models/FragTale/cms/class.files.php:107
+msgid "You must allow Apache to have recursive permissions to write upon "
+msgstr ""
+"Vous devez autoriser Apache à avoir les permissions récursives d'écrire sur"
 
-#: templates/views/admin/forms/user.phtml:60
-msgid "Date of birth"
-msgstr "Date de naissance"
+#: models/FragTale/cms/class.files.php:124
+msgid ""
+": a file with same name already exists. Item associated with the existing "
+"file."
+msgstr ""
+": un fichier du même nom existe déjà. L'élément a été associé au fichier "
+"déjà existant."
 
-#: templates/views/admin/forms/user.phtml:65
-msgid "Use the universal date format YYYY-MM-DD if your browser does not support natively the date picker."
-msgstr "Utiliser le format universel de date AAAA-MM-JJ si votre navigateur n'intègre pas par défaut un sélecteur de date."
+#: models/FragTale/cms/class.files.php:131
+msgid ""
+": error occured while transferring this file into the uploads directory."
+msgstr ": Une erreur est survenue lors du transfert de fichier."
 
-#: templates/views/admin/forms/user.phtml:70
-msgid "Activate"
-msgstr "Activé"
-
-#: templates/views/admin/forms/user.phtml:78
-msgid "Change password"
-msgstr "Modifier le mot de passe"
-
-#: templates/views/admin/forms/user.phtml:96
-msgid "Roles"
-msgstr "Rôles"
-
-#: templates/views/admin/file_manager/diffs.phtml:11
-msgid "Erase"
-msgstr "Effacer"
-
-#: templates/views/admin/file_manager/diffs.phtml:55
-msgid "Remove from database"
-msgstr "Enlever de la base"
-
-#: templates/views/admin/file_manager/diffs.phtml:75
-msgid "Status: OK"
-msgstr "Statut : OK"
-
-#: templates/views/admin/elements/file_upload.phtml:9
-msgid "Upload a file"
-msgstr "Téléverser un fichier"
-
-#: templates/views/admin/elements/file_upload.phtml:11
-msgid "Or choose an existing one (auto-completion)"
-msgstr "Ou choisir un fichier existant (par auto-complétion)"
-
-#: templates/views/admin/elements/datagrid_searches.phtml:8
-msgid "Display"
-msgstr "Afficher"
-
-#: templates/views/admin/elements/datagrid_searches.phtml:14
-msgid "rows"
-msgstr "lignes"
-
-#: templates/views/admin/elements/datagrid_searches.phtml:18
-msgid "Page"
-msgstr "Page"
-
-#: templates/views/admin/elements/datagrid_searches.phtml:24
-msgid "of"
-msgstr "sur"
-
-#: templates/views/admin/article_category/edit.phtml:1
-msgid "Edit category informations"
-msgstr "Modifier les infos de la catégorie"
-
-#: templates/views/admin/article_category/create.phtml:1
-msgid "Add new category"
-msgstr "Ajouter une nouvelle catégorie"
-
-#: templates/views/blocks/chatbox.phtml:8
-msgid "chars max."
-msgstr "caractères max."
-
-#: templates/views/blocks/chatbox.phtml:9
-msgid "Send"
-msgstr "Envoyer"
-
-#: templates/views/blocks/mumble.phtml:6
-msgid "Connect to Mumble"
-msgstr "Connexion à Mumble"
-
-#: templates/views/blocks/mumble.phtml:17
-msgid "View profile"
-msgstr "Voir le profil"
-
-#: templates/views/blocks/mumble.phtml:23
-msgid "Nobody's logged"
-msgstr "Chat room vide"
-
-#: templates/views/blocks/list_of_articles.phtml:13
-msgid "This is the only article of this category."
-msgstr "C'est le seul article de cette catégorie."
-
-#: templates/views/blocks/footer.phtml:3
-msgid "Sitemap"
-msgstr "Plan du site"
-
-#: templates/views/blocks/footer.phtml:28
-msgid "Recommended links"
-msgstr "Liens recommandés"
-
-#: templates/views/blocks/header.phtml:25
-msgid "your profile"
-msgstr "modifiez votre profile"
-
-#: templates/views/blocks/header.phtml:27
-msgid "go to admin panel"
-msgstr "Espace admin"
-
-#: templates/views/forms/article_comments.phtml:2
-msgid "Comments"
-msgstr "Commentaires"
-
-#: templates/views/forms/article_comments.phtml:12
-msgid "Be the first to post a comment."
-msgstr "Soyez le premier à poster un commentaire."
-
-#: templates/views/forms/article_comments.phtml:18
-msgid "Post comment"
-msgstr "Commenter"
-
-#: templates/views/forms/article_comments.phtml:21
-msgid "You must be logged in to post a comment."
-msgstr "Vous devez être connecté pour taper un commentaire."
-
-#~ msgid "Login"
-#~ msgstr "Se connecter"
-
-#~ msgid "Unexpected error while loading new article category."
-#~ msgstr "Erreur inattendue lors du chargement de la nouvelle catégorie."
-
-#~ msgid "Log for a list of connected users"
-#~ msgstr "Connectez-vous pour voir la liste d'utilisateurs"
-
-#~ msgid "See profile"
-#~ msgstr "Voir le profil"
-
-#~ msgid "Update user informations"
-#~ msgstr "Modifier les infos utilisateur"
-
-#~ msgid "Update your informations"
-#~ msgstr "Modifier vos informations"
-
-#~ msgid "Action"
-#~ msgstr "Action"
-
-#~ msgid "Birth date"
-#~ msgstr "Date de naissance"
-
-#~ msgid "Rules"
-#~ msgstr "Rôles"
-
-#~ msgid "Accueil"
-#~ msgstr "Home"
-
-#~ msgid "Téléchargements"
-#~ msgstr "Téléchargements"
-
-#~ msgid "Nous contacter"
-#~ msgstr "Nous contacter"
-
-#~ msgid "Se déconnecter"
-#~ msgstr "Se déconnecter"
-
-#~ msgid "Se connecter"
-#~ msgstr "Se connecter"
-
-#~ msgid "no"
-#~ msgstr "Non"
-
-#~ msgid "This is my footer"
-#~ msgstr "Ceci est mon pied de page"
+#: models/FragTale/cms/class.files.php:138
+msgid ""
+": file successfully transferred in server file system and its informations "
+"stored into the database."
+msgstr ": fichier transféré et archivé par le système."

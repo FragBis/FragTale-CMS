@@ -1,0 +1,30 @@
+<div class="fil-ariane"><?php echo _('DIVORCE FOR ALL - SEARCH');?></div>
+<input type="hidden" id="search" value="<?php echo $view->terms?>"/>
+<div class="news" id="search_result_container">
+	<h1><?php
+		if (strlen($view->terms) > 0) echo _('List of pages containing').' <em>&laquo;'.$view->terms.'&raquo;</em>';?>
+	</h1>
+	<?php
+	if (!empty($view->search_results)){
+		$i=1;
+		foreach ($view->search_results as $article){?>
+	<a href="<?php echo WEB_ROOT.'/'.$article['request_uri']?>">
+		<div class="news_elt">
+			<div class="search_result_elt">
+				<strong><?php echo $i?>.</strong>
+				<em><?php echo $article['article_title'];?></em>
+			</div>
+			<div class="search_result_elt desc"><?php echo $article['search_result'];?>...</div>
+		</div>
+	</a><?php
+			$i++;
+		}
+	}else{?>
+	<div class="news_elt italic bold" onclick="document.getElementById('search').focus();"><?php
+		if (strlen($view->terms) > 1)
+			echo _('There is no result.');
+		else
+			echo _('Please type your search with at least 2 signs.');?>
+	</div>
+	<?php }?>
+</div>

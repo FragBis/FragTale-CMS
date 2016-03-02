@@ -1,0 +1,20 @@
+<?php
+$view->addJS(WEB_ROOT.'/js/admin/article_lists.js');
+$view->addCSS(WEB_ROOT.'/css/admin/article_lists.css');
+?>
+<div class="block_user_info">
+	<h1><?php echo _('Content Hierarchy')?></h1>
+	<div class="article_lists_description">
+		<?php echo _('Here is the sitemap tree. All items are clickable and allow you to change each item content.');?><br>
+		<?php echo _('You can also create a new article for each category.');?>
+		<?php echo _('And you can define the content hierarchy by clicking the up/down arrows (and at last, by clicking the "Save" button).');?><br>
+	</div>
+	<br>
+	<div class="article_lists_cont">
+		<form method="post">
+			<h1><?php echo _('Editable Sitemap')?></h1>
+			<?php echo $view->tree;?>
+			<button type="submit" class="validate"><?php echo _('Save hierarchy')?></button>
+		</form>
+	</div>
+</div>

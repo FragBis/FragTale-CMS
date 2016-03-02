@@ -1,8 +1,10 @@
 <?php
-namespace Bonz\Controller\Admin\Article;
-use Bonz\Controller\Admin;
-use Bonz\CMS\Article;
-use Bonz\CMS\Article_Category;
+namespace FragTale\Controller\Admin\Article;
+use FragTale\Controller\Admin;
+use FragTale\CMS\Article;
+use FragTale\CMS\Article_Category;
+use FragTale\CMS\Files;
+//use FragTale\CMS\Article_Custom_Fields;
 
 
 /**
@@ -13,6 +15,7 @@ use Bonz\CMS\Article_Category;
 class Edit extends Admin{
 	
 	protected $aid;
+	//protected $custom_fields = array();
 	
 	function initialize(){
 		if (empty($_GET['aid']))
@@ -23,6 +26,18 @@ class Edit extends Admin{
 			$this->catchError($msg, __CLASS__, __FUNCTION__, __LINE__);
 			$this->addUserEndMsg('ERRORS', $msg);
 		}
+		
+		#Check whether if it's an article category
+		$Cat = $this->getArticle()->getCategory();
+		if (!empty($Cat->aid) && ($this->getArticle()->aid == $Cat->aid)){
+			$this->redirect(ADMIN_WEB_ROOT.'/article_category/edit?catid='.$this->getArticle()->getCategory()->catid);
+		}
+		
+		// if ALERT_SENT == false, display the sending button
+		/*$this->custom_fields['ALERT_SENT'] = array(
+				'input_type'=>'checkbox',
+				'field_name' => _('Send an email alert')
+		);*/
 	}
 	
 	/**
@@ -30,17 +45,43 @@ class Edit extends Admin{
 	 * @return boolean
 	 */
 	function doPostBack(){
-		if (!isset($_POST['upd']) && isset($_POST['historicize']) && isset($_POST['upd_historicize'])) return false;
+		#Delete article
+		if (isset($_POST['delete'])){
+			if ($this->_article->delete("aid=$this->aid")){
+				$this->addUserEndMsg('SUCCESS', _('Article successfully removed'));
+				$this->redirect(ADMIN_WEB_ROOT.'/articles?order=aid&desc=1');
+			}
+			else{
+				$this->addUserEndMsg('ERRORS', _('Error occured'));
+				$this->redirectToSelf();
+			}
+		}
+		if (!isset($_POST['upd']) && !isset($_POST['historicize']) && !isset($_POST['upd_historicize'])) return false;
 		$NewArticle = clone $this->_article;
 		#Update informations
-		if (isset($_POST['upd']) || isset($_POST['upd_historicize'])){
+		if (isset($_POST['upd'])){
 			$values = array();
 			foreach ($_POST as $key=>$value){
 				if (property_exists($this->_article, $key))
 					$values[$key] = $value;
 			}
+			
+			if (empty($_POST['article']['selected_fid'])){
+				#File upload
+				$Files = new Files();
+				if (!empty($_FILES['article'])){
+					if ($files = $Files->store($_FILES['article'])){
+						$keys = array_keys($files);
+						$values['fid'] = reset($keys);
+					}
+				}
+			}
+			else
+				$values['fid'] = $_POST['article']['selected_fid'];
+			unset($values['article']);
+			
 			$values['publish'] = !empty($values['publish']) ? 1 : 0;
-			$values['uid'] = $_SESSION['REG_USER']['uid'];
+			$values['uid'] = $this->getUser()->uid;
 			if (empty($values['catid']))
 				unset($values['catid']);
 			
@@ -65,9 +106,23 @@ class Edit extends Admin{
 	
 	function main(){
 		$this->_view->article_category = $this->_article->getCategory();
-		#Include Wysiwyg
-		$this->addJS(WEB_ROOT.'/js/wysiwyg.js');
 		$this->setTitle(_('Article edition'));
+		
+		# Get custom fields
+		/*$ArticleCustomFields = new Article_Custom_Fields();
+		$custom_fields = array();
+		if ($result = $ArticleCustomFields->select('aid='.$this->aid))
+			foreach ($result as $row){
+				$custom_fields[$row['field_key']] = $row;
+			}
+		foreach ($this->custom_fields as $field_key=>$values){
+			if (!isset($custom_fields[$field_key])){
+				$custom_fields[$field_key] = $values;
+			}
+		}
+		if (!isset($custom_fields['ALERT_SENT']['field_value']))
+			$custom_fields['ALERT_SENT']['field_value'] = false;
+		$this->_view->custom_fields = $custom_fields;*/
 	}
 	
 	/**

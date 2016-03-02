@@ -1,21 +1,32 @@
 <?php $isAdminAccess = ($view->getMetaView()->getViewName()=='admin/login');?>
 <form class="login-form" method="post">
 	<?php if ($isAdminAccess){?>
-	<h1><?php echo _('Admin only')?></h1>
+	<h1><?php echo _('Please login')?></h1>
+	<?php }else{?>
+	<p class="description aligncenter"><?php echo _('Please enter your login (nickname) and your password below')?></p>
 	<?php }?>
-	<div class="login-elt">
-		<label for="login"><?php echo _('Login:')?></label>
-		<input type="text" id="login" name="login" class="text login" />
+	<br>
+	<div class="margin">
+		<div>
+			<label for="login"><?php echo _('Nickname')?></label>
+			<input type="text" id="login" name="login" class="text medium login" autofocus />
+		</div>
+		<br>
+		<div>
+			<label for="pwd"><?php echo _('Password')?></label>
+			<input type="password" id="pwd" name="pwd" class="text medium pwd" />
+			<button type="submit" class="validate"><?php echo _('Submit')?></button>
+		</div>
+		<br><br>
+		<div>
+			<?php if (!$isAdminAccess){?>
+			<a href="<?php echo WEB_ROOT.'/register'; ?>" class="register"><?php echo _('Not registered yet?');?></a>
+			<?php }else{?>
+			<a href="<?php echo WEB_ROOT;?>" class="register"><?php echo _('Back to home page')?></a>
+			<?php }?>
+			<div style="float:right">
+				<a href="<?php echo WEB_ROOT.'/password_recovery';?>" class="register"><?php echo _('I\'ve forgot my password');?></a>
+			</div>
+		</div>
 	</div>
-	<div class="login-elt">
-		<label for="pwd"><?php echo _('Password:')?></label>
-		<input type="password" id="pwd" name="pwd" class="text pwd" />
-	</div>
-	<div class="login-elt">
-		<button type="submit" class="validate"><?php echo _('Submit')?></button>
-	</div>
-	<div class="register"><a href="<?php echo WEB_ROOT."/register"; ?>"><?php echo _('Not registred yet?');?></a></div>
 </form>
-<script>
-	document.getElementById('login').focus();
-</script>

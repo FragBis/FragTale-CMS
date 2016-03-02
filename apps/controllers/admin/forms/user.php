@@ -1,7 +1,7 @@
 <?php
-namespace Bonz\Controller\Admin\Forms;
-use Bonz\Controller\Admin;
-use Bonz\CMS\Role;
+namespace FragTale\Controller\Admin\Forms;
+use FragTale\Controller\Admin;
+use FragTale\CMS\Role;
 
 /**
  * 

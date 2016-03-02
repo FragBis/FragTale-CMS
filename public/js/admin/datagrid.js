@@ -22,9 +22,9 @@ var CriteriasCollection = {
 		return search;
 	},
 	getLocation: function(){
-		return document.location.protocol  + '//' + document.location.host + document.location.pathname + this.getSearch();
+		return document.location.protocol  + '//' + document.location.host.trim('/') + '/' + document.location.pathname.trim('/') + '/' + this.getSearch();
 	}
-}
+};
 $(function(){
 	$('.datagrid').each(function(){
 		//On click row = go to edit page
@@ -34,7 +34,7 @@ $(function(){
 			var key_name= exp[0];
 			var obj_id	= exp[1];
 			var target_object = $(this).attr('object');
-			document.location = ADMIN_WEB_ROOT + '/' + target_object + '/edit?' + key_name + '=' + obj_id;
+			document.location = ADMIN_WEB_ROOT.trim('/') + '/' + target_object.trim('/') + '/edit?' + key_name + '=' + obj_id;
 		});
 		
 		/**	Criterias **/
@@ -52,6 +52,7 @@ $(function(){
 		
 	});
 	$('.gridcount').change(function(){
+		BoN.Cookie.set('gridcount', this.value);
 		CriteriasCollection.count = this.value;
 		document.location = CriteriasCollection.getLocation();
 	});
@@ -59,4 +60,7 @@ $(function(){
 		CriteriasCollection.page = this.value;
 		document.location = CriteriasCollection.getLocation();
 	});
+	/*if (!document.location.href.getSearch('count')){
+		$('.gridcount').val(BoN.Cookie.get('gridcount'));
+	}*/
 });

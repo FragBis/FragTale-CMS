@@ -1,7 +1,7 @@
 <?php
-namespace Bonz\Controller\Cms;
-use Bonz\Controller;
-use Bonz\CMS\Article;
+namespace FragTale\Controller\Cms;
+use FragTale\Controller;
+use FragTale\CMS\Article;
 
 /**
  * @author fabrice
@@ -9,10 +9,11 @@ use Bonz\CMS\Article;
 class _Default extends Controller{
 	function main(){
 		if (empty($this->_article->aid)){
-			$this->_article = new Article();
 			$request_uri = $this->_article->escape(trim($_GET['my_current_view'], '/'));
 			$this->_article->load("request_uri='$request_uri'");
 		}
 		$this->setTitle($this->_article->title);
+		$this->_view->restricted = !$this->checkRules();
+		if (!empty($_REQUEST['clean'])) $this->setLayout('clean');
 	}
 }

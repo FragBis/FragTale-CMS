@@ -1,11 +1,12 @@
 <?php if (!empty($view->users)){?>
+<h1><?php echo _('Registered users:')?></h1>
 <div class="grid_container">
-	<h1><?php echo _('Registered users:')?></h1>
+	<a class="add_new" href="<?php echo ADMIN_WEB_ROOT?>/user/create"title="<?php echo _('Add')?>">+</a>
 	<?php echo $view->getBlock('admin/elements/datagrid_searches')?>
 	<table id="users_grid" class="datagrid">
 		<thead>
 			<tr>
-				<?php foreach (array('uid'=>'UID', 'login'=>_('Pseudo'), 'email'=>_('E-mail'),
+				<?php foreach (array('uid'=>'UID', 'login'=>_('Login'), 'email'=>_('E-mail'),
 						'lastname'=>_('Last name'), 'firstname'=>_('First name')) as $field=>$title){?>
 				<th><a href="#" id="field_<?php echo $field?>" class="<?php if (!empty($_GET['order']) && $_GET['order']==$field) echo 'current';?>"><?php echo $title?></a></th>
 				<?php }?>
@@ -29,5 +30,4 @@
 <?php }else{?>
 <h1><?php echo _('No users found')?></h1>
 <?php }?>
-
-<a class="add_new" href="<?php echo ADMIN_WEB_ROOT?>/user/create"><?php echo _('Add')?></a>
+<a class="add_new" href="<?php echo ADMIN_WEB_ROOT?>/user/create"title="<?php echo _('Add')?>">+</a>

@@ -1,0 +1,8 @@
+<?php if (!empty($view->inbox)){?>
+<div class="inbox-count">
+	<a href="<?php echo ADMIN_WEB_ROOT;?>/messages">
+		<img src="<?php echo WEB_ROOT?>/img/inbox.png" />
+		<span><?php echo sprintf(_('%d unread message(s)'), $view->inbox)?></span>
+	</a>
+</div>
+<?php }?>

@@ -1,6 +1,6 @@
 <?php
-namespace Bonz\Controller\Blocks;
-use Bonz\Controller;
+namespace FragTale\Controller\Blocks;
+use FragTale\Controller;
 
 /**
  * @author fabrice

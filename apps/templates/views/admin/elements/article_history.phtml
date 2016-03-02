@@ -1,0 +1,52 @@
+<?php if ($history = $view->getMetaView()->getArticle()->getHistory()){?>
+<div class="article_history">
+	<a id="open_history_box" class="bon_toggler vertical" target="history_box" href="#open_history_box"><?php echo _('Show/hide history')?></a>
+	<div id="history_box" class="collapsed">
+		<table id="article_history" class="datagrid">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th><?php echo _('Date')?></th>
+					<th><?php echo _('Url alias')?></th>
+					<th><?php echo _('Title')?></th>
+					<th><?php echo _('Summary')?></th>
+					<th><?php echo _('Greeting text')?></th>
+					<th><?php echo _('Signature')?></th>
+					<?php if ($view->userIsAdmin()){?>
+					<th><?php echo _('Action')?></th>
+					<?php }?>
+				</tr>
+			</thead>
+			<tbody>
+				<?php foreach ($history as $i=>$oldArticle){
+					$hoverText =
+							_('User ID:').' '.$oldArticle['uid']."\n".
+							_('Category ID:').' '.$oldArticle['catid']."\n".
+							_('Layout:').' '.$oldArticle['view']."\n".
+							_('Access level:').' '.$oldArticle['access'];?>
+				<tr class="<?php echo $i%2 ? '' : 'iter'?> ahid_<?php echo $oldArticle['ahid']?>" title="<?php echo htmlentities($hoverText)?>">
+					<td><?php echo count($history)-$i?></td>
+					<td><?php echo date(_('Y-m-d H:i'), strtotime($oldArticle['edit_date']))?></td>
+					<td><?php echo $oldArticle['request_uri']?></td>
+					<td><?php echo $oldArticle['title']?></td>
+					<td>
+						<?php echo $oldArticle['summary']?>
+						<div class="hidden body_text_content">
+							<?php echo htmlentities($oldArticle['body'])?>
+						</div>
+						<div class="hidden body_html_content">
+							<?php echo $oldArticle['body']?>
+						</div>
+					</td>
+					<td><?php echo htmlentities($oldArticle['greeting_text'])?></td>
+					<td><?php echo $oldArticle['signature']?></td>
+					<?php if ($view->userIsAdmin()){?>
+					<td><button class="delete archive" value="<?php echo $oldArticle['ahid']?>"><?php echo _('Del.')?></button></td>
+					<?php }?>
+				</tr>
+				<?php }?>
+			</tbody>
+		</table>
+	</div>
+</div>
+<?php }?>

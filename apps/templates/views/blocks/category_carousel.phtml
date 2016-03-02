@@ -1,0 +1,23 @@
+<div class="main_category">
+	<ul class="carrousel">
+	<?php foreach ($view->categories as $category){
+		if (empty($category['data']['publish'])) continue;
+		$isCurrent = $category['data']['catid']==$view->getMetaView()->getArticle()->catid;
+		if (!$isCurrent)
+		foreach ($category['children'] as $subcategory){
+			if ($subcategory['data']['catid']==$view->getMetaView()->getArticle()->catid){
+				$isCurrent = true;
+				break;
+			}
+		}?>
+		<li class="<?php if ($isCurrent) echo 'current';?>">
+			<a href="<?php echo WEB_ROOT.'/'.$category['data']['request_uri'];?>">
+				<?php if (!empty($category['data']['image_filepath'])){?>
+				<img class="<?php if ($isCurrent) echo 'current';?>" src="<?php echo WEB_ROOT.$category['data']['image_filepath'] ;?>" alt="<?php echo $category['data']['label']?>" />
+				<?php }?>
+				<span><?php echo $category['data']['name'];?></span>
+			</a>
+		</li>
+	<?php }?>
+	</ul>
+</div>

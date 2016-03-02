@@ -1,9 +1,9 @@
 <?php
-namespace Bonz\Controller\Admin\Forms;
-use Bonz\Controller\Admin;
-use Bonz\CMS\Role;
-use Bonz\CMS\Article_Category as CMS_CAT;
-use Bonz\CMS\User;
+namespace FragTale\Controller\Admin\Forms;
+use FragTale\Controller\Admin;
+use FragTale\CMS\Role;
+use FragTale\CMS\Article_Category as CMS_CAT;
+use FragTale\CMS\User;
 
 /**
  * @author fabrice
@@ -41,7 +41,7 @@ class Article_Category extends Admin{
 			return $views;
 		}
 		else{
-			\Bonz\Application::catchError('Missing required directory '.$dir, __CLASS__, __FUNCTION__, __LINE__);
+			\FragTale\Application::catchError('Missing required directory '.$dir, __CLASS__, __FUNCTION__, __LINE__);
 			return array();
 		}
 	}

@@ -8,7 +8,7 @@
 	</head>
 	
 	<body class="<?php echo $myCurrentView = str_replace('/', ' ', $view->getViewName());?> <?php
-		$getMyCurrentView = str_replace('/', ' ', $_GET['my_current_view']);
+		$getMyCurrentView = isset($_GET['my_current_view']) ? str_replace('/', ' ', $_GET['my_current_view']) : '';
 		if ($myCurrentView!=$getMyCurrentView) echo $getMyCurrentView;?>">
 		<div class="page">
 		

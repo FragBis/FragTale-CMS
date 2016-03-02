@@ -1,6 +1,7 @@
 <?php if (!empty($view->articles)){?>
+<h1><?php echo _('Registered articles:')?></h1>
 <div class="grid_container">
-	<h1><?php echo _('Registered articles:')?></h1>
+	<a class="add_new" href="<?php echo ADMIN_WEB_ROOT?>/article/create" title="<?php echo _('Add')?>">+</a>
 	<?php echo $view->getBlock('admin/elements/datagrid_searches');?>
 	<table id="articles_grid" class="datagrid">
 		<thead>
@@ -31,5 +32,4 @@
 <?php }else{?>
 <h1><?php echo _('No articles found')?></h1>
 <?php }?>
-
-<a class="add_new" href="<?php echo ADMIN_WEB_ROOT?>/article/create"><?php echo _('Add')?></a>
+<a class="add_new" href="<?php echo ADMIN_WEB_ROOT?>/article/create" title="<?php echo _('Add')?>">+</a>

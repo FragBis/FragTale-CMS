@@ -1,0 +1,50 @@
+<?php $view->addJS(WEB_ROOT.'/js/admin/talks.js')?>
+<div class="bgNoteLines">
+	<h1><?php echo _('Talks')?></h1>
+	<?php foreach ($view->allMsgs as $block){
+		$uid = $block['user']['uid'];?>
+	<div id="with_<?php echo $uid?>" class="talks_block">
+		<div class="private_talks_header">
+			<a href="#form-msg" class="reply_to" title="<?php echo sprintf(_('Reply to %s'), $block['user']['login'])?>" >
+				<img src="<?php echo WEB_ROOT?>/img/reply.png"/>
+				<input type="hidden" class="user_id" value="<?php echo $uid?>" />
+			</a>
+			<div class="bon_toggler vertical" target="uid_<?php echo $uid?>">
+				<?php echo $block['user']['login'];?>
+			</div>
+			<?php if ($block['unread']>0){?>
+			<span class="unread_message"><span class="unread_count"><?php echo $block['unread']?></span> <?php echo _('unread message(s)')?></span>
+			<?php }?>
+		</div>
+		<div class="private_talks collapsed" id="uid_<?php echo $uid?>">
+		<?php foreach ($block['messages'] as $msg){
+			$wasSent= $msg['sender_id']==$view->getUser()->uid;
+			$unread	= !$wasSent && !$msg['opened'];?>
+			<div class="letter <?php echo $wasSent ? 'outbox' : 'inbox'?>">
+				<div class="date description bon_toggler vertical <?php if ($unread) echo 'unread'?>" target="mid_<?php echo $msg['mid']?>"><?php echo date(_('Y-m-d H:i'), strtotime($msg['send_date']))?></div>
+				<div class="message collapsed" id="mid_<?php echo $msg['mid']?>">
+					<?php echo $msg['body']?>
+				</div>
+			</div>
+		<?php }?>
+		</div>
+	</div>
+	<?php }?>
+	<br>
+	<form method="post" id="form-msg">
+		<h1 class="description"><?php echo _('Send new message')?></h1>
+		<label for="recipient"><?php echo _('To:')?></label>
+		<select id="recipient" name="recipient_id" class="mandatory">
+			<option value="">-- <?php echo _('Choose a recipient')?> --</option>
+			<?php foreach ($view->allUsers as $usr){?>
+			<option value="<?php echo $usr['uid']?>"><?php echo $usr['login']?></option>
+			<?php }?>
+		</select>
+		<br>
+		<label for="body"><?php echo _('Message:')?></label>
+		<textarea class="ckeditor" name="body"></textarea>
+		<div class="buttons">
+			<button type="submit" class="validate" name="new_msg"><?php echo _('Send')?></button>
+		</div>
+	</form>
+</div>

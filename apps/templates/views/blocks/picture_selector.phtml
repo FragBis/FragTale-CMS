@@ -1,0 +1,30 @@
+<?php
+$view->addCSS(WEB_ROOT.'/css/picture_selector.css');
+$view->addJS(WEB_ROOT.'/js/jquery.min.js');
+$view->addJS(WEB_ROOT.'/js/bon.js');
+$view->addJS(WEB_ROOT.'/js/picture_selector.js');
+
+$max = !empty($view->nbmax) ? $view->nbmax : 15;
+if(!empty($view->pictures)){?>
+<script type="text/javascript">
+	var AllPictures = <?php echo json_encode($view->pictures);?>;
+</script>
+<?php }?>
+<div class="image_library">
+	<div class="img_search">
+		<input type="text" class="text img_search_input" placeholder="<?php echo _('Filter by filename...')?>" />
+	</div>
+	<div class="image_results">
+		<div class="image_no_result"><?php echo _('No results...')?></div>
+		<?php for ($i=0; $i<$max; $i++){?>
+		<div class="image_library_cont ">
+			<img class="image_library_result" />
+			<div class="filename description"></div>
+		</div>
+		<?php }?>
+	</div>
+	<div class="image_library_arrows">
+		<span class="image_library_arrow_previous" title="<?php echo _('Previous')?>"></span>
+		<span class="image_library_arrow_next" title="<?php echo _('Next')?>"></span>
+	</div>
+</div>

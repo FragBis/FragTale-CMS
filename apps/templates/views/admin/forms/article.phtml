@@ -1,121 +1,151 @@
 <?php 
+use FragTale\CMS\Article_Category;
+use FragTale\CMS\Article;
 $article = $view->getMetaView()->getArticle();
 $article_category = $view->getMetaView()->article_category;
-$inCreation = empty($article->aid);?>
+$inCreation = empty($article->aid);
+$getcatid = !empty($_GET['catid']) ? $_GET['catid'] : false;?>
 <div class="form-content">
-	<table>
-		<?php if (!$inCreation){?>
-		<tr>
-			<?php if ($view->userIsAdmin()){?>
-			<td><label><?php echo _('Article ID')?></label></td>
-			<td><?php echo $article->aid?>&nbsp;&nbsp;&nbsp;<a class="description" href="<?php echo WEB_ROOT.'/'.$article->request_uri;?>">(<span class="underline"><?php echo _('go to front page')?></span>)</a></td>
+	<?php if (!$inCreation){?>
+	<div class="description alignright">
+		<?php echo _('Edited on')?> <label><?php echo date('d/m/Y H:i', strtotime($article->edit_date));?></label>
+		<br>
+		<?php echo _('By')?> <label><?php echo $view->author->login;?></label>
+	</div>
+	<div class="form-elt">
+		<div class="form-label mobile-stayinline">
+			<label><?php echo _('Article ID')?></label>
+		</div>
+		<div class="form-input mobile-stayinline">
+			<?php echo $article->aid?>&nbsp;&nbsp;&nbsp;
+			<a class="add_new" href="<?php echo WEB_ROOT.'/'.$article->request_uri;?>">
+				<?php echo _('go to front page')?>
+			</a>
+		</div>
+	</div>
+	<?php }?>
+	
+	<div class="form-elt">
+		<div class="form-label">
+			<label for="title"><?php echo _('Title')?>*</label>
+		</div>
+		<div class="form-input">
+			<input type="text" id="title" name="title" class="text long mandatory" maxlength="128" value="<?php if (!empty($article->title)) echo $article->title;?>" required />
+			<div class="description">
+				128 <?php echo _('characters max.')?>
+				<?php echo _('No HTML tags.')?>
+			</div>
+		</div>
+	</div>
+	
+	<div class="form-elt">
+		<div class="form-label">
+			<label for="category"><?php echo _('Category')?></label>
+		</div>
+		<div class="form-input">
+			<?php if (!$getcatid){?>
+			<select id="category" name="catid">
+				<option value=""><?php echo _('None')?></option>
+				<?php echo $view->htmlOptGroupCategories?>
+			</select>
+			<?php }else{
+				if ($inCreation && $getcatid){
+					$Cat = new Article_Category();
+					$Cat->load('catid='.$getcatid);
+					$catname = $Cat->name;
+				}
+				else{
+					$catname = !empty($article_category->name) ? $article_category->name : _('None');
+				}
+				echo $catname;?>
+			<input type="hidden" name="catid" value="<?php echo $getcatid?>" />
 			<?php }?>
-			<td>
-				<table class="description">
-					<tr>
-						<td class="alignright"><?php echo _('Edited on')?></td>
-						<td><label><?php echo date('d/m/Y H:i', strtotime($article->edit_date));?></label></td>
-					</tr>
-					<tr>
-						<td class="alignright"><?php echo _('By')?></td>
-						<td><label><?php echo $view->author->login;?></label></td>
-					</tr>
-				</table>
-			</td>
-		</tr>
-		<?php }?>
-		<tr>
-			<td><label for="title"><?php echo _('Title')?>*</label></td>
-			<td>
-				<input type="text" id="title" name="title" class="text long mandatory" maxlength="128" value="<?php if (!empty($article->title)) echo $article->title;?>" />
-				<div class="description">
-					128 <?php echo _('characters max.')?>
-					<?php echo _('No HTML tags.')?>
-				</div>
-			</td>
-		</tr>
-		<tr>
-			<td class="aligntop"><label for="summary"><?php echo _('Summary')?>*</label></td>
-			<td><textarea id="summary" name="summary" class="short mandatory" maxlength="255"><?php if (!empty($article->summary)) echo $article->summary;?></textarea></td>
-			<td class="aligntop description" colspan="2">
+		</div>
+	</div>
+	
+	<div class="form-elt">
+		<div class="form-label">
+			<label for="summary"><?php echo _('Summary')?></label>
+		</div>
+		<div class="form-input">
+			<textarea id="summary" name="summary" class="medium" maxlength="255"><?php
+				if (!empty($article->summary)) echo $article->summary;
+			?></textarea>
+			<div class="description">
 				255 <?php echo _('characters max.')?>
-				<br /><br />
+				<br>
 				<?php echo _('Must contain a little summary that will be displayed into the "latest news" box.')?>
-			</td>
-		</tr>
-		
-		<tr>
-			<td><label for="category"><?php echo _('Category')?></label></td>
-			<td>
-				<select id="category" name="catid">
-					<option value=""><?php echo _('None')?></option>
-					<?php foreach ($view->article_categories as $category){?>
-					<option value="<?php echo $category['catid']?>" <?php if ($article->catid==$category['catid']) echo 'selected'?>><?php echo $category['name']?></option>
-					<?php }?>
-				</select>
-			</td>
-		</tr>
-		<?php if ($view->userIsAdmin()){?>
-		<tr>
-			<td><label for="access"><?php echo _('Access level')?></label></td>
-			<td>
-				<input type="number" id="access" name="access" class="text number short" min="0" max="4" value="<?php if (!empty($article->access)) echo $article->access;?>" />
-				<div class="description">
-					<?php echo _('Degree of accessibility: 1=Only for super-admin, 2=For administrators, empty=access for all')?>
-				</div>
-			</td>
-		</tr>
-		<?php }?>
-		<tr>
-			<td><label for="request_uri"><?php echo _('Url alias')?>*</label></td>
-			<td>
-				<input type="text" id="request_uri" name="request_uri" class="text medium mandatory" maxlength="255" value="<?php if (!empty($article->request_uri)) echo $article->request_uri;?>" />
-				<div class="description" colspan="2">
-					255 <?php echo _('characters max.')?>
-					<br />
-					<?php echo _('Url alias must be unique for each article.')?>
-				</div>
-			</td>
-		</tr>
-		<tr>
-			<td><label for="view"><?php echo _('View template')?>*</label></td>
-			<td>
-				<select id="view" name="view" class="mandatory">
-					<option></option>
-					<?php foreach ($view->cms_views as $tplView){?>
-					<option value="<?php echo $tplView?>" <?php if (!empty($article->view) && $tplView==$article->view) echo 'selected';?>><?php echo $tplView?></option>
-					<?php }?>
-				</select>
-				<div class="description" colspan="2">
-					<?php echo _('These layouts are stored in "apps/templates/views/cms".')?>
-				</div>
-			</td>
-		</tr>
-		<tr>
-			<td class="aligntop"><label for="body"><?php echo _('Body')?></label></td>
-			<td><textarea id="body" name="body" class="long"><?php if (!empty($article->body)) echo $article->body;?></textarea></td>
-		</tr>
-		<tr>
-			<td class="aligntop"><label for="greeting_text"><?php echo _('Greeting text')?></label></td>
-			<td><textarea id="greeting_text" name="greeting_text" class="short"><?php if (!empty($article->greeting_text)) echo $article->greeting_text;?></textarea></td>
-			<td class="aligntop description" colspan="2">
-				200 <?php echo _('characters max.')?>
-				<br /><br />
-				<?php echo _('A litle ending message such as "Cheers!".')?>
-			</td>
-		</tr>
-		<tr>
-			<td class="aligntop"><label for="signature"><?php echo _('Signature')?></label></td>
-			<td><textarea id="signature" name="signature" class="short madatory"><?php echo !empty($article->signature) ? $article->signature : ($inCreation ? $_SESSION['REG_USER']['login'] : '');?></textarea></td>
-			<td class="aligntop description" colspan="2">
-				100 <?php echo _('characters max.')?>
-				<br /><br />
-				<?php echo _('Author signature.')?>
-			</td>
-		</tr>
-		<tr>
-			<td><label for="publish"><?php echo _('Published')?></label></td>
-			<td><input type="checkbox" id="publish" name="publish" <?php if (!empty($article->publish)) echo 'checked="checked"';?> /></td>
-		</tr>
-	</table>
+			</div>
+		</div>
+	</div>
+	
+	<?php if ($view->userIsSuperAdmin()){?>
+	<div class="form-elt">
+		<div class="form-label">
+			<label for="access"><?php echo _('Access level')?></label>
+		</div>
+		<div class="form-input">
+			<input type="number" id="access" name="access" class="text number short" min="0" max="4" value="<?php if (!empty($article->access)) echo $article->access;?>" />
+			<div class="description">
+				<?php echo _('Degree of accessibility: 1=Only for super-admin, 2=For administrators, empty=access for all')?>
+			</div>
+		</div>
+	</div>
+	<?php }?>
+	
+	<div class="form-elt">
+		<div class="form-label">
+			<label for="request_uri"><?php echo _('Url alias')?>*</label>
+		</div>
+		<div class="form-input">
+			<input type="text" id="request_uri" name="request_uri" class="text medium mandatory" maxlength="255" value="<?php if (!empty($article->request_uri)) echo $article->request_uri;?>" required />
+			<div class="description">
+				255 <?php echo _('characters max.')?>
+				<br />
+				<?php echo _('Url alias must be unique for each article.')?>
+			</div>
+		</div>
+	</div>
+	
+	<div class="form-elt">
+		<div class="form-label">
+			<label for="view"><?php echo _('View template')?>*</label>
+		</div>
+		<div class="form-input">
+			<select id="view" name="view" class="mandatory">
+				<option></option>
+				<?php foreach ($view->cms_views as $tplView){?>
+				<option value="<?php echo $tplView?>" <?php if (!empty($article->view) && $tplView==$article->view) echo 'selected';?>><?php echo $tplView?></option>
+				<?php }?>
+			</select>
+			<div class="description">
+				<?php echo _('These layouts are stored in "apps/templates/views/cms".')?>
+			</div>
+		</div>
+	</div>
+	
+	<div class="form-elt">
+		<div class="form-label"><label for="article_fid"><?php echo _('Main picture')?></label></div>
+		<div class="form-input">
+			<!-- Block include for file upload -->
+			<?php $view->file_upload = array('fid'=>$article->fid, 'object_name'=>'article');?>
+			<?php echo $view->getBlock('admin/elements/file_upload')?>
+		</div>
+	</div>
+	
+	<div class="form-elt">
+		<div>
+			<label for="body"><?php echo _('Body')?></label>
+			<textarea id="body" name="body" class="long ckeditor"><?php if (!empty($article->body)) echo $article->body;?></textarea>
+		</div>
+	</div>
+	
+	<div class="form-elt">
+		<div class="form-label mobile-stayinline">
+			<label for="publish"><?php echo _('Published')?></label>
+		</div>
+		<div class="form-input mobile-stayinline">
+			<input type="checkbox" id="publish" name="publish" <?php if (!empty($article->publish)) echo 'checked="checked"';?> />
+		</div>
+	</div>
 </div>

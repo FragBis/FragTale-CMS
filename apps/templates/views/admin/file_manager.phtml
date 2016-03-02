@@ -19,17 +19,16 @@
 				<td><?php echo $file['filename']?></td>
 				<td><?php echo $file['mime_type']?></td>
 				<td>
+					<?php if (stripos($file['mime_type'], 'image')!==false){?>
 					<div class="pic_toggle">
-						<div class="toggle_open"><?php echo _('Visualize')?></div>
-						<div class="toggle_preview">
+						<div class="bon_toggler" target="fid_<?php echo $file['fid']?>"><?php echo _('Visualize')?></div>
+						<div id="fid_<?php echo $file['fid']?>" class="collapsed">
 							<div><em><?php echo $file['filename']?></em></div>
-							<?php if (stripos($file['mime_type'], 'image')===false){?>
-							<object class="preview" type="<?php echo $file['mime_type']?>" data="<?php echo WEB_ROOT.'/'.$file['path'];?>"></object>
-							<?php }else{?>
 							<img class="preview" src="<?php echo WEB_ROOT.'/'.$file['path'];?>" />
-							<?php }?>
 						</div>
-					</div>
+					</div><?php
+					}
+					else echo _('N/A');?>
 				</td>
 				<td class="center">
 					<input type="checkbox" name="delete[<?php echo $file['fid']?>]" />
@@ -37,29 +36,36 @@
 			</tr>
 			<?php }?>
 		</tbody>
+		<tr class="iter">
+			<td colspan="4"></td>
+			<td class="aligncenter">
+				<button type="submit" class="validate delete" onclick="return confirm('<?php echo _('Confirm this action');?>');"><?php echo _('Del.')?></button>
+			</td>
+		</tr>
 	</table>
-	<div class="buttons">
-		<button type="submit" class="validate" onclick="return confirm('<?php echo _('Confirm this action');?>');"><?php echo _('Delete')?></button>
-	</div>
 </form>
+<br><br>
 <?php }?>
 
 <!-- Upload de fichier -->
-<form method="post" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data" class="multiple_file_upload">
 	<h1><?php echo _('Upload and list new files')?></h1>
-	<div id="files">
-		<input type="file" class="text file" name="file[0]" />
+	<div class="vignettes_container">
+		<div class="vignette">
+			<div class="pic_cont">
+				<label>
+					<?php echo _('Please click or drop your file here.');?>
+				</label>
+				<input type="file" name="file[]" class="file "/>
+			</div>
+		</div>
 	</div>
-	<div style="margin-top: 10px;">
-		<a class="validate add_file_input">+</a>
-	</div>
-	<div class="buttons">
-		<button type="submit" class="add_new" name="upload" onclick="return confirm('<?php echo _('Confirm this action');?>');"><?php echo _('Upload')?></button>
-	</div>
+	<button type="submit" class="add_new validate upd" name="upload"><?php echo _('Upload')?></button>
 </form>
 
-
+<?php if ($view->userIsSuperAdmin()){?>
 <?php if (!empty($view->files['not_in_db'])){?>
+<br><br>
 <form method="post">
 	<h1><?php echo _('Physical files that are not registered into the database')?></h1>
 	<table class="datagrid">
@@ -82,28 +88,30 @@
 				<td><?php echo $path?></td>
 				<td>
 					<div class="pic_toggle">
-						<div class="toggle_open"><?php echo _('Visualize')?></div>
-						<div class="toggle_preview">
+						<?php if ($isImg){?>
+						<div class="bon_toggler" target="file_<?php echo $filename?>"><?php echo _('Visualize')?></div>
+						<div id="file_<?php echo $filename?>" class="collapsed">
 							<div><em><?php echo $filename?></em></div>
-							<?php if ($isImg){?>
 							<img class="preview" src="<?php echo WEB_ROOT.'/'.$path;?>" />
-							<?php }else{?>
-							<object class="preview" type="<?php echo $type?>" data="<?php echo WEB_ROOT.'/'.$path;?>"></object>
-							<?php }?>
 						</div>
+						<?php }else echo _('N/A')?>
 					</div>
 				</td>
 			</tr>
 			<?php }?>
 		</tbody>
+		<tr class="iter">
+			<td colspan="2"></td>
+			<td class="aligncenter">
+				<a class="add_new validate" href="<?php echo ADMIN_WEB_ROOT?>/file_manager/diffs"><?php echo _('Manage')?></a>
+			</td>
+		</tr>
 	</table>
-	<div class="buttons">
-		<a class="validate" href="<?php echo ADMIN_WEB_ROOT?>/file_manager/diffs"><?php echo _('Manage')?></a>
-	</div>
 </form>
 <?php }?>
 
 <?php if (!empty($view->files['not_in_dir'])){?>
+<br><br>
 <form method="post">
 	<h1><?php echo _('Files in database that are not physically presents')?></h1>
 	<table class="datagrid">
@@ -123,14 +131,23 @@
 			</tr>
 			<?php }?>
 		</tbody>
+		<tr class="iter">
+			<td colspan="2"></td>
+			<td class="aligncenter">
+				<a class="add_new validate" href="<?php echo ADMIN_WEB_ROOT?>/file_manager/diffs"><?php echo _('Manage')?></a>
+			</td>
+		</tr>
 	</table>
-	<div class="buttons">
-		<a class="validate" href="<?php echo ADMIN_WEB_ROOT?>/file_manager/diffs"><?php echo _('Manage')?></a>
-	</div>
 </form>
 <?php }?>
+
 <?php if (empty($view->files['not_in_dir']) && empty($view->files['not_in_db'])){?>
-<a class="validate" href="<?php echo ADMIN_WEB_ROOT?>/file_manager/diffs">>><?php echo _('Check for unregistered files')?></a>
-<br /><br />
-<span class="user_end_warning"><?php echo _('Be aware that this process can take a while if your database is huge.')?></span>
+<div class="description" style="margin-top: 5em">
+	<h1><?php echo _('Check for unregistered files')?></h1>
+	<a class="add_new validate" href="<?php echo ADMIN_WEB_ROOT?>/file_manager/diffs">>>Go</a>
+	<br /><br />
+	<span class="user_end_warning"><?php echo _('Be aware that this process can take a while if your database is huge.')?></span>
+</div>
+<?php }?>
+
 <?php }?>

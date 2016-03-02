@@ -1,45 +1,5 @@
-<h1><?php echo _('Common informations')?></h1>
-<?php if (!empty($view->newUsers)){?>
-<div>
-	<p>
-		<?php echo sprintf(_('There are %s new USERS registered from these last 10 days.'), count($view->newUsers))?>
-		<a class="user_end_success" href="<?php echo ADMIN_WEB_ROOT?>/users?order=cre_date&direction=desc">>><?php echo _('See')?></a>
-	</p>
-</div>
-<?php }?>
-
-<?php if (!empty($view->newCategories)){?>
-<div>
-	<p>
-		<?php echo sprintf(_('There are %s new CATEGORIES registered from these last 10 days.'), count($view->newCategories))?>
-		<a class="user_end_success" href="<?php echo ADMIN_WEB_ROOT?>/articles?order=aid&direction=desc">>><?php echo _('See')?></a>
-	</p>
-</div>
-<?php }?>
-
-<?php if (!empty($view->newArticles)){?>
-<div>
-	<p>
-		<?php echo sprintf(_('There are %s new ARTICLES registered from these last 10 days.'), count($view->newArticles))?>
-		<a class="user_end_success" href="<?php echo ADMIN_WEB_ROOT?>/articles?order=aid&direction=desc">>><?php echo _('See')?></a>
-	</p>
-</div>
-<?php }?>
-
-<?php if (!empty($view->files['not_in_db'])){?>
-<div>
-	<p>
-		<?php echo sprintf(_('There are %s files in uploads folder that are not registered in the database.'), count($view->files['not_in_db']))?>
-		<a class="user_end_warning validate" href="<?php echo ADMIN_WEB_ROOT?>/file_manager">>><?php echo _('Go manage them')?></a>
-	</p>
-</div>
-<?php }?>
-
-<?php if (!empty($view->files['not_in_dir'])){?>
-<div>
-	<p>
-		<?php echo sprintf(_('There are %s files registered in the database that are not in the uploads folder.'), count($view->files['not_in_dir']))?>
-		<a class="user_end_warning validate" href="<?php echo ADMIN_WEB_ROOT?>/file_manager">>><?php echo _('Go manage them')?></a>
-	</p>
-</div>
-<?php }?>
+<?php
+echo $view->getBlock('admin/blocks/common_infos');
+echo $view->getBlock('admin/elements/user_info');
+if ($view->userCanEditArticles())
+	echo $view->getBlock('admin/blocks/article_lists');

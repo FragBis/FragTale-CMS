@@ -1,8 +1,8 @@
 <?php
-namespace Bonz\Controller\Admin\File_Manager;
-use Bonz\Controller\Admin;
-use Bonz\CMS\Parameter;
-use Bonz\CMS\Files;
+namespace FragTale\Controller\Admin\File_Manager;
+use FragTale\Controller\Admin;
+use FragTale\CMS\Parameters;
+use FragTale\CMS\Files;
 
 /**
  * @author fabrice
@@ -52,7 +52,7 @@ class Diffs extends Admin{
 				$this->_view->files['not_in_dir'][] = $file;
 		}
 		
-		$param = new Parameter();
+		$param = new Parameters();
 		if (!$param->load("param_key='FILES_NOT_IN_DB'"))
 			$param->insert(array('param_key'=>'FILES_NOT_IN_DB', 'param_value'=>serialize($this->_view->files['not_in_db'])));
 		else
