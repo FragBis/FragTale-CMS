@@ -51,3 +51,11 @@ PHPWord
 
 Cette application utilise la librairie PHPWord en licence libre.
 http://phpword.codeplex.com/
+
+
+
+Procédure d'installation
+------------------------
+
+Le projet n'étant pas encore en "release", l'installation automatique (notamment de la base de données) n'a pas encore été
+développée, ni implémentée. Le code (PHP, JS, CSS et HTML) de ce CMS ayant été entièrement imaginé et rédigé par un seul développeur, les fonctionnalités additionnelles pourraient ne voir le jour que dans une date plus lointaine.
