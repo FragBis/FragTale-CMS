@@ -72,7 +72,8 @@ class View{
 	 */
 	function __construct($view_name=null){
 		# Instanciate the article associated to the view
-		$this->_article = new Article();
+		if (class_exists('Article'))
+			$this->_article = new Article();
 		if (!is_a(self::$_metaView, __CLASS__)){
 			## Default meta view settings:
 			$this->_isMeta = true;
@@ -276,8 +277,10 @@ class View{
 	 * @param string $fullpath
 	 */
 	function setCurrentScript($fullpath){
-		if (file_exists($fullpath))
+		if (file_exists($fullpath)){
 			$this->_current_script = $fullpath;
+			$this->_is404 = false;
+		}
 		else
 			$this->_is404 = true;
 	}
@@ -352,6 +355,8 @@ class View{
 	 */
 	function isCmsPage(){
 		if (!defined('DEFAULT_CMS_DATABASE_CONNECTOR_NAME') || strtolower(DEFAULT_CMS_DATABASE_CONNECTOR_NAME)==='none')
+			return false;
+		if (!class_exists('Article'))
 			return false;
 		$this->_article->load("request_uri='$this->_my_current_view'");
 		if (!empty($this->_article->aid)){
