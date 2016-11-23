@@ -129,8 +129,10 @@ class View{
 			Application::requireControllers($this->getViewName());
 			$viewName = $this->getViewName()=='cms/default' ? 'cms/_Default' : $this->getViewName();
 			$className = '\\FragTale\\Controller\\'.str_replace(array(' ', '-'), '_', str_replace('/', '\\', $viewName));
-			$controller = new $className($this);
-			$controller->run();
+			if (class_exists($className)){
+				$controller = new $className($this);
+				$controller->run();
+			}
 		}
 	}
 	
