@@ -72,7 +72,7 @@ class View{
 	 */
 	function __construct($view_name=null){
 		# Instanciate the article associated to the view
-		if (class_exists('Article'))
+		if (class_exists('\FragTale\CMS\Article'))
 			$this->_article = new Article();
 		if (!is_a(self::$_metaView, __CLASS__)){
 			## Default meta view settings:
@@ -91,14 +91,20 @@ class View{
 				foreach ($ini_params['default_css_files'] as $script){
 					$script = trim($script);
 					if (empty($script)) continue;
-					$this->addCSS(WEB_ROOT.'/css/'.$script);
+					if (stripos($script, 'http')===0)
+						$this->addCSS($script);
+					else
+						$this->addCSS(WEB_ROOT.'/css/'.$script);
 				}
 			}
 			if (!empty($ini_params['default_js_files'])){
 				foreach ($ini_params['default_js_files'] as $script){
 					$script = trim($script);
 					if (empty($script)) continue;
-					$this->addJS(WEB_ROOT.'/js/'.$script);
+					if (stripos($script, 'http')===0)
+						$this->addJS($script);
+					else
+						$this->addJS(WEB_ROOT.'/js/'.$script);
 				}
 			}
 			$this->_my_current_view = !empty($_GET['my_current_view']) ? trim(trim($_GET['my_current_view']), '/') : '';
@@ -356,7 +362,7 @@ class View{
 	function isCmsPage(){
 		if (!defined('DEFAULT_CMS_DATABASE_CONNECTOR_NAME') || strtolower(DEFAULT_CMS_DATABASE_CONNECTOR_NAME)==='none')
 			return false;
-		if (!class_exists('Article'))
+		if (!class_exists('\FragTale\Cms\Article'))
 			return false;
 		$this->_article->load("request_uri='$this->_my_current_view'");
 		if (!empty($this->_article->aid)){
@@ -485,7 +491,7 @@ class View{
 	function unsetRender(){
 		unset($this->_render);
 		foreach ($this as $key=>$object){
-			if (is_a($object, '\\FragTale\\Db\\Table')){
+			if (is_a($object, '\FragTale\Db\Table')){
 				$this->$key->clearDb();
 			}
 		}

@@ -33,6 +33,10 @@ class Adapter{
 	 */
 	private $conn;
 	/**
+	 * @var Timestamp
+	 */
+	private $timeCursor;
+	/**
 	 * Use static function "getInstanceOf", instead of using "new Adapter()".
 	 * @param string	$connectionName		The connection name must 
 	 * @param bool		$dontSpecifyDbName	Set True if you don't want to pass the database name into connection string
@@ -144,6 +148,7 @@ class Adapter{
 			$this->dbDriver = 'oci';
 		$this->connectionString = $this->dbDriver.':';
 		$this->connectionString.= 'host='.$this->dbHost.';';
+		$this->connectionString.= 'port='.$this->dbPort.';';
 		$this->connectionString.= 'dbname='.$this->dbName.';';
 		$this->rowsAffected		= 0;
 	}
@@ -155,7 +160,7 @@ class Adapter{
 	 */
 	private function storeQuery($query, $resulting='Success'){
 		if (defined('ENV') && ENV=='devel')
-			$GLOBALS['QUERIES'][$this->instanceName.'@'.$this->dbName][$resulting][] = $query;
+			$GLOBALS['QUERIES'][$this->instanceName.'@'.$this->dbName][$resulting][] = round(microtime(true)-$this->timeCursor, 4).'s: '.$query;
 	}
 	
 	/**
@@ -163,7 +168,7 @@ class Adapter{
 	 */
 	private function connect(){
 		try{
-			if (!is_a($this->conn, 'PDO')){
+			if (!is_a($this->conn, '\PDO')){
 				if ($this->dbDriver=='mysql' && $this->dbCharset)
 					$options = array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES '.$this->dbCharset);
 				else
@@ -183,9 +188,10 @@ class Adapter{
 	 * Returns data table into a generic PHP array, indexed by incremented integers.
 	 * If false: connection failed
 	 * @param string	$query	Sql statement
-	 * @return ArrayIterator
+	 * @return array
 	 */
 	final public function getTable($query){
+		$this->timeCursor = microtime(true);
 		if ($this->connect()){
 			$array = Array();
 			try{
@@ -235,6 +241,7 @@ class Adapter{
 	 * @return Anything but an array
 	 */
 	final public function getScalar($query){
+		$this->timeCursor = microtime(true);
 		if ($this->connect()){
 			try{
 				if ($ret=$this->conn->query($query)){
@@ -274,6 +281,7 @@ class Adapter{
 	 * @return bool (false) or int (rows affected)
 	 */
 	final public function exec($query, $withTransaction = true){
+		$this->timeCursor = microtime(true);
 		if ($this->connect()){
 			try{
 				if ($withTransaction) $this->conn->beginTransaction();

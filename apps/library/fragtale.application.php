@@ -118,11 +118,69 @@ class Application{
 		
 		# Include system library
 		self::requireFolder(LIB_ROOT.'/FragTale');
-		self::requireFolder(APP_ROOT.'/models/FragTale');
+		# Include libraries set into ini files
 		if (!empty(self::$_ini['library'])){
 			foreach (self::$_ini['library'] as $library)
 				self::requireFolder(APP_ROOT.'/library/'.$library);
 		}
+		# Inculde CMS model
+		self::requireFolder(APP_ROOT.'/models/FragTale');
+		# Include models set into ini files
+		if (!empty(self::$_ini['models'])){
+			foreach (self::$_ini['models'] as $model)
+				self::requireFolder(APP_ROOT.'/models/'.$model);
+		}
+	}
+	
+	/**
+	 * On CLI environment, use these params
+	 * @param string $inifilepath	Full path to ini configuration file. Default is CONF_ROOT.'/application/default/cli.ini'
+	 */
+	final static function loadCliParams($inifilepath=null){
+		$defaultfilepath = CONF_ROOT.'/application/default/cli.ini';
+		if (!file_exists($defaultfilepath)) die("Unknown configuration file $defaultfilepath\n");
+		self::setIniParams(parse_ini_file($defaultfilepath));
+		if (!$inifilepath) $inifilepath = CONF_ROOT.'/application/locales/cli.ini';
+		if (file_exists($inifilepath))
+			self::setIniParams(parse_ini_file($inifilepath));
+		else echo "CONFIGURATION ERROR: $inifilepath does not exist!\n";
+		
+		if (!defined('DEVEL') && (!empty(self::$_ini['devel']) || !empty(self::$_ini['DEVEL'])))
+			define('DEVEL', true);
+		
+		### Defining development environment
+		if (defined('DEVEL') && DEVEL==1){
+			ini_set('display_errors', 1);
+			error_reporting(E_ALL);
+		}
+		
+		### Any declared php.ini values to override
+		if (!empty(self::$_ini['php.ini'])){
+			foreach (self::$_ini['php.ini'] as $key=>$value)
+				ini_set($key, $value);
+		}
+		if (!defined('DEFAULT_DATABASE_CONNECTOR_NAME')) define('DEFAULT_DATABASE_CONNECTOR_NAME', 'default');
+		if (!defined('LOCALE')) define('LOCALE', 'fr_FR');
+		### Locale PO files for translations with GETTEXT, assuming gettext PHP extension is installed
+		if (stripos(LOCALE, 'utf8')===false)
+			$locale = LOCALE.'.utf8';
+		else
+			$locale = LOCALE;
+		putenv("LC_ALL=$locale");
+		setlocale(LC_ALL, $locale);
+		bindtextdomain('messages', DOC_ROOT.'/locale');
+		textdomain('messages');
+	
+		# Include system library
+		self::requireFolder(LIB_ROOT.'/FragTale');
+		# Include libraries set into ini files
+		if (!empty(self::$_ini['library'])){
+			foreach (self::$_ini['library'] as $library)
+				self::requireFolder(APP_ROOT.'/library/'.$library);
+		}
+		# Inculde CMS model
+		self::requireFolder(APP_ROOT.'/models/FragTale');
+		# Include models set into ini files
 		if (!empty(self::$_ini['models'])){
 			foreach (self::$_ini['models'] as $model)
 				self::requireFolder(APP_ROOT.'/models/'.$model);
@@ -184,7 +242,7 @@ class Application{
 		$handle = opendir($dir);
 		$dirs = array();
 		while ($content = readdir($handle)) {
-			if (!in_array($content, array('.', '..', '.svn'))){
+			if (substr($content, 0, 1) !== '.'){
 				$path = $folder.'/'.$content;
 				if (is_dir($path) && $recursively)
 					$dirs[] = $path;

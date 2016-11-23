@@ -302,7 +302,7 @@ abstract class Table{
 	function setDb($connection=''){
 		if (empty($connection) || is_string($connection))
 			$this->_db = Adapter::getInstanceOf($connection);
-		elseif (is_a($connection, 'Adapter'))
+		elseif (is_a($connection, '\FragTale\Db\Adapter'))
 			$this->_db = $connection;
 	}
 	/**

@@ -33,7 +33,8 @@ abstract class Controller{
 	 * @desc Constructor (by default, nothing to do, no param to pass).
 	 * @param View $view
 	 */
-	final function __construct(View $view){
+	final function __construct(View $view=null){
+		if (!$view) $view = new View();
 		$this->_view = $view;
 		$this->_article = $view->getArticle();
 		$this->_meta_view = $view->getMetaView();
@@ -84,7 +85,7 @@ abstract class Controller{
 	 * @param string $model		File or directory placed in 'app/models'
 	 */
 	final public function loadModel($model=''){
-		Application::requireFolder('apps/models/'.$model);
+		Application::requireFolder(DOC_ROOT.'/apps/models/'.$model);
 	}
 
 	final public function catchError($msg, $class, $function, $line){
@@ -522,5 +523,17 @@ abstract class Controller{
 			return $this->sendMail($Param->param_value, $from, $subject, $message, $template, null, $values);
 		}
 		return $this->sendMailToAdmin($from, $subject, $message, $template, $values);
+	}
+	
+	/**
+	 * Only in CLI mode
+	 * @param string $message	The message to echo
+	 * @param bool	$breakLine	If true, it will break line into console after message
+	 */
+	function cliPrint($message, $breakLine=true){
+		if (defined('IS_CLI')){
+			echo date('[Y-m-d H:i:s] ').$message;
+			if ($breakLine) echo "\n";
+		}
 	}
 }
