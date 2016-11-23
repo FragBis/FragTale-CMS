@@ -1,0 +1,13 @@
+<?php
+$hasContentType = false;
+if (!empty($view->response_headers) && is_array($view->response_headers)){
+	foreach ($view->response_headers as $headerkey=>$headervalue){
+		if (strtolower($headerkey)=='content-type') $hasContentType = true;
+		header($headerkey.': '.$headervalue);
+	}
+}
+if (!$hasContentType)
+	header("Content-type: application/json; charset=UTF-8");
+echo $view;
+flush();
+exit;

@@ -1,0 +1,28 @@
+<?php
+if (defined('DEVEL') && empty($_SERVER['HTTP_ORIGIN'])){
+	echo '<pre>'.print_r($view->json, true).'</pre>';
+}
+elseif (!empty($view->json)){
+	if (is_array($view->json)){
+		if (defined('DEVEL')){
+			$view->json[]['_DEBUG'] = array(
+				'_REQUEST'	=>$_REQUEST,
+				'_QUERIES'	=>$GLOBALS['QUERIES'],
+				'_SERVER'	=>$_SERVER
+			);
+		}
+		echo json_encode($view->json);
+	}
+	elseif (json_decode($view->json))
+		echo $view->json;
+	else{
+		echo json_encode(array(
+			'error'		=> json_last_error(),
+			'message'	=> 'JSON object malformed: '.print_r($view->json, true)
+		));
+	}
+}
+else
+	echo json_encode(array(
+		'message'	=> 'No result'
+	));
