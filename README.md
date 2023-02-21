@@ -1,4 +1,4 @@
-Note : Ce CMS est obsolète et un nouveau projet est en cours (framework PHP FragTale 2).
+Note 21/02/2023 : Ce CMS est obsolète et un nouveau projet est en cours (framework PHP FragTale 2).
 
 Licence
 -------
